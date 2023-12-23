@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -18,15 +17,19 @@ $data-zone-angular-client-accent: mat.define-palette(mat.$pink-palette, A200, A1
 // The warn palette is optional (defaults to red).
 $data-zone-angular-client-warn: mat.define-palette(mat.$red-palette);
 
+$data-zone-angular-client-black: mat.define-palette(mat.$grey-palette, 900);
+
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$data-zone-angular-client-theme: mat.define-light-theme((
-  color: (
-    primary: $data-zone-angular-client-primary,
-    accent: $data-zone-angular-client-accent,
-    warn: $data-zone-angular-client-warn,
+$data-zone-angular-client-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $data-zone-angular-client-primary,
+      accent: $data-zone-angular-client-accent,
+      warn: $data-zone-angular-client-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -35,5 +38,11 @@ $data-zone-angular-client-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
