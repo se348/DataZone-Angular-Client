@@ -1,0 +1,112 @@
+<div class="divider">
+  <div class="desc">
+    <div class="desc-container">
+      <h1>Data Zone</h1>
+      <h3>Data Analytics and Analytics Platform</h3>
+      <div class="full-width x-gap">
+        <div class="half-width">
+          <div class="row">
+            <img
+              class="icon-image"
+              src="assets/images/calc.svg"
+              alt="calc icon"
+            />
+            <h4>Data Visualization</h4>
+          </div>
+          <div class>
+            <p class="lt-300">
+              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+              consectetur, adipisci velit, sed qu
+            </p>
+          </div>
+        </div>
+        <div class="half-width">
+          <div class="row">
+            <img
+              class="icon-image"
+              src="assets/images/calc.svg"
+              alt="calc icon"
+            />
+            <h4>Data Analytics</h4>
+          </div>
+          <div>
+            <p class="lt-300">
+              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+              consectetur, adipisci velit, sed qu
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="full-width x-gap">
+        <div class="half-width">
+          <div class="row">
+            <img
+              class="icon-image"
+              src="assets/images/calc.svg"
+              alt="calc icon"
+            />
+            <h4>Purchase Data</h4>
+          </div>
+          <div class>
+            <p class="lt-300">
+              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+              consectetur, adipisci velit, sed qu
+            </p>
+          </div>
+        </div>
+        <div class="half-width">
+          <div class="row">
+            <img
+              class="icon-image"
+              src="assets/images/calc.svg"
+              alt="calc icon"
+            />
+            <h4>Sell Data</h4>
+          </div>
+          <div>
+            <p class="lt-300">
+              Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+              consectetur, adipisci velit, sed qu
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <mat-divider [vertical]="true" style="height: 70vh"></mat-divider>
+  <div class="sigin-form">
+    <div class="form-container">
+      <h1>Log in</h1>
+      <p class="lt-300">Enter Your Login Detail To Sign in</p>
+      <form [formGroup]="loginForm">
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="abel@xyz.com" formControlName="email" />
+            <mat-error *ngIf="emailValidationError.errors?.['required']">
+              Please provide a valid email address
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" required/>
+            <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{
+              hidePassword ? "visibility" : "visibility_off"
+            }}</mat-icon>
+          </mat-form-field>
+        </div>
+        <div class="flex-end">
+          <a href="">Forgot Password?</a>
+        </div>
+        <div class="center">
+          <button class="submit-btn circular-radius" mat-button (click)="login()">Log in</button>
+        </div>
+      </form>
+      <div class="margin-top">
+        <p class="lt-350">Don’t have an account? <a href="">Sign up</a></p>
+      </div>
+    </div>
+  </div>
+</div>
