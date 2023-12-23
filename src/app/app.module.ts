@@ -7,7 +7,7 @@ import { NgxsModule } from '@ngxs/store';
 
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { JwtInterceptor } from './auth/services/jwt.interceptor';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorInterceptor } from './core/interceptors/error.inteceptor';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,7 +25,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule, 
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   providers: [
     {
