@@ -24,6 +24,7 @@
     "@ngxs/logger-plugin": "^3.8.2-dev.master-e0981de",
     "@ngxs/storage-plugin": "^3.8.2",
     "@ngxs/store": "^3.8.2",
+    "@rx-angular/state": "^17.0.0",
     "ngx-logger": "^5.0.12",
     "primeng": "^17.2.0",
     "rxjs": "~7.8.0",
