@@ -14,7 +14,7 @@ import { NgxsModule } from '@ngxs/store';
     SharedModule,
     AuthRoutingModule,
     NgxsModule.forFeature([AuthState]),
-  ],,
+  ],
   providers: [RxState]
 })
 export class AuthModule {}
