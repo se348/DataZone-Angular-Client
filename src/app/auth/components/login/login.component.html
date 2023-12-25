@@ -84,9 +84,6 @@
               placeholder="Enter your email address"
               formControlName="email"
             />
-            <mat-error *ngIf="emailValidationError.errors?.['required']">
-              Please provide a valid email address
-            </mat-error>
           </mat-form-field>
         </div>
         <div>
@@ -101,9 +98,6 @@
             <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{
               hidePassword ? "visibility" : "visibility_off"
             }}</mat-icon>
-            <mat-error *ngIf="passwordFormControl.errors?.['required']">
-              Please provide a valid password
-            </mat-error>
           </mat-form-field>
         </div>
         <div class="flex-end">
