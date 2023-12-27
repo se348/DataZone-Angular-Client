@@ -4,6 +4,8 @@ import { Action, State, StateContext, StateToken, Store } from '@ngxs/store';
 import { Login, Register } from './auth.actions';
 import { LoginResponse } from '../models/auth.model';
 import { tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
 
 export interface AuthStateModel {
   accessToken: string | null;
@@ -29,7 +31,8 @@ const defaultState: AuthStateModel = {
 export class AuthState {
   constructor(
     private readonly authService: AuthService,
-    private store: Store
+    private store: Store,
+    private readonly router: Router
   ) {}
 
   @Action(Login)
@@ -52,7 +55,9 @@ export class AuthState {
     { request } : Register
   ) {
     return this.authService.register(request).pipe(tap(
-      () => {}
+      () => {
+        this.router.navigate([LANDING_PAGE_ROUTE]);
+      }
     ));
   }
 
