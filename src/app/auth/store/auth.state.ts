@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Action, State, StateContext, StateToken, Store } from '@ngxs/store';
-import { Login } from './auth.actions';
+import { Login, Register } from './auth.actions';
 import { LoginResponse } from '../models/auth.model';
 import { tap } from 'rxjs';
 
@@ -44,4 +44,16 @@ export class AuthState {
         }
     ))
   }
+
+
+  @Action(Register)
+  register(
+    { patchState } : StateContext<AuthStateModel>,
+    { request } : Register
+  ) {
+    return this.authService.register(request).pipe(tap(
+      () => {}
+    ));
+  }
+
 }
