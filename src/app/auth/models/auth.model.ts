@@ -7,3 +7,8 @@ export interface LoginResponse {
   accessToken: string | null;
   refreshToken: string | null;
 }
+
+export interface RegisterRequest {
+  email: string;
+  password: string;
+}

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthSelector } from '../store/auth.selector';
-import { LoginRequest } from '../models/auth.model';
+import { LoginRequest, RegisterRequest } from '../models/auth.model';
 import { Select, Store } from '@ngxs/store';
-import { Login } from '../store/auth.actions';
+import { Login, Register } from '../store/auth.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,9 @@ export class AuthFacade {
 
   dispatchLogin(request: LoginRequest) {
     this.store.dispatch(new Login(request));
+  }
+
+  dispatchRegister(request: RegisterRequest) {
+    this.store.dispatch(new Register(request));
   }
 }

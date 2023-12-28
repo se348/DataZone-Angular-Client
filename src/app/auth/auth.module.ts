@@ -6,15 +6,16 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { AuthState } from './store/auth.state';
 import { NgxsModule } from '@ngxs/store';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, SignUpComponent],
   imports: [
     CommonModule,
     SharedModule,
     AuthRoutingModule,
     NgxsModule.forFeature([AuthState]),
   ],
-  providers: [RxState]
+  providers: [RxState],
 })
 export class AuthModule {}
