@@ -10,9 +10,10 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { SharedComponentModule } from '../shared/shared-component/shared-component.module';
 import { CompleteCompanyProfileComponent } from './components/complete-company-profile/complete-company-profile.component';
 import { ConfirmPageLandingComponent } from './components/confirm-page-landing/confirm-page-landing.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 @NgModule({
-  declarations: [LoginComponent, CompleteCompanyProfileComponent, ConfirmPageLandingComponent],
+  declarations: [LoginComponent, CompleteCompanyProfileComponent, ConfirmPageLandingComponent, SignUpComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -21,6 +22,6 @@ import { ConfirmPageLandingComponent } from './components/confirm-page-landing/c
     SharedComponentModule,
     CdkStepperModule
   ],
-  providers: [RxState]
+  providers: [RxState],
 })
 export class AuthModule {}

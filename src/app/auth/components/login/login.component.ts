@@ -3,7 +3,7 @@ import { AuthFacade } from '../../facades/auth.facades';
 import { RxState } from '@rx-angular/state';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
+import { LANDING_PAGE_ROUTE, REGISTER_ROUTE } from 'src/app/core/constants/routes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface LoginComponentState {
@@ -67,5 +67,9 @@ export class LoginComponent implements OnInit {
         password: this.loginForm.value.password,
       });
     }
+  }
+
+  navigateToSignup() {
+    this.router.navigate([REGISTER_ROUTE]);
   }
 }

@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { LoginRequest, LoginResponse } from '../models/auth.model';
-import { Observable } from 'rxjs';
-import { COMPLETE_COMPANY_PROFILE_URL, CONFIRM_EMAIL_URL, LOGIN_URL } from 'src/app/core/constants/api-endpoints';
-import { CompleteCompanyProfile } from '../store/auth.actions';
-import { CompanyProfileRequest, CompanyProfileResponse } from '../models/profile.model';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { LOGIN_URL, COMPLETE_COMPANY_PROFILE_URL, REGISTER_URL } from "src/app/core/constants/api-endpoints";
+import { LoginRequest, LoginResponse, RegisterRequest } from "../models/auth.model";
+import { CompanyProfileRequest, CompanyProfileResponse } from "../models/profile.model";
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +21,13 @@ export class AuthService {
     return this.http.post<CompanyProfileResponse>(COMPLETE_COMPANY_PROFILE_URL, request);
   }
 
-  confirmEmail(userId :string, token: string) {
+  confirmEmail(userId:string, token: string) {
     return this.http.get(`CONFIRM_EMAIL_URL?userId=${userId}&code=${token}`, {});
   }
+
+  register(request: RegisterRequest): Observable<any> {
+    return this.http.post<any>(REGISTER_URL, request);
+  }
+
 
 }

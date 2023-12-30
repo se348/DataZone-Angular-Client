@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Action, State, StateContext, StateToken, Store } from '@ngxs/store';
-import { CompleteCompanyProfile, ConfirmEmail, Login } from './auth.actions';
+
 import { LoginResponse } from '../models/auth.model';
 import { tap } from 'rxjs';
+import { Router } from '@angular/router';
+import { LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
 import { CompanyProfileResponse } from '../models/profile.model';
+import { Login, CompleteCompanyProfile, ConfirmEmail, Register } from './auth.actions';
 
 export interface AuthStateModel {
   accessToken: string | null;
@@ -32,7 +35,8 @@ const defaultState: AuthStateModel = {
 export class AuthState {
   constructor(
     private readonly authService: AuthService,
-    private store: Store
+    private store: Store,
+    private readonly router: Router
   ) {}
 
   @Action(Login)
@@ -62,5 +66,17 @@ export class AuthState {
   @Action(ConfirmEmail)
   confirmEmail({ patchState }: StateContext<AuthStateModel>, { userId, token }: ConfirmEmail) {
     return this.authService.confirmEmail(userId, token);
+  }
+
+  @Action(Register)
+  register(
+    { patchState } : StateContext<AuthStateModel>,
+    { request } : Register
+  ) {
+    return this.authService.register(request).pipe(tap(
+      () => {
+        this.router.navigate([LANDING_PAGE_ROUTE]);
+      }
+    ));
   }
 }

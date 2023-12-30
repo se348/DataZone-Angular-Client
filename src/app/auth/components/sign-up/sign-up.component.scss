@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 .divider {
   display: flex;
   max-width: 100vw;
@@ -112,13 +108,29 @@ mat-form-field {
   min-height: fit-content;
 }
 
+.icon-image {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
 .navigator-anchor {
   cursor: pointer;
 }
 
-.icon-image {
-  width: 2.6rem;
-  height: 2.6rem;
+.small-checkbox {
+  font-size: small;
+}
+
+.mat-icon {
+  vertical-align: middle !important;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.warn {
+  color: red;
 }
 
 :host ::ng-deep .mdc-text-field--outlined {

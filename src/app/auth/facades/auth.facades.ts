@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AuthSelector } from '../store/auth.selector';
-import { LoginRequest } from '../models/auth.model';
-import { Select, Store } from '@ngxs/store';
-import { CompleteCompanyProfile, ConfirmEmail, Login } from '../store/auth.actions';
-import { CompanyProfileRequest, CompanyProfileResponse } from '../models/profile.model';
+import { Injectable } from "@angular/core";
+import { Select, Store } from "@ngxs/store";
+import { Observable } from "rxjs";
+import { LoginRequest, RegisterRequest } from "../models/auth.model";
+import { CompanyProfileResponse, CompanyProfileRequest } from "../models/profile.model";
+import { Login, CompleteCompanyProfile, ConfirmEmail, Register } from "../store/auth.actions";
+import { AuthSelector } from "../store/auth.selector";
+
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,8 @@ export class AuthFacade {
 
   dispatchConfirmEmail(userId: string, token: string) {
     this.store.dispatch(new ConfirmEmail(userId, token));
+  }
+  dispatchRegister(request: RegisterRequest) {
+    this.store.dispatch(new Register(request));
   }
 }
