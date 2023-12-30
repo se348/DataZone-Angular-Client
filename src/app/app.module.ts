@@ -14,11 +14,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
+import { CompleteUserProfileComponent } from './user-profile/components/complete-user-profile/complete-user-profile.component';
+import { UserProfileModule } from './user-profile/user-profile.module';
 @NgModule({
-  declarations: [
-    AppComponent,
-    LandingPageComponent
-  ],
+  declarations: [AppComponent, LandingPageComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -29,22 +28,22 @@ import { AuthModule } from './auth/auth.module';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
       multi: true,
-    }
+    },
   ],
-  bootstrap: [AppComponent], 
+  bootstrap: [AppComponent],
   imports: [
     NgxsModule.forRoot([]),
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     NgxsStoragePluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
     AuthModule,
     AppRoutingModule,
-    
+    UserProfileModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

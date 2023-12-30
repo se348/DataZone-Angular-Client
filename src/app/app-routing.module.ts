@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LANDING_PAGE_ROUTE } from './core/constants/routes';
+import {
+  COMPLETE_USER_PROFILE_PAGE_ROUTE,
+  LANDING_PAGE_ROUTE,
+} from './core/constants/routes';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { CompleteUserProfileComponent } from './user-profile/components/complete-user-profile/complete-user-profile.component';
 
 const routes: Routes = [
   {
@@ -11,6 +15,10 @@ const routes: Routes = [
   {
     path: LANDING_PAGE_ROUTE,
     component: LandingPageComponent,
+  },
+  {
+    path: COMPLETE_USER_PROFILE_PAGE_ROUTE,
+    component: CompleteUserProfileComponent,
   },
 ];
 

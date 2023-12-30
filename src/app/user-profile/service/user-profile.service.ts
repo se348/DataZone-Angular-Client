@@ -9,7 +9,11 @@ import { Observable } from 'rxjs';
 export class UserProfileService {
   constructor(private http: HttpClient) {}
 
-  completeProfile(request: UserProfile): Observable<UserProfile> {
-    return this.http.post<UserProfile>('api', request);
+  completeProfile(request: Partial<UserProfile>): Observable<UserProfile> {
+    return this.http.patch<UserProfile>('http://localhost:3000/users/1', request);
+  }
+
+  getUserProfile(id: String): Observable<UserProfile> {
+    return this.http.get<UserProfile>('http://localhost:3000/users/1');
   }
 }
