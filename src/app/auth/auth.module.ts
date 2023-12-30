@@ -6,14 +6,20 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { AuthState } from './store/auth.state';
 import { NgxsModule } from '@ngxs/store';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { SharedComponentModule } from '../shared/shared-component/shared-component.module';
+import { CompleteCompanyProfileComponent } from './components/complete-company-profile/complete-company-profile.component';
+import { ConfirmPageLandingComponent } from './components/confirm-page-landing/confirm-page-landing.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, CompleteCompanyProfileComponent, ConfirmPageLandingComponent],
   imports: [
     CommonModule,
     SharedModule,
     AuthRoutingModule,
     NgxsModule.forFeature([AuthState]),
+    SharedComponentModule,
+    CdkStepperModule
   ],
   providers: [RxState]
 })

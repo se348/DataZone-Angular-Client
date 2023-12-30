@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
+import { CustomStepperComponent } from './custom-stepper/custom-stepper.component';
+import { CdkStepperModule } from '@angular/cdk/stepper';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CustomStepperComponent
+  ],
   imports: [
-    CommonModule
-  ]
+    CommonModule, CdkStepperModule
+  ],
+  exports:[CustomStepperComponent]
 })
 export class SharedComponentModule { }
