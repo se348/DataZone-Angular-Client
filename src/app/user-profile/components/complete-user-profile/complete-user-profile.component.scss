@@ -1,76 +1,33 @@
-:root{
-    --background-color: #D8DCCF;
-    --font-family: 'Poppins', sans-serif;
-}
-
-html, body {
-  height: 100%;
-  background-color: black;
-}
-
-body {
-    margin: 0;
-    height: 100vh;
-    font-family: var(--font-family);
-    background-color: #d8dccfa5;
-}
-
 .container {
-    // background-color: #d8dccfa5;
     display: flex;
-    // border: solid 5px black;
-    // height: 100vh;
-}
-
-.sidebar {
-    flex: 1;
-    // border: solid 5px red;
-    background-color: white;
+    background-color: #ddded7;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
 }
 
 .main {
     flex : 4;
     display: flex;
     flex-direction: column;
-    // border: solid 5px green;
 }
 
-.nav  {
-    // flex: 1;
-    border: solid 3px yellow;
-    background-color: white;
-    height: 100px;
-}
 
 .main .main-content{
-    flex: 10;
-    // border: solid 3px red;
     padding: 20px 25px 0 25px;
     display: flex;
     flex-direction: column;
-    // height: 100%;
 }
 
 .main-body {
     flex: 1;
     display: flex;
-    // border: solid 3px blue;
 }
 
 .main-body .info {
-    // border: solid 3px green;
     flex:  3;
     margin: 0 10px 0 0;
     border-radius: 10px;
     background-color: white;
-}
-
-.main-body .status-bar {
-    // border: solid 3px rebeccapurple;
-    flex: 1;
-    border-radius: 10px;
-    background-color: white;
-    height: 500px;
 }
 
 .main-title h1{
@@ -95,7 +52,7 @@ body {
     object-fit: cover;
     // margin-right: 20px;
 }
-
+// Upload Image button
 .profile-image .btn-light {
     display: flex;
     width: 120px;
@@ -118,14 +75,14 @@ body {
   }
 
   .image-wrapper {
-    flex: 1;
+    flex: 1.3;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   .profile-image .space {
-    flex: 1.2;
+    flex: 1;
   }
 
   .profile-image h2 {
@@ -300,3 +257,72 @@ body {
   align-items: center;
   width: 100%;
 }
+
+// Side Bar 
+.sidebar {
+  flex: 0.8;
+  background-color: white;
+  margin: 0 5px 0 0 ;
+  border-radius: 12px;
+}
+
+// Nav Bar
+.nav  {
+  background-color: white;
+  flex: 1;
+  display: flex;
+  padding: 20px 20px;
+  justify-content: end;
+  border-radius: 12px;
+}
+
+.search {
+  display: flex;
+  padding: 0 10px;
+  border-radius: 12px;
+  background: rgba(217, 217, 217, 0.56); 
+  width: 20rem;
+  height: 40px;
+  margin: 0 10rem 0 0;
+}
+
+input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.nav mat-icon {
+  color: #D8DCCF;
+  font-size: 2rem;
+  height: 40px;
+  width: 40px;
+}
+
+.search mat-icon {
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search input {
+  color: #868881;
+}
+
+.main-body .status-bar {
+  flex: 1;
+  border-radius: 10px;
+  background-color: white;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-bar h2 {
+  font-size: 1.1rem;
+}
+
+

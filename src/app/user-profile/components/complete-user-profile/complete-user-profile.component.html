@@ -1,206 +1,238 @@
-<html>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500&display=swap"
+  rel="stylesheet"
+/>
 
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500&display=swap"
-    rel="stylesheet"
-  />
-  <body>
-    
-    <div class="container">
-      <div class="sidebar">This is the side bar</div>
-      <div class="main">
-        <div class="navbar">
-          <div class="search-bar"></div>
+<div class="container">
+  <div class="sidebar">This is the side bar</div>
+  <div class="main">
+    <div class="main">
+      <div class="nav">
+        <!-- Search Area -->
+        <div class="search">
+          <mat-icon>search</mat-icon>
+          <input type="text" class="searchTerm" placeholder="Search" />
         </div>
-        <div class="main">
-          <div class="nav"></div>
-          <!-- Main Content -->
-          <div class="main-content">
-            <div class="main-title">
-              <h1>Edit Profile</h1>
-            </div>
-            <div class="main-body">
-              <div class="info">
-                <!-- Profile Image -->
-                <div class="profile-image">
-                  <div class="image-wrapper">
-                    <img
-                      *ngIf="imagePreview != ''"
-                      [src]="imagePreview"
-                      alt="Image Preview"
+        <div class="notification">
+          <mat-icon>notifications</mat-icon>
+        </div>
+        <div class="help">
+          <mat-icon>help</mat-icon>
+        </div>
+      </div>
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="main-title">
+          <h1>Edit Profile</h1>
+        </div>
+        <div class="main-body">
+          <div class="info">
+            <!-- Profile Image -->
+            <div class="profile-image">
+              <div class="image-wrapper">
+                <img
+                  *ngIf="imagePreview != ''"
+                  [src]="imagePreview"
+                  alt="Image Preview"
+                />
+                <img
+                  *ngIf="imagePreview === ''"
+                  src="{{ userProfile!.profileImage }}"
+                  alt=""
+                />
+                <!-- Upload Image btn -->
+                <div class="upload-image">
+                  <div (click)="fileInput.click()" class="btn-light">
+                    <button>Upload Image</button>
+                    <input
+                      hidden
+                      (change)="onFileSelected()"
+                      #fileInput
+                      type="file"
+                      id="file"
                     />
-                    <img
-                      *ngIf="imagePreview === ''"
-                      src={{userProfile!.profileImage}}
-                      alt=""
-                    />
-                    <!-- Upload Image btn -->
-                    <div class="upload-image">
-                      <div (click)="fileInput.click()" class="btn-light">
-                        <button>Upload Image</button>
-                        <input
-                          hidden
-                          (change)="onFileSelected()"
-                          #fileInput
-                          type="file"
-                          id="file"
-                        />
-                      </div>
-                      <h2>
-                        At least 800x800 px recomended
-                        <span>JPG or Png is allowed</span>
-                      </h2>
-                      <div *ngIf="imagePreview != ''" (ngSubmit)="saveImage()" class="submit-btn">
-                        <button>Save Image</button>
-                      </div>
-                    </div>
                   </div>
-                  <div class="space"></div>
-                </div>
-                <div class="personal-info">
-                  <div class="header">
-                    <h3>Personal Info</h3>
-                    <div (click)="toggleEdit('isPersonalInfoEditMode')" class="edit-btn">
-                      <img
-                        *ngIf="!toggledProperties['isPersonalInfoEditMode']"
-                        src="assets/images/edit.svg"
-                        alt=""
-                      />
-                      <p *ngIf="!toggledProperties['isPersonalInfoEditMode']">Edit</p>
-                      <p *ngIf="toggledProperties['isPersonalInfoEditMode']">Cancle</p>
-                    </div>
-                  </div>
-                  <div *ngIf="!toggledProperties['isPersonalInfoEditMode']" class="content">
-                    <div class="contet-body">
-                      <h4 class="title">Full Name</h4>
-                      <h4 class="value">{{ userProfile!.fullName }}</h4>
-                    </div>
-                    <div class="contet-body">
-                      <h4 class="title">Email</h4>
-                      <h4 class="value">{{ userProfile!.email }}</h4>
-                    </div>
-                    <div class="contet-body">
-                      <h4 class="title">Phone Number</h4>
-                      <h4 class="value">{{ userProfile!.phoneNumber }}</h4>
-                    </div>
-                  </div>
-                  <div *ngIf="toggledProperties['isPersonalInfoEditMode']">
-                    <form
-                      [formGroup]="userProfileForm"
-                      (ngSubmit)="completeProfile('isPersonalInfoEditMode')"
-                      class="form info-edit"
-                    >
-                      <mat-form-field appearance="outline" class="input-field">
-                        <mat-label>Full Name</mat-label>
-                        <input
-                          matInput
-                          placeholder="Full Name"
-                          formControlName="fullName"
-                        />
-                      </mat-form-field>
-                      <mat-form-field appearance="outline" class="input-field">
-                        <mat-label>Email </mat-label>
-                        <input
-                          matInput
-                          placeholder="email"
-                          formControlName="email"
-                        />
-                      </mat-form-field>
-    
-                      <mat-form-field appearance="outline" class="input-field">
-                        <mat-label>Phone Number </mat-label>
-                        <input
-                          matInput
-                          placeholder="phone number"
-                          formControlName="phoneNumber"
-                        />
-                      </mat-form-field>
-                      <div class="submit-btn">
-                        <button>Submit Changes</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-                <div class="location">
-                  <div class="header">
-                    <h3>Personal Info</h3>
-                    <div (click)="toggleEdit('isLocationEditMode')" class="edit-btn">
-                      <img
-                        *ngIf="!toggledProperties['isLocationEditMode']"
-                        src="assets/images/edit.svg"
-                        alt=""
-                      />
-                      <p *ngIf="!toggledProperties['isLocationEditMode']">Edit</p>
-                      <p *ngIf="toggledProperties['isLocationEditMode']">Cancle</p>
-                    </div>
-                  </div>
-                  <div  class="location-card">
-                    {{userProfile!.country}}
-                  </div>
-                    <div *ngIf="toggledProperties['isLocationEditMode']">
-                      <form
-                        [formGroup]="userProfileForm"
-                        (ngSubmit)="completeProfile('isLocationEditMode')"
-                        class="form location-edit"
-                      >
-                        <mat-form-field appearance="outline" class="input-field">
-                          <mat-label>Address</mat-label>
-                          <input
-                            matInput
-                            placeholder="Address"
-                            formControlName="country"
-                          />
-                        </mat-form-field>
-                        <div class="submit-btn">
-                          <button>Submit Changes</button>
-                        </div>
-                      </form>
-                  </div>
-                </div>
-    
-                <!-- Bio Section -->
-                <div class="bio">
-                  <div class="header">
-                    <h3>Bio</h3>
-                    <div (click)="toggleEdit('isBioEditMode')" class="edit-btn">
-                      <img
-                        *ngIf="!toggledProperties['isBioEditMode']"
-                        src="assets/images/edit.svg"
-                        alt=""
-                      />
-                      <p *ngIf="!toggledProperties['isBioEditMode']">Edit</p>
-                      <p *ngIf="toggledProperties['isBioEditMode']">Cancle</p>
-                    </div>
-                  </div>
-                  <div  class="location-card">
-                    {{userProfile!.bio}}
-                  </div>
-                    <div *ngIf="toggledProperties['isBioEditMode']">
-                      <form
-                        [formGroup]="userProfileForm"
-                        (ngSubmit)="completeProfile('isBioEditMode')"
-                        class="form bio-edit"
-                      >
-                        <mat-form-field appearance="outline" class="input-field">
-                          <mat-label>Address</mat-label>
-                          <textarea matInput placeholder="biography"
-                          formControlName="bio"></textarea>
-                        </mat-form-field>
-                        <div class="submit-btn">
-                          <button>Submit Changes</button>
-                        </div>
-                      </form>
+                  <h2>
+                    At least 800x800 px recomended
+                    <span>JPG or Png is allowed</span>
+                  </h2>
+                  <div
+                    *ngIf="imagePreview != ''"
+                    (ngSubmit)="saveImage()"
+                    class="submit-btn"
+                  >
+                    <button>Save Image</button>
                   </div>
                 </div>
               </div>
-              <div class="status-bar"></div>
+              <div class="space"></div>
             </div>
+            <!-- Personal Info -->
+            <div class="personal-info">
+              <div class="header">
+                <h3>Personal Info</h3>
+                <div
+                  (click)="toggleEdit('isPersonalInfoEditMode')"
+                  class="edit-btn"
+                >
+                  <img
+                    *ngIf="!toggledProperties['isPersonalInfoEditMode']"
+                    src="assets/images/edit.svg"
+                    alt=""
+                  />
+                  <p *ngIf="!toggledProperties['isPersonalInfoEditMode']">
+                    Edit
+                  </p>
+                  <p *ngIf="toggledProperties['isPersonalInfoEditMode']">
+                    Cancle
+                  </p>
+                </div>
+              </div>
+              <div
+                *ngIf="!toggledProperties['isPersonalInfoEditMode']"
+                class="content"
+              >
+                <div class="contet-body">
+                  <h4 class="title">Full Name</h4>
+                  <h4 class="value">{{ userProfile!.fullName }}</h4>
+                </div>
+                <div class="contet-body">
+                  <h4 class="title">Email</h4>
+                  <h4 class="value">{{ userProfile!.email }}</h4>
+                </div>
+                <div class="contet-body">
+                  <h4 class="title">Phone Number</h4>
+                  <h4 class="value">{{ userProfile!.phoneNumber }}</h4>
+                </div>
+              </div>
+              <div *ngIf="toggledProperties['isPersonalInfoEditMode']">
+                <form
+                  [formGroup]="userProfileForm"
+                  (ngSubmit)="completeProfile('isPersonalInfoEditMode')"
+                  class="form info-edit"
+                >
+                  <mat-form-field appearance="outline" class="input-field">
+                    <mat-label>Full Name</mat-label>
+                    <input
+                      matInput
+                      placeholder="Full Name"
+                      formControlName="fullName"
+                    />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" class="input-field">
+                    <mat-label>Email </mat-label>
+                    <input
+                      matInput
+                      placeholder="email"
+                      formControlName="email"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class="input-field">
+                    <mat-label>Phone Number </mat-label>
+                    <input
+                      matInput
+                      placeholder="phone number"
+                      formControlName="phoneNumber"
+                    />
+                  </mat-form-field>
+                  <div class="submit-btn">
+                    <button>Submit Changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="location">
+              <div class="header">
+                <h3>Personal Info</h3>
+                <div
+                  (click)="toggleEdit('isLocationEditMode')"
+                  class="edit-btn"
+                >
+                  <img
+                    *ngIf="!toggledProperties['isLocationEditMode']"
+                    src="assets/images/edit.svg"
+                    alt=""
+                  />
+                  <p *ngIf="!toggledProperties['isLocationEditMode']">Edit</p>
+                  <p *ngIf="toggledProperties['isLocationEditMode']">Cancle</p>
+                </div>
+              </div>
+              <div
+                *ngIf="!toggledProperties['isLocationEditMode']"
+                class="location-card"
+              >
+                {{ userProfile!.country }}
+              </div>
+              <div *ngIf="toggledProperties['isLocationEditMode']">
+                <form
+                  [formGroup]="userProfileForm"
+                  (ngSubmit)="completeProfile('isLocationEditMode')"
+                  class="form location-edit"
+                >
+                  <mat-form-field appearance="outline" class="input-field">
+                    <mat-label>Address</mat-label>
+                    <input
+                      matInput
+                      placeholder="Address"
+                      formControlName="country"
+                    />
+                  </mat-form-field>
+                  <div class="submit-btn">
+                    <button>Submit Changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- Bio Section -->
+            <div class="bio">
+              <div class="header">
+                <h3>Bio</h3>
+                <div (click)="toggleEdit('isBioEditMode')" class="edit-btn">
+                  <img
+                    *ngIf="!toggledProperties['isBioEditMode']"
+                    src="assets/images/edit.svg"
+                    alt=""
+                  />
+                  <p *ngIf="!toggledProperties['isBioEditMode']">Edit</p>
+                  <p *ngIf="toggledProperties['isBioEditMode']">Cancle</p>
+                </div>
+              </div>
+              <div
+                *ngIf="!toggledProperties['isBioEditMode']"
+                class="location-card"
+              >
+                {{ userProfile!.bio }}
+              </div>
+              <div *ngIf="toggledProperties['isBioEditMode']">
+                <form
+                  [formGroup]="userProfileForm"
+                  (ngSubmit)="completeProfile('isBioEditMode')"
+                  class="form bio-edit"
+                >
+                  <mat-form-field appearance="outline" class="input-field">
+                    <mat-label>Address</mat-label>
+                    <textarea
+                      matInput
+                      placeholder="biography"
+                      formControlName="bio"
+                    ></textarea>
+                  </mat-form-field>
+                  <div class="submit-btn">
+                    <button>Submit Changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="status-bar">
+            <h2>Complete Your Profile</h2>
           </div>
         </div>
       </div>
     </div>
-  </body>
-</html>
+  </div>
+</div>
