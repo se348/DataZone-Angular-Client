@@ -8,6 +8,9 @@ export interface LoginResponse {
   refreshToken: string | null;
 }
 
+export interface User{
+  userName: string;
+}
 export interface RegisterRequest {
   email: string;
   password: string;

@@ -1,0 +1,129 @@
+
+
+.divider {
+  display: grid;
+  max-width: 100vw;
+  grid-template-columns: 1fr 1% 1fr;
+  height: 92vh;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../../../assets/images/background_net.svg");
+  background-position: 110% -185%;
+}
+
+.vertical-line{
+    grid-column-start: 2;
+}
+.company-profile-form {
+  grid-column-start: 3;
+  align-self: center;
+}
+
+// ::ng-deep{
+//     .max-width{
+//         max-width: 100px;
+//     }
+// }
+
+.color{
+    // background: black;
+    border-radius: 1.5px;
+}
+
+
+mat-form-field {
+  width: calc(100% - 45% / 2) !important;
+  padding-left: 10%;
+  padding-right: 10%;
+  
+}
+.red{
+    background-color: red;
+    color: red;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pd-l {
+  padding-left: 2rem;
+}
+
+.submit-btn {
+  padding: 1.3rem 0;
+  width: 100%;
+  margin-top: 2rem;
+  background-color: black;
+  color: white !important;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.circular-radius {
+  border-radius: 0.55rem !important;
+}
+
+.margin-top {
+  margin-top: 2rem;
+}
+
+.lt-300 {
+  color: grey;
+  font-weight: 300;
+}
+
+.lt-400 {
+  font-weight: 350;
+}
+
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 45%;
+}
+
+.row-sp-betwn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.8rem;
+}
+
+.row-items {
+  width: 50%;
+  justify-self: start;
+  align-self: center;
+}
+
+.x-gap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4rem;
+}
+
+.row {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
+  min-height: fit-content;
+}
+
+.icon-image {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+:host ::ng-deep .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 0.55rem;
+}
