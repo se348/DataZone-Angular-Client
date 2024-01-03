@@ -53,6 +53,14 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls['password'];
   }
 
+  get isFormValid(): boolean {
+    const { valid, touched, dirty } = this.loginForm;
+    return valid &&
+    (touched || dirty) &&
+    this.loginForm.value.email &&
+    this.loginForm.value.password;
+  }
+
   login() {
     const { valid, touched, dirty } = this.loginForm;
 

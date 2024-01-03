@@ -101,7 +101,7 @@
               hidePassword ? "visibility" : "visibility_off"
             }}</mat-icon>
           </mat-form-field>
-        </div>        
+        </div>
         <div class="small-checkbox">
           <div class="row">
             <p *ngIf="!hasUpper" class="lt-300 mt-0 row-items">
@@ -147,6 +147,7 @@
             class="submit-btn circular-radius"
             mat-button
             (click)="register()"
+            [disabled]="!isFormValid"
           >
             Create an account
           </button>

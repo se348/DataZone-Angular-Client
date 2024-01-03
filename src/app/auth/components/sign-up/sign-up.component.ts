@@ -27,8 +27,8 @@ const initComponentState: SignupComponentState = {
   styleUrl: './sign-up.component.scss',
 })
 export class SignUpComponent {
-  hidePassword: boolean = false;
-  hideConfirmPassword: boolean = false;
+  hidePassword: boolean = true;
+  hideConfirmPassword: boolean = true;
   registerForm!: FormGroup;
   password: string = "";
 
@@ -118,6 +118,12 @@ export class SignUpComponent {
   hasSpecialChars(password: string): boolean {
     let regex = /.*[^a-zA-Z0-9].*/;
     return regex.test(password);
+  }
+
+  get isFormValid(): boolean {
+    const { valid, touched, dirty } = this.registerForm;
+    return !!valid &&
+    !!(touched || dirty);
   }
 
   passwordValidator(): ValidatorFn {
