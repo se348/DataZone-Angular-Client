@@ -1,0 +1,28 @@
+@keyframes spinners-angular-dotted-shrink {
+  50% {
+    transform: translate(0, 0);
+  }
+}
+.one{
+  max-width: 100px;
+  max-height: 100px;
+  margin: 0 auto;
+}
+.dot-style{
+      animation-name:spinners-angular-dotted-shrink;
+      animation-duration: 3s;
+      animation-timing-function:cubic-bezier(0, 0.9, 0, 0.9);
+      animation-iteration-count:infinite;
+}
+
+
+
+
+
+
+
+
+
+
+
+

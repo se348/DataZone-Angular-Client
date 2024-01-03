@@ -14,6 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
+import { CustomProgressBarComponent } from './shared/shared-component/custom-progress-bar/spinner-dotted.component';
+import { ProgressStatusState } from './core/store/custom-progress-bar.state';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,8 +35,7 @@ import { AuthModule } from './auth/auth.module';
   ],
   bootstrap: [AppComponent], 
   imports: [
-    NgxsModule.forRoot([]),
-    BrowserAnimationsModule, 
+    NgxsModule.forRoot([ProgressStatusState]), 
     NgxsStoragePluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     BrowserModule,
@@ -44,7 +45,7 @@ import { AuthModule } from './auth/auth.module';
     HttpClientModule,
     AuthModule,
     AppRoutingModule,
-    
+     CustomProgressBarComponent    
   ],
 })
 export class AppModule { }
