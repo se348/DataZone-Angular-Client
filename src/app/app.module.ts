@@ -14,18 +14,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
-import { CustomProgressBarComponent } from './shared/shared-component/custom-progress-bar/spinner-dotted.component';
-
-import { CustomToasterComponent } from './shared/shared-component/custom-toaster/custom-toaster.component';
-import { ButtonModule } from 'primeng/button';
-import { RippleModule } from 'primeng/ripple';
-import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 import { ToastState } from './core/store/toast.state';
 @NgModule({
   declarations: [AppComponent, LandingPageComponent],
   providers: [
-    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

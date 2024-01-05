@@ -21,7 +21,7 @@ interface ProgressStatusComponentState {
   styleUrls: ['./spinner-dotted.component.css'],
   providers:[RxState]
 })
-export class CustomProgressBarComponent {
+export class CustomSpinnerComponent {
 
   constructor(
   ) {
