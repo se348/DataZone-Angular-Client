@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RxState } from '@rx-angular/state';
 import { Observable } from 'rxjs';
-import { CustomProgressBarFacade } from 'src/app/core/facades/custom-progress-bar.facade';
 
 
 interface ProgressStatusComponentState {
@@ -17,23 +16,15 @@ interface ProgressStatusComponentState {
   
 
 @Component({
-  selector: 'sa-spinner-dotted',
-  standalone:true,
-  imports:[CommonModule, BrowserModule],
+  selector: 'custom-spinner',
   templateUrl: './spinner-dotted.component.html',
   styleUrls: ['./spinner-dotted.component.css'],
   providers:[RxState]
 })
 export class CustomProgressBarComponent {
 
-    inprogress$: Observable<boolean> = this.state.select('inprogress');
-
   constructor(
-    private state: RxState<ProgressStatusComponentState>,
-    private progressStatusFacade: CustomProgressBarFacade,
   ) {
-    this.state.set(initProgressStatusComponentState);
-    this.state.connect('inprogress', this.progressStatusFacade.inprogress$);
     this.scale();
   }
 

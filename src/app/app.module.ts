@@ -15,13 +15,17 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { CustomProgressBarComponent } from './shared/shared-component/custom-progress-bar/spinner-dotted.component';
-import { ProgressStatusState } from './core/store/custom-progress-bar.state';
+
+import { CustomToasterComponent } from './shared/shared-component/custom-toaster/custom-toaster.component';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ToastState } from './core/store/toast.state';
 @NgModule({
-  declarations: [
-    AppComponent,
-    LandingPageComponent
-  ],
+  declarations: [AppComponent, LandingPageComponent],
   providers: [
+    MessageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
@@ -31,21 +35,20 @@ import { ProgressStatusState } from './core/store/custom-progress-bar.state';
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorInterceptor,
       multi: true,
-    }
+    },
   ],
-  bootstrap: [AppComponent], 
+  bootstrap: [AppComponent],
   imports: [
-    NgxsModule.forRoot([ProgressStatusState]), 
+    NgxsModule.forRoot([ToastState]),
     NgxsStoragePluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
     AuthModule,
     AppRoutingModule,
-     CustomProgressBarComponent    
   ],
 })
-export class AppModule { }
+export class AppModule {}

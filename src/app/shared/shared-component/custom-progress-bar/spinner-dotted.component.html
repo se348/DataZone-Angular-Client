@@ -1,6 +1,6 @@
 <div class="one">
-  <svg *ngIf="inprogress$ | async" [ngStyle]="svgStyle" viewBox="0 0 30 30">
+  <svg [ngStyle]="svgStyle" viewBox="0 0 40 10">
     <circle *ngFor="let item of coords; let i = index" [ngStyle]="circleStyle(i)"
-     cx="15" cy="15" fill="currentColor" [attr.r]="10 * (thickness / 100)" class="dot-style"/>
+     cx="20" cy="5" fill="currentColor" [attr.r]="10 * (thickness / 100)" class="dot-style"/>
   </svg>
 </div>
