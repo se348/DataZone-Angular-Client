@@ -1,7 +1,7 @@
-// toaster.service.ts
 import { Injectable } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { CloseToast, ShowToast } from '../store/toast.actions';
+import { ShowToast,CloseToast } from '../store/toast.actions';
+
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +9,10 @@ import { CloseToast, ShowToast } from '../store/toast.actions';
 export class ToasterService {
   constructor(private store: Store) {}
 
-  showToast(message: string) {
+  showrToast(message: string) {
     this.store.dispatch(new ShowToast(message));
   }
-  closeToast() {
+  closehToast() {
     this.store.dispatch(new CloseToast());
   }
 }

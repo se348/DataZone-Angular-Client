@@ -1,8 +1,6 @@
 
-.flex{
-    display: flex;
-    gap:5px;
-    padding-top: 8px;
+.text-container{
+    margin: 5px auto;
 }
 .loading-container {
     display: flex;
@@ -58,6 +56,7 @@
   }
 
   .toast-container {
+    min-width: 300px;
     position: fixed;
     bottom: 20px;
     left: 50%;
