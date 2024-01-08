@@ -4,6 +4,6 @@ export interface UserProfile {
   email?: string;
   country?: string;
   phoneNumber?: string;
-  profileImage? : string,
-  bio? : string,
+  profileImage?: string;
+  bio?: string;
 }
