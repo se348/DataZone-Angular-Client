@@ -5,9 +5,9 @@ import { Action, State, StateContext, StateToken, Store } from '@ngxs/store';
 import { LoginResponse } from '../models/auth.model';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
+import { EMAIL_SENT_ROUTE, LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
 import { CompanyProfileResponse } from '../models/profile.model';
-import { Login, CompleteCompanyProfile, ConfirmEmail, Register } from './auth.actions';
+import { Login, CompleteCompanyProfile, ConfirmEmail, Register, ResendConfirmEmail } from './auth.actions';
 
 export interface AuthStateModel {
   accessToken: string | null;
@@ -75,8 +75,15 @@ export class AuthState {
   ) {
     return this.authService.register(request).pipe(tap(
       () => {
-        this.router.navigate([LANDING_PAGE_ROUTE]);
+        const userEmail = request.email; // Assuming email is in the request
+        const queryParams = { email: userEmail };
+        this.router.navigate([EMAIL_SENT_ROUTE], {queryParams});
       }
     ));
+  }
+
+  @Action(ResendConfirmEmail)
+  resendConfirmationEmail({ patchState }: StateContext<AuthStateModel>, {request}: ResendConfirmEmail) {
+    return this.authService.resendConfirmEmail(request);
   }
 }

@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { LOGIN_URL, COMPLETE_COMPANY_PROFILE_URL, REGISTER_URL } from "src/app/core/constants/api-endpoints";
-import { LoginRequest, LoginResponse, RegisterRequest } from "../models/auth.model";
+import { LOGIN_URL, COMPLETE_COMPANY_PROFILE_URL, REGISTER_URL, RESEND_CONFIRM_EMAIL_URL } from "src/app/core/constants/api-endpoints";
+import { LoginRequest, LoginResponse, RegisterRequest, ResendConfirmationRequest } from "../models/auth.model";
 import { CompanyProfileRequest, CompanyProfileResponse } from "../models/profile.model";
 
 
@@ -27,6 +27,10 @@ export class AuthService {
 
   register(request: RegisterRequest): Observable<any> {
     return this.http.post<any>(REGISTER_URL, request);
+  }
+
+  resendConfirmEmail(request: ResendConfirmationRequest){
+    return this.http.post<any>(RESEND_CONFIRM_EMAIL_URL, request)
   }
 
 
