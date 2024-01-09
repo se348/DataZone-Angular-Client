@@ -1,36 +1,34 @@
-.stepper-container{
-    width: 80%;
-    align-self: center;
+.stepper-container {
+  width: 80%;
+  align-self: center;
 }
-.flex-space-between{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.flex-space-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.flex-end{
-    align-self: flex-end !important;
+.flex-end {
+  align-self: flex-end !important;
 }
 
 .submit-btn {
-    padding: 0.2rem 1rem;
-    margin-top: 2rem;
-    background-color: black;
-    color: white !important;
-  }
+  padding: 0.5rem 1.2rem;
+  margin-top: 2rem;
+  background-color: black;
+  color: white !important;
+}
 
- 
+.circular-radius {
+  border-radius: 4px !important;
+}
 
-  .circular-radius {
-    border-radius: 4px !important;
-  }
+.flex-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .flex-vertical{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .btn-small{
-   max-width: min-content;
-  }
+.btn-small {
+  max-width: min-content;
+}
