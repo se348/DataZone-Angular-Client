@@ -1,0 +1,53 @@
+.outer-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.inner-container{
+    width: 50vw;
+    text-align: center;
+    padding: 0px 10px 10px 50px ;
+    box-shadow: inset;
+    border-radius: 15px;
+
+    h1{
+        padding-top: 20px;
+        font-size: 48px;
+    }
+
+    p{
+        padding:0 50px;
+        font-size: 20px;
+    }
+    .footer-confirmation{
+        font-size: 16px;
+        span{
+            color: rgb(0, 42, 255);
+            text-decoration: underline;
+            cursor: pointer;
+        } 
+    }
+    
+}
+.line{
+    border-top: solid;
+    border-width: 1.2px;
+    margin: 20px 40px 10px 40px;
+}
+
+.email{
+    transform: scale(5);
+    margin-top: 50px;
+    color: rgb(0, 0, 0);
+}
+.right-aligned{
+    display: flex;
+    justify-content: end;
+    .close{
+        padding: 10px;
+    }
+}
+.inner-content{
+    padding-right: 40px;
+}

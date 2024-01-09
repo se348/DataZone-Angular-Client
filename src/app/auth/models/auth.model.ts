@@ -15,3 +15,6 @@ export interface RegisterRequest {
   email: string;
   password: string;
 }
+export interface ResendConfirmationRequest{
+  email:string;
+}

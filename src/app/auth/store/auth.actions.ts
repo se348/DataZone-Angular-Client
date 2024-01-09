@@ -1,4 +1,4 @@
-import { LoginRequest, RegisterRequest } from '../models/auth.model';
+import { LoginRequest, RegisterRequest, ResendConfirmationRequest } from '../models/auth.model';
 import { CompanyProfileRequest } from "../models/profile.model";
 
 export class Login {
@@ -18,4 +18,9 @@ export class ConfirmEmail {
 export class Register {
   static readonly type = `[Auth] ${Register.name}`;
   constructor(public request: RegisterRequest) {}
+}
+
+export class ResendConfirmEmail {
+  static readonly type = `[Auth] ${ResendConfirmEmail.name}`;
+  constructor(public request: ResendConfirmationRequest) {}
 }
