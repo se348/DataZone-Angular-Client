@@ -180,7 +180,6 @@ export class CompleteCompanyProfileComponent {
   }
 
   handleSelectionChange(index: number) {
-    console.log(index);
     this.currentStepIndexControl.setValue(index);
   }
 }
