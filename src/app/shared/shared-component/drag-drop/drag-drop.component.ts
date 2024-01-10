@@ -41,7 +41,6 @@ export class DragDropComponent implements OnInit {
     return;
   }
   preview() {
-    console.log(this.fileMeta.url);
     window.open(this.fileMeta.url, '_blank');
   }
 
