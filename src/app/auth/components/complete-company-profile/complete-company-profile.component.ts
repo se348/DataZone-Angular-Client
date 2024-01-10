@@ -4,6 +4,7 @@ import {
   CdkStep,
   CdkStepper,
   CdkStepperModule,
+  StepperOrientation,
   StepperSelectionEvent,
 } from '@angular/cdk/stepper';
 import { CustomStepperComponent } from 'src/app/shared/shared-component/custom-stepper/custom-stepper.component';
@@ -13,13 +14,19 @@ import {
   FormBuilder,
   Validators,
   FormControl,
+  AbstractControl,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
 import { AuthFacade } from '../../facades/auth.facades';
 import { SelectionChange } from '@angular/cdk/collections';
-import { CompanyProfileRequest, CompanyProfileResponse, IndustryTypes } from '../../models/profile.model';
+import {
+  CompanyProfileResponse,
+  IndustryTypes,
+} from '../../models/profile.model';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatSelectChange } from '@angular/material/select';
 
 interface LoginComponentState {
   isAuthenticated: boolean;
@@ -28,7 +35,7 @@ interface LoginComponentState {
 
 const initLoginComponentState: LoginComponentState = {
   isAuthenticated: false,
-  companyProfile: null
+  companyProfile: null,
 };
 
 @Component({
@@ -39,9 +46,14 @@ const initLoginComponentState: LoginComponentState = {
 })
 export class CompleteCompanyProfileComponent {
   isAuthenticated$: Observable<boolean> = this.state.select('isAuthenticated');
-  completeProfileForm!: FormGroup;
+  profileControl!: FormGroup;
+  documentControl!: FormGroup;
+  paymentControl!: FormGroup;
+  profilePic?: File;
+  businessLicense?:File;
 
-  companyProfile :CompanyProfileResponse | null = null;
+
+  companyProfile: CompanyProfileResponse | null = null;
 
   companyProfile$ = this.state.select('companyProfile');
 
@@ -52,9 +64,8 @@ export class CompleteCompanyProfileComponent {
     return Object.keys(IndustryTypes);
   }
 
-
-  progressBarValue = 0;
   currentStepIndex = 0;
+  imageSize = 100;
 
   constructor(
     private readonly authFacade: AuthFacade,
@@ -65,78 +76,111 @@ export class CompleteCompanyProfileComponent {
     this.state.set(initLoginComponentState);
     this.state.connect('isAuthenticated', this.authFacade.isAuthenticated$);
     this.state.connect('companyProfile', this.authFacade.companyProfile$);
-    this.completeProfileForm = this.formBuilder.group({
-      companyName: ['', [Validators.required]],
-      companyEmail: ['', [Validators.required, Validators.email]],
-      companyWebSite: [''],
+
+    this.profileControl = this.formBuilder.group({
+          companyName: ['', [Validators.required]],
+          companyEmail: ['', [Validators.required, Validators.email]],
+          companyWebSite: [''],
+        });
+    this.documentControl =  this.formBuilder.group({
       companyAddress: [''],
-      industryType:['', [Validators.required]]
+      industryType: ['', [Validators.required]],
+      businessLicense: ['', [Validators.required]],
+      profilePicture:['']
     });
+    this.paymentControl = this.formBuilder.group({}); 
   }
 
   ngOnInit(): void {
     this.companyProfile$.subscribe((profile) => {
-      this.companyProfile =profile
+      this.companyProfile = profile;
     });
     this.isAuthenticated$.subscribe((isAuth) => {
-      if (isAuth && this.companyProfile !== null ) this.router.navigate([LANDING_PAGE_ROUTE]);
+      if (isAuth && this.companyProfile !== null)
+        this.router.navigate([LANDING_PAGE_ROUTE]);
     });
     this.currentStepIndexControl.valueChanges.subscribe((value) => {
       this.currentStepIndex = value;
-      this.handleProgressState(value);
     });
   }
   currentStepIndexControl = new FormControl();
 
   stepperTitle = 'Complete Company Profile';
 
-  progressStatus = [
-    {
-      stepNo: 1,
-      stepDesc: 'Company address and website',
-    },
-    {
-      stepNo: 2,
-      stepDesc: 'Payment Information',
-    },
-  ];
 
   handleSubmitEvent(event: any) {
     if (event) this.saveForm();
   }
 
-  handleProgressState(index: number) {
-    this.progressBarValue = ((index + 1) * 100) / 2;
-  }
-
-  handleProgressList(listIndex: number) {
-    if (this.currentStepIndex > listIndex) return false;
-    return true;
-  }
-
   saveForm() {
-    const { valid, touched, dirty } = this.completeProfileForm;
+    const { valid, touched, dirty } = this.profileControl!;
     if (valid && (touched || dirty)) {
       const {
         companyName,
         companyEmail,
         companyWebSite,
         companyAddress,
-        industryType
-      } = this.completeProfileForm.value;
-      const request: CompanyProfileRequest = {
-        CompanyName: companyName,
-        ContactEmail: companyEmail,
-        CompanyWebsite: companyWebSite,
-        Address: companyAddress,
-        IndustryType: industryType
-      };
-      this.authFacade.dispatchCompleteCompanyProfile(request);
+        industryType,
+      } = this.profileControl!.value;
+      
+      const formData = this.organizeFormData(companyName,
+        companyEmail,
+        companyWebSite,
+        companyAddress,
+        industryType,)
+      this.authFacade.dispatchCompleteCompanyProfile(formData);
       this.router.navigate([LANDING_PAGE_ROUTE]);
     }
   }
 
-  handleSelectionChange(event: StepperSelectionEvent) {
-    this.currentStepIndexControl.setValue(event.selectedIndex);
+  organizeFormData(
+    companyName: string,
+    companyEmail: string,
+    industryType: IndustryTypes,
+    companyWebSite?: string,
+    companyAddress?: string): FormData {
+    const formData = new FormData();
+    formData.append('CompanyName', companyName);
+    formData.append('CompanyEmail', companyEmail);
+    if(companyWebSite) 
+    formData.append('CompanyWebSite', companyWebSite);
+  if(companyAddress)
+  formData.append('CompanyAddress', companyAddress);
+  formData.append('IndustryType', industryType);
+  if(this.profilePic)
+  formData.append('ProfilePic', this.profilePic);
+    
+    return formData;
+  }
+
+  getProfilePic(file:File){
+    this.profilePic = file;
+  }
+  
+  getUploadedLicense(file?:File){
+    this.documentControl.controls['businessLicense'].setValue(file);
+    if(file) 
+    this.businessLicense = file;
+  else return 
+  }
+
+  getInitials(){
+
+    const names = this.profileControl.controls['companyName'].value.trim().split(' ');
+    let initials = '';
+    for (let i = 0; i < names.length; i++) {
+      if (names[i] !== '') {
+        initials += names[i][0]; 
+        if (initials.length === 2) {
+          break;
+        }
+      }
+    }
+    return initials.toUpperCase();    
+  }
+
+  handleSelectionChange(index: number) {
+    console.log(index);
+    this.currentStepIndexControl.setValue(index);
   }
 }
