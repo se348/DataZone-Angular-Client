@@ -1,0 +1,12 @@
+<form>
+  <div class="fileupload" [class.dragover]="isDragOver" (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)" (drop)="onDrop($event)" (click)="fileField.click()"
+    (fileDropped)="upload($event)">
+    <span class="ddinfo">{{ fileMeta.name ? fileMeta.name : 'Choose a file or drag here' }}</span>
+    <input type="file" accept=".pdf, .png, .jpg, .jpeg" #fileField (change)="upload($event)" hidden />
+  </div>
+</form>
+<div class="action-btn">
+  <button class="preview-btn" (click)="preview()" *ngIf="fileMeta.url !== ''">Preview File</button>
+<button class="preview-btn" (click)="removeFile()" *ngIf="fileMeta.url !== ''">Remove</button>
+</div>

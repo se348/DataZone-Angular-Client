@@ -1,78 +1,89 @@
-<div class="divider">
-    <div class="progress-tracker">
-        <mat-progress-bar class="color" mode="determinate" value={{progressBarValue}}></mat-progress-bar>
-        <mat-list>
-            <div mat-subheader>Progress</div>
-              <mat-list-item disabled="{{!handleProgressList(i)}}" *ngFor="let item of progressStatus; let i = index">
-                    <mat-icon matListItemIcon>{{handleProgressList(i)?"schedule":"done_all"}}</mat-icon>
-                    <div matListItemTitle>step {{item.stepNo}}</div>
-                    <div matListItemLine>{{item.stepDesc}}</div>
-              
-              </mat-list-item>
-      </mat-list>
-    </div>
-    <mat-divider class="vertical-line" [vertical]="true" style="height: 70vh"></mat-divider>
-    <app-custom-stepper stepperTitle="{{stepperTitle}}" linear="true"   (submitForm)="handleSubmitEvent($event)" (selectionChange)="handleSelectionChange($event)">
-        <div class="company-profile-form">
-            <div >  
-              <form autocomplete="off" [formGroup]="completeProfileForm">
-                <cdk-step>
-                <div>
-                  <mat-form-field appearance="outline">
-                    <mat-label> Company Email</mat-label>
-                    <input
-                      matInput
-                      formControlName="companyEmail"
-                    />
-                  </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field appearance="outline">
-                      <mat-label>Company Name</mat-label>
-                      <input
-                        matInput
-                        formControlName="companyName"
-                        required
-                      />
-                    </mat-form-field>
 
-                  </div>
-                <div>
-                  <mat-form-field appearance="outline">
-                    <mat-label>Company website</mat-label>
-                    <input
-                      matInput
-                      formControlName="companyWebSite"
-                    />
-                  </mat-form-field>
+<div class="body">
+  <div class="container">
+    <div class="divider">
+      <div class="profile-container">
+        <app-profile-picture class="p-image" imageUrl="" initials="{{getInitials()}}" size= {{this.imageSize}} (imageSelected)="getProfilePic($event)" ></app-profile-picture>
+        <h2>Add profile picture</h2>
+      </div>
+      <mat-divider class="vertical-line" [vertical]="true" style="height: 70vh"></mat-divider>
+      <mat-stepper linear class="stepper-container">
+        <div class="form-container">
+          <form [formGroup]="this.profileControl" autocomplete="off">
+            <mat-step [stepControl]="profileControl">
+              <div class="step-container">
+                <ng-template matStepLabel>Basic Information</ng-template>
+                <mat-form-field appearance="outline">
+                  <mat-label>Company Name</mat-label>
+                  <input matInput formControlName="companyName" required />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label> Company Email</mat-label>
+                  <input matInput formControlName="companyEmail" />
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                  <mat-label>Company website</mat-label>
+                  <input matInput formControlName="companyWebSite" />
+                </mat-form-field>
+
+                <div class="action-btn">
+                  <button mat-button matStepperPrevious  type="button">Back</button>
+                  <button mat-flat-button color="primary" matStepperNext  type="button">Next</button>
                 </div>
-                <div>
+              </div>
+            </mat-step>
+          </form>
+          <form [formGroup]="documentControl">
+            <mat-step  [stepControl]="documentControl">
+              <div class="step-container">
+                <ng-template matStepLabel>Details & Documents</ng-template>
+                <mat-form-field appearance="outline">
+                  <mat-label>Company Address</mat-label>
+                  <input matInput formControlName="companyAddress" />
+                </mat-form-field>
                 <mat-form-field appearance="outline" class="workflow-selector">
-                    <mat-label>Choose Industry type</mat-label>
-                    <mat-select
-                      formControlName="industryType"
-                    >
-                      <mat-option *ngFor="let type of getIndustryTypes" [value]="type">{{
-                        type
+                  <mat-label>Choose Industry type</mat-label>
+                  <mat-select formControlName="industryType">
+                    <mat-option *ngFor="let type of getIndustryTypes" [value]="type">{{
+                      type
                       }}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                  </mat-select>
+                </mat-form-field>
+                <h3> Add Official Company Business License </h3>
+                <app-drag-drop class="drag-drop-container" (uploadedFile)="getUploadedLicense($event)"></app-drag-drop>
+                <div class="action-btn">
+                  <button mat-button matStepperPrevious  type="button">Back</button>
+                  <button mat-flat-button color="primary" matStepperNext  type="button">Next</button>
                 </div>
-                <div>
-                  <mat-form-field appearance="outline">
-                    <mat-label>Company Address</mat-label>
-                    <input
-                      matInput
-                      formControlName="companyAddress"
-                    />
-                  </mat-form-field>
+              </div>
+            </mat-step>
+          </form>
+          <form [formGroup]="paymentControl">
+            <mat-step [stepControl]="paymentControl">
+              <div class="step-container">
+
+                <ng-template matStepLabel>payment information</ng-template>
+                <h2>Payment info coming soon</h2>
+                <div class="action-btn">
+                  <button mat-button matStepperPrevious  type="button">Back</button>
+                  <button mat-flat-button color="primary" matStepperNext  type="button">Next</button>
                 </div>
-            </cdk-step>   
-            <cdk-step>
-                <h2>Upcoming in the next versions</h2>
-            </cdk-step>     
-              </form>
-            </div>
-          </div> 
-      </app-custom-stepper>
+              </div>
+            </mat-step>
+          </form>
+            <mat-step>
+
+              <ng-template matStepLabel>Review</ng-template>
+              <h2>Preview submit profile</h2>
+
+              <div class="action-btn">
+                <button mat-button matStepperPrevious  type="button">Back</button>
+                <button mat-flat-button color="primary" matStepperNext  type="button" >save</button>
+              </div>
+            </mat-step>
+        </div>
+
+      </mat-stepper>
+    </div>
   </div>
+</div>
