@@ -1,0 +1,9 @@
+<label for="fileInput" class="edit-label">
+<div class="profile-picture" [ngStyle]="{ 'width.px': size, 'height.px': size }">
+      <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" hidden />
+    
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="Profile Picture" />
+    <div class="initials" *ngIf="!imageUrl">{{ initials }}</div>
+  </div>
+</label>
+  

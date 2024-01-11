@@ -1,6 +1,6 @@
-.stepper-container {
-  width: 80%;
-  align-self: center;
+.stepper-container{
+    width: 50%;
+    margin:0 auto;
 }
 .flex-space-between {
   display: flex;
@@ -19,6 +19,9 @@
   color: white !important;
 }
 
+  .circular-radius {
+    border-radius: 4px !important;
+  }
 .circular-radius {
   border-radius: 4px !important;
 }
@@ -29,6 +32,8 @@
   align-items: center;
 }
 
-.btn-small {
-  max-width: min-content;
-}
+  .btn-small{
+   max-width: min-content;
+   padding: 12px 20px;
+   font-size: 20px;
+  }

@@ -1,0 +1,23 @@
+<div class="outer-container">
+    <div class="inner-container">
+        <div class="inner-content" *ngIf="email !== undefined">
+            <mat-icon class="email" color="primary">email</mat-icon>
+            <h1>Email Confirmation</h1>
+            <p>
+                We have sent an email to you to confirm the validity of your email address. After receiving the email,
+                follow
+                the link provided to complete your registration.
+            </p>
+            <div class="line"></div>
+            <div class="footer-confirmation">
+                If you did not get any mail <span (click)="resendConfirmationEmail()" class="link-email">Resend
+                    confirmation mail</span>
+            </div>
+        </div>
+
+        <div class="inner-content" *ngIf="email == undefined">
+            <h1>Email is not set</h1>
+        </div>
+
+    </div>
+</div>
