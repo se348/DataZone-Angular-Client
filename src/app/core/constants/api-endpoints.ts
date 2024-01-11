@@ -10,4 +10,6 @@ export const CONFIRM_EMAIL_URL = `${AUTH_URL}/confirmEmail`;
 
 export const REGISTER_URL = `${AUTH_URL}/register`;
 
-export const ROLES_URL = `${BASE_URL}/roles`
+export const ROLES_URL = `${BASE_URL}/roles`;
+
+export const RESEND_CONFIRM_EMAIL_URL = `${AUTH_URL}/resendConfirmationEmail`;

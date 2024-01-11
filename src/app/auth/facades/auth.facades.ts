@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Select, Store } from "@ngxs/store";
 import { Observable } from "rxjs";
-import { LoginRequest, RegisterRequest } from "../models/auth.model";
-import { CompanyProfileResponse, CompanyProfileRequest } from "../models/profile.model";
-import { Login, CompleteCompanyProfile, ConfirmEmail, Register } from "../store/auth.actions";
+import { LoginRequest, RegisterRequest, ResendConfirmationRequest } from "../models/auth.model";
+import { CompanyProfileResponse } from "../models/profile.model";
+import { Login, CompleteCompanyProfile, ConfirmEmail, Register, ResendConfirmEmail } from "../store/auth.actions";
 import { AuthSelector } from "../store/auth.selector";
-
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +27,7 @@ export class AuthFacade {
     this.store.dispatch(new Login(request));
   }
 
-  dispatchCompleteCompanyProfile(request: CompanyProfileRequest) {
+  dispatchCompleteCompanyProfile(request: FormData) {
     this.store.dispatch(new CompleteCompanyProfile(request));
   }
 
@@ -37,5 +36,9 @@ export class AuthFacade {
   }
   dispatchRegister(request: RegisterRequest) {
     this.store.dispatch(new Register(request));
+  }
+
+  dispatchResendConfirmationEmail(request: ResendConfirmationRequest){
+    this.store.dispatch(new ResendConfirmEmail(request))
   }
 }
