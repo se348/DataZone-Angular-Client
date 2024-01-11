@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
-  COMPLETE_USER_PROFILE_PAGE_ROUTE,
+  EDIT_USER_PROFILE_PAGE_ROUTE,
   LANDING_PAGE_ROUTE,
-  EDIT_COMPANY_PROFILE_PAGE_ROUTE
+  EDIT_COMPANY_PROFILE_PAGE_ROUTE,
 } from './core/constants/routes';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { CompleteUserProfileComponent, } from './user-profile/components/complete-user-profile/complete-user-profile.component';
+import { CompleteUserProfileComponent } from './user-profile/components/complete-user-profile/complete-user-profile.component';
 import { EditCompanyProfileComponent } from './company-profile/components/edit-company-profile/edit-company-profile.component';
 
 const routes: Routes = [
@@ -19,7 +19,7 @@ const routes: Routes = [
     component: LandingPageComponent,
   },
   {
-    path: COMPLETE_USER_PROFILE_PAGE_ROUTE,
+    path: EDIT_USER_PROFILE_PAGE_ROUTE,
     component: CompleteUserProfileComponent,
   },
   {
