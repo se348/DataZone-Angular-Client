@@ -6,17 +6,17 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { catchError, of, retry, throwError, timer } from 'rxjs';
-// import { OperationStatusService } from '../services/operation-status/operation-status.service';
-// import { NGXLogger } from 'ngx-logger';
-// import { errorStyle } from '../services/operation-status/status-style-names';
-// import { ProgressStatusFacade } from '../facades/progress-status.facade';
+import { OperationStatusService } from '../services/operation-status/operation-status.service';
+import { NGXLogger } from 'ngx-logger';
+import { errorStyle } from '../services/operation-status/status-style-names';
+import { ProgressStatusFacade } from '../facades/progress-status.facade';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
-    // private operationStatusService: OperationStatusService,
-    // private logger: NGXLogger,
-    // private progressStatusFacade: ProgressStatusFacade,
+    private operationStatusService: OperationStatusService,
+    private logger: NGXLogger,
+    private progressStatusFacade: ProgressStatusFacade,
   ) {}
 
   shouldRetry(error: any, retryCount: number) {
