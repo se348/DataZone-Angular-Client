@@ -11,9 +11,10 @@ interface CompleteUserProfileComponentState {
   userProfile: UserProfile | null;
 }
 
-const initCompleteUserProfileComponentState: CompleteUserProfileComponentState = {
-  userProfile: null,
-};
+const initCompleteUserProfileComponentState: CompleteUserProfileComponentState =
+  {
+    userProfile: null,
+  };
 
 @Component({
   selector: 'app-complete-user-profile',
@@ -43,33 +44,33 @@ export class CompleteUserProfileComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userProfileFacade.dispatchGetUserProfile('');
-    this.userProfileFacade.userProfile$.pipe(takeUntil(this.destroy$)).subscribe((userProfile) => {
-      this.userProfile = userProfile;
+    this.userProfileFacade.userProfile$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((userProfile) => {
+        this.userProfile = userProfile;
 
-      this.userProfileForm = this.formBuilder.group({
-        fullName: [userProfile?.fullName || ''],
-        email: [userProfile?.email || ''],
-        phoneNumber: [userProfile?.phoneNumber || ''],
-        country: [userProfile?.country || ''],
-        bio: [userProfile?.bio]
-        // ... other form fields
-      });
+        this.userProfileForm = this.formBuilder.group({
+          fullName: [userProfile?.fullName || ''],
+          email: [userProfile?.email || ''],
+          phoneNumber: [userProfile?.phoneNumber || ''],
+          country: [userProfile?.country || ''],
+          bio: [userProfile?.bio],
+          // ... other form fields
+        });
 
-      this.toggledProperties['isPersonalInfoEditMode'] =
-        !userProfile?.fullName || !userProfile?.email || !userProfile?.phoneNumber;
+        this.toggledProperties['isPersonalInfoEditMode'] =
+          !userProfile?.fullName ||
+          !userProfile?.email ||
+          !userProfile?.phoneNumber;
         this.toggledProperties['isLocationEditMode'] = !userProfile.country;
         this.toggledProperties['isBioEditMode'] = !userProfile.bio;
-    });
+      });
   }
 
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
-  // toggleEditMode() {
-  //   this.isPersonalInfoEditMode = !this.isPersonalInfoEditMode;
-  // }
 
   toggleEdit(property: string) {
     this.toggledProperties[property] = !this.toggledProperties[property];
@@ -81,11 +82,21 @@ export class CompleteUserProfileComponent implements OnInit, OnDestroy {
 
     if (valid && (touched || dirty)) {
       this.userProfileFacade.dispatchCompeleteUserProfile({
-        fullName: this.userProfileForm.value.fullName || this.userProfile?.fullName || null,
-        country: this.userProfileForm.value.country || this.userProfile?.country || null,
-        email: this.userProfileForm.value.email || this.userProfile?.email || null,
-        phoneNumber: this.userProfileForm.value.phoneNumber || this.userProfile?.phoneNumber || null,
-        bio: this.userProfileForm.value.bio || this.userProfile?.bio
+        fullName:
+          this.userProfileForm.value.fullName ||
+          this.userProfile?.fullName ||
+          null,
+        country:
+          this.userProfileForm.value.country ||
+          this.userProfile?.country ||
+          null,
+        email:
+          this.userProfileForm.value.email || this.userProfile?.email || null,
+        phoneNumber:
+          this.userProfileForm.value.phoneNumber ||
+          this.userProfile?.phoneNumber ||
+          null,
+        bio: this.userProfileForm.value.bio || this.userProfile?.bio,
       });
     }
 
