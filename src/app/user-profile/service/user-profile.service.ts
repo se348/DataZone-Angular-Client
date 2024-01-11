@@ -2,6 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserProfile } from '../models/user-profile.model';
 import { Observable } from 'rxjs';
+import {
+  EDIT_USER_PROFILE_URL,
+  GET_USER_PROFILE_URL,
+} from 'src/app/core/constants/api-endpoints';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +13,11 @@ import { Observable } from 'rxjs';
 export class UserProfileService {
   constructor(private http: HttpClient) {}
 
-  completeProfile(request: Partial<UserProfile>): Observable<UserProfile> {
-    return this.http.patch<UserProfile>('http://localhost:3000/users/1', request);
+  editUserProfile(request: Partial<UserProfile>): Observable<UserProfile> {
+    return this.http.patch<UserProfile>(EDIT_USER_PROFILE_URL, request);
   }
 
   getUserProfile(id: String): Observable<UserProfile> {
-    return this.http.get<UserProfile>('http://localhost:3000/users/1');
+    return this.http.get<UserProfile>(GET_USER_PROFILE_URL);
   }
 }

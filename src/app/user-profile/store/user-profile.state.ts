@@ -30,11 +30,11 @@ export class UserProfileState {
   ) {}
 
   @Action(CompleteUserProfile)
-  completeUserProfile(
+  editUserProfile(
     { patchState }: StateContext<UserProfileStateModel>,
     { request }: CompleteUserProfile
   ) {
-    return this.userProfileService.completeProfile(request).pipe(
+    return this.userProfileService.editUserProfile(request).pipe(
       tap((response: UserProfile) => {
         patchState({
           userProfile: response,
