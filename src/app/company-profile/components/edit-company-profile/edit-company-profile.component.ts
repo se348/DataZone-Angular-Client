@@ -45,7 +45,6 @@ export class EditCompanyProfileComponent {
   ngOnInit(): void {
     // Todo send the company id
     this.companyProfileFacade.dispatchGetCompanyProfile('');
-    console.log('company profile:', this.companyProfile);
     this.companyProfileFacade.companyProfile$
       .pipe(takeUntil(this.destroy$))
       .subscribe((companyProfile) => {
