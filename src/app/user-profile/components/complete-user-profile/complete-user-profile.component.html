@@ -89,7 +89,7 @@
             <div *ngIf="toggledProperties['isPersonalInfoEditMode']">
               <form
                 [formGroup]="userProfileForm"
-                (ngSubmit)="completeProfile('isPersonalInfoEditMode')"
+                (ngSubmit)="editUserProfile('isPersonalInfoEditMode')"
                 class="form info-edit"
               >
                 <mat-form-field appearance="outline" class="input-field">
@@ -151,7 +151,7 @@
             <div *ngIf="toggledProperties['isLocationEditMode']">
               <form
                 [formGroup]="userProfileForm"
-                (ngSubmit)="completeProfile('isLocationEditMode')"
+                (ngSubmit)="editUserProfile('isLocationEditMode')"
                 class="form location-edit"
               >
                 <mat-form-field appearance="outline" class="input-field">
@@ -201,7 +201,7 @@
             <div *ngIf="toggledProperties['isBioEditMode']">
               <form
                 [formGroup]="userProfileForm"
-                (ngSubmit)="completeProfile('isBioEditMode')"
+                (ngSubmit)="editUserProfile('isBioEditMode')"
                 class="form bio-edit"
               >
                 <mat-form-field appearance="outline" class="input-field">

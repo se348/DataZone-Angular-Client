@@ -5,7 +5,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 interface CompleteUserProfileComponentState {
   userProfile: UserProfile | null;
@@ -20,8 +20,9 @@ const initCompleteUserProfileComponentState: CompleteUserProfileComponentState =
   selector: 'app-complete-user-profile',
   templateUrl: './complete-user-profile.component.html',
   styleUrls: ['./complete-user-profile.component.scss'],
+  providers: [RxState],
 })
-export class CompleteUserProfileComponent implements OnInit, OnDestroy {
+export class EditUserProfileComponent implements OnInit {
   toggledProperties: { [key: string]: boolean } = {
     isPersonalInfoEditMode: false,
     isLocationEditMode: false,
@@ -30,8 +31,8 @@ export class CompleteUserProfileComponent implements OnInit, OnDestroy {
   imagePreview: string = '';
   userProfileForm!: FormGroup;
   userProfile: UserProfile | null = null;
-
-  private destroy$ = new Subject<void>();
+  userProfile$: Observable<UserProfile | null> =
+    this.state.select('userProfile');
 
   constructor(
     private readonly state: RxState<CompleteUserProfileComponentState>,
@@ -40,36 +41,21 @@ export class CompleteUserProfileComponent implements OnInit, OnDestroy {
     private readonly formBuilder: FormBuilder
   ) {
     this.state.set(initCompleteUserProfileComponentState);
+    this.state.connect('userProfile', this.userProfileFacade.userProfile$);
   }
 
   ngOnInit(): void {
-    this.userProfileFacade.dispatchGetUserProfile('');
-    this.userProfileFacade.userProfile$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((userProfile) => {
-        this.userProfile = userProfile;
+    this.userProfile$.subscribe(
+      (userProfile) => (this.userProfile = userProfile)
+    );
 
-        this.userProfileForm = this.formBuilder.group({
-          fullName: [userProfile?.fullName || ''],
-          email: [userProfile?.email || ''],
-          phoneNumber: [userProfile?.phoneNumber || ''],
-          country: [userProfile?.country || ''],
-          bio: [userProfile?.bio],
-          // ... other form fields
-        });
-
-        this.toggledProperties['isPersonalInfoEditMode'] =
-          !userProfile?.fullName ||
-          !userProfile?.email ||
-          !userProfile?.phoneNumber;
-        this.toggledProperties['isLocationEditMode'] = !userProfile.country;
-        this.toggledProperties['isBioEditMode'] = !userProfile.bio;
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.userProfileForm = this.formBuilder.group({
+      fullName: [this.userProfile?.fullName || ''],
+      email: [this.userProfile?.email || ''],
+      phoneNumber: [this.userProfile?.phoneNumber || ''],
+      country: [this.userProfile?.country || ''],
+      bio: [this.userProfile?.bio],
+    });
   }
 
   toggleEdit(property: string) {
@@ -77,26 +63,16 @@ export class CompleteUserProfileComponent implements OnInit, OnDestroy {
   }
 
   // Complate Profile
-  completeProfile(property: string) {
+  editUserProfile(property: string) {
     const { valid, touched, dirty } = this.userProfileForm;
 
     if (valid && (touched || dirty)) {
-      this.userProfileFacade.dispatchCompeleteUserProfile({
-        fullName:
-          this.userProfileForm.value.fullName ||
-          this.userProfile?.fullName ||
-          null,
-        country:
-          this.userProfileForm.value.country ||
-          this.userProfile?.country ||
-          null,
-        email:
-          this.userProfileForm.value.email || this.userProfile?.email || null,
-        phoneNumber:
-          this.userProfileForm.value.phoneNumber ||
-          this.userProfile?.phoneNumber ||
-          null,
-        bio: this.userProfileForm.value.bio || this.userProfile?.bio,
+      this.userProfileFacade.dispatchEditUserProfile({
+        fullName: this.userProfileForm.value.fullName,
+        country: this.userProfileForm.value.country,
+        email: this.userProfileForm.value.email,
+        phoneNumber: this.userProfileForm.value.phoneNumber,
+        bio: this.userProfileForm.value.bio,
       });
     }
 
@@ -118,7 +94,7 @@ export class CompleteUserProfileComponent implements OnInit, OnDestroy {
   // Submit Image
   saveImage() {
     if (this.imagePreview !== '') {
-      this.userProfileFacade.dispatchCompeleteUserProfile({
+      this.userProfileFacade.dispatchEditUserProfile({
         profileImage: this.imagePreview,
       });
     }
