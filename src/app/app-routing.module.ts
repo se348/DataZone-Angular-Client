@@ -6,7 +6,7 @@ import {
   EDIT_COMPANY_PROFILE_PAGE_ROUTE,
 } from './core/constants/routes';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { CompleteUserProfileComponent } from './user-profile/components/complete-user-profile/complete-user-profile.component';
+import { EditUserProfileComponent } from './user-profile/components/complete-user-profile/complete-user-profile.component';
 import { EditCompanyProfileComponent } from './company-profile/components/edit-company-profile/edit-company-profile.component';
 
 const routes: Routes = [
@@ -20,7 +20,7 @@ const routes: Routes = [
   },
   {
     path: EDIT_USER_PROFILE_PAGE_ROUTE,
-    component: CompleteUserProfileComponent,
+    component: EditUserProfileComponent,
   },
   {
     path: EDIT_COMPANY_PROFILE_PAGE_ROUTE,
