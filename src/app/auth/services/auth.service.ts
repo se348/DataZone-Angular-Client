@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { LOGIN_URL, COMPLETE_COMPANY_PROFILE_URL, REGISTER_URL, RESEND_CONFIRM_EMAIL_URL } from "src/app/core/constants/api-endpoints";
 import { LoginRequest, LoginResponse, RegisterRequest, ResendConfirmationRequest } from "../models/auth.model";
-import { CompanyProfileRequest, CompanyProfileResponse } from "../models/profile.model";
+import { CompanyProfileResponse } from "../models/profile.model";
 
 
 @Injectable({
@@ -17,7 +17,7 @@ export class AuthService {
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(LOGIN_URL, request);
   }
-  completeCompanyProfile(request: CompanyProfileRequest): Observable<CompanyProfileResponse> {
+  completeCompanyProfile(request: FormData): Observable<CompanyProfileResponse> {
     return this.http.post<CompanyProfileResponse>(COMPLETE_COMPANY_PROFILE_URL, request);
   }
 

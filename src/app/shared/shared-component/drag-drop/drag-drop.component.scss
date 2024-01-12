@@ -1,0 +1,55 @@
+/* Existing styles remain unchanged */
+
+.fileupload {
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .fileupload:hover {
+    border-color: #aaa;
+  }
+  
+  .ddinfo {
+    font-size: 16px;
+    color: #555;
+  }
+  
+  .preview {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: calc(100% - 40px); /* Adjust as needed */
+    max-height: calc(100% - 40px); /* Adjust as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+ .preview-btn{
+    background: black;
+    color:white;
+    border-radius: 3px;
+    padding: 3px 5px;
+ }
+
+ .fileupload {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 54.5%;
+  }
+
+  .action-btn{
+    cursor: pointer;
+    display: flex;
+    gap: 20px;
+  }
+  
+  
