@@ -1,0 +1,14 @@
+<div (click)="closeToast()" class="toast-container" [ngClass]="{'show-toast': showToast}">
+    <custom-spinner></custom-spinner>
+    <!-- <button class="close-button" (click)="closeToast()">Close</button> -->
+    <div class="text-container">
+            <div class="loading-container">
+                <span class="loading-text">{{toast}}</span>
+                <span class="ellipsis-animation"></span>
+              </div>
+    </div>
+  </div>
+  
+
+
+  

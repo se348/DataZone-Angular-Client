@@ -37,6 +37,9 @@ $data-zone-angular-client-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+button:disabled {
+  background-color: grey !important;
+}
 
 button:disabled {
   background-color: grey !important;
