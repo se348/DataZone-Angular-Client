@@ -12,12 +12,9 @@ import {
   providedIn: 'root',
 })
 export class CompanyProfileFacade {
-  companyProfile$: Observable<CompanyProfile> = this.store.select(
-    CompanyProfileSelector.companyProfile
-  );
 
   @Select(CompanyProfileSelector.companyProfile)
-  companyProfile!: Observable<CompanyProfile>;
+  companyProfile$!: Observable<CompanyProfile>;
   constructor(private store: Store) {}
 
   dispatchGetCompanyProfile(request: string) {

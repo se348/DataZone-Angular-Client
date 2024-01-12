@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { UserProfile } from './../models/user-profile.model';
 import { Injectable } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { CompleteUserProfile, GetUserProfile } from '../store/user-profile.actions';
+import { EditUserProfile, GetUserProfile } from '../store/user-profile.actions';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +21,7 @@ export class UserProfileFacade {
     this.store.dispatch(new GetUserProfile(request));
   }
 
-  dispatchCompeleteUserProfile(request: Partial<UserProfile>) {
-    this.store.dispatch(new CompleteUserProfile(request));
+  dispatchEditUserProfile(request: Partial<UserProfile>) {
+    this.store.dispatch(new EditUserProfile(request));
   }
 }

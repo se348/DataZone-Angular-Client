@@ -5,12 +5,12 @@ import {
   REGISTER_ROUTE,
   EDIT_USER_PROFILE_PAGE_ROUTE,
 } from '../core/constants/routes';
-import { CompleteUserProfileComponent } from './components/complete-user-profile/complete-user-profile.component';
+import { EditUserProfileComponent } from './components/complete-user-profile/complete-user-profile.component';
 
 const routes: Routes = [
   {
     path: EDIT_USER_PROFILE_PAGE_ROUTE,
-    component: CompleteUserProfileComponent,
+    component: EditUserProfileComponent,
   },
 ];
 
