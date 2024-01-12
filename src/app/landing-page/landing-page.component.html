@@ -1,46 +1,47 @@
-<div class="title-wrapper"><h1 class="title">Complete profile to Get Started</h1></div>
-<div class="flex">
-          <div class="card-wrapper">
-            <mat-card class="example-card" (click)="navToCompleteProfile()">
-              <mat-card-header>
-                <img
-                  src="../../assets/images/calc.svg"
-                  mat-card-avatar />
-                <mat-card-title>Company</mat-card-title>
-                <mat-card-subtitle>
-                 Join our world as a company
-                </mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
-                </p>
-              </mat-card-content>
-            </mat-card>
-          
-          </div>
-          <div class="card-wrapper">
-            <mat-card>
-              <mat-card-header>
-                <img
-                  src="../../assets/images/calc.svg"
-                  mat-card-avatar />
-                <mat-card-title>Personal</mat-card-title>
-                <mat-card-subtitle>
-                 Enthusiasts join here
-                </mat-card-subtitle>
-              </mat-card-header>
-              <mat-card-content>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
-                </p>
-              </mat-card-content>
-            </mat-card>
-          
-          </div>
-
+<div class="container">
+  <div class="title-wrapper">
+    <h1 class="title">Complete profile to Get Started</h1>
+  </div>
+  <div class="flex">
+    <div class="card-wrapper"  [ngClass]="{'selectedCard': selectedType === 'company'}" (click)="onSelect('company')">
+      <mat-card>
+        <mat-icon *ngIf="selectedType === 'company'" selectedCard>check_circle</mat-icon>
+        <mat-card-header>
+          <img src="../../assets/images/calc.svg" mat-card-avatar />
+          <mat-card-title>Company</mat-card-title>
+          <mat-card-subtitle> Join our world as a company </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <!-- User -->
+    <div class="card-wrapper" (click)="onSelect('user')">
+      <mat-card [ngClass]="{'selectedCard': selectedType === 'user'}">
+        <mat-icon *ngIf="selectedType === 'user'" selectedCard>check_circle</mat-icon>
+        <mat-card-header>
+          <img src="../../assets/images/calc.svg" mat-card-avatar />
+          <mat-card-title>Personal</mat-card-title>
+          <mat-card-subtitle> Enthusiasts join here </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="button" (click)="navToCompleteProfile()">
+    <button [disabled]="selectedType === ''">Continue</button>
+  </div>
 </div>
