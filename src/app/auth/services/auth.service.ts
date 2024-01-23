@@ -10,7 +10,7 @@ import { CompanyProfileResponse } from "../models/profile.model";
   providedIn: 'root'
 })
 export class AuthService {
-
+  
   constructor(private http: HttpClient) { }
 
 
