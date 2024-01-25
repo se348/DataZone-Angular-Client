@@ -7,7 +7,7 @@ import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EMAIL_SENT_ROUTE, LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
 import { CompanyProfileResponse } from '../models/profile.model';
-import { Login, CompleteCompanyProfile, ConfirmEmail, Register, ResendConfirmEmail } from './auth.actions';
+import { Login, CompleteCompanyProfile, ConfirmEmail, Register, ResendConfirmEmail, ForgetPassword, ResetPassword } from './auth.actions';
 
 export interface AuthStateModel {
   accessToken: string | null;
@@ -85,5 +85,15 @@ export class AuthState {
   @Action(ResendConfirmEmail)
   resendConfirmationEmail({ patchState }: StateContext<AuthStateModel>, {request}: ResendConfirmEmail) {
     return this.authService.resendConfirmEmail(request);
+  }
+
+  @Action(ForgetPassword)
+  forgetPassword({ patchState }: StateContext<AuthStateModel>, {request}: ForgetPassword) {
+    return this.authService.forgetPassword(request);
+  }
+
+  @Action(ResetPassword)
+  resetPassword({ patchState }: StateContext<AuthStateModel>, {request}: ResetPassword) {
+    return this.authService.resetPassword(request);
   }
 }
