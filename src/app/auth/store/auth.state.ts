@@ -5,16 +5,28 @@ import { Action, State, StateContext, StateToken, Store } from '@ngxs/store';
 import { LoginResponse } from '../models/auth.model';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { EMAIL_SENT_ROUTE, LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
+import {
+  EMAIL_SENT_ROUTE,
+  LANDING_PAGE_ROUTE,
+} from 'src/app/core/constants/routes';
 import { CompanyProfileResponse } from '../models/profile.model';
-import { Login, CompleteCompanyProfile, ConfirmEmail, Register, ResendConfirmEmail, ForgetPassword, ResetPassword } from './auth.actions';
+import {
+  Login,
+  CompleteCompanyProfile,
+  ConfirmEmail,
+  Register,
+  ResendConfirmEmail,
+  ForgetPassword,
+  ResetPassword,
+} from './auth.actions';
+import { ToasterService } from 'src/app/core/service/toast.service';
 
 export interface AuthStateModel {
   accessToken: string | null;
   refreshToken: string | null;
   email: string | null;
   username: string | null;
-  companyProfile: CompanyProfileResponse | null
+  companyProfile: CompanyProfileResponse | null;
 }
 
 const AUTH_STATE_TOKEN = new StateToken<AuthStateModel>('authState');
@@ -24,7 +36,7 @@ const defaultState: AuthStateModel = {
   refreshToken: null,
   username: null,
   email: null,
-  companyProfile: null
+  companyProfile: null,
 };
 
 @State<AuthStateModel>({
@@ -36,64 +48,109 @@ export class AuthState {
   constructor(
     private readonly authService: AuthService,
     private store: Store,
-    private readonly router: Router
+    private readonly router: Router,
+    private toasterService: ToasterService
   ) {}
 
   @Action(Login)
   login({ patchState }: StateContext<AuthStateModel>, { request }: Login) {
-    return this.authService.login(request).pipe(tap(
-        (response: LoginResponse) => {
-            patchState({
-                accessToken: response.accessToken,
-                refreshToken: response.refreshToken,
-                email: request.email,
-            });
-        }
-    ))
+    return this.authService.login(request).pipe(
+      tap((response: LoginResponse) => {
+        patchState({
+          accessToken: response.accessToken,
+          refreshToken: response.refreshToken,
+          email: request.email,
+        });
+      })
+    );
   }
 
   @Action(CompleteCompanyProfile)
-  completeCompanyProfile({ patchState }: StateContext<AuthStateModel>, { request }: CompleteCompanyProfile) {
-    return this.authService.completeCompanyProfile(request).pipe(tap(
-        (response: CompanyProfileResponse) => {
-            patchState({
-                companyProfile: response
-            });
-        }
-    ))
+  completeCompanyProfile(
+    { patchState }: StateContext<AuthStateModel>,
+    { request }: CompleteCompanyProfile
+  ) {
+    return this.authService.completeCompanyProfile(request).pipe(
+      tap((response: CompanyProfileResponse) => {
+        patchState({
+          companyProfile: response,
+        });
+      })
+    );
   }
 
   @Action(ConfirmEmail)
-  confirmEmail({ patchState }: StateContext<AuthStateModel>, { userId, token }: ConfirmEmail) {
+  confirmEmail(
+    { patchState }: StateContext<AuthStateModel>,
+    { userId, token }: ConfirmEmail
+  ) {
     return this.authService.confirmEmail(userId, token);
   }
 
   @Action(Register)
   register(
-    { patchState } : StateContext<AuthStateModel>,
-    { request } : Register
+    { patchState }: StateContext<AuthStateModel>,
+    { request }: Register
   ) {
-    return this.authService.register(request).pipe(tap(
-      () => {
+    return this.authService.register(request).pipe(
+      tap(() => {
         const userEmail = request.email; // Assuming email is in the request
         const queryParams = { email: userEmail };
-        this.router.navigate([EMAIL_SENT_ROUTE], {queryParams});
-      }
-    ));
+        this.router.navigate([EMAIL_SENT_ROUTE], { queryParams });
+      })
+    );
   }
 
   @Action(ResendConfirmEmail)
-  resendConfirmationEmail({ patchState }: StateContext<AuthStateModel>, {request}: ResendConfirmEmail) {
+  resendConfirmationEmail(
+    { patchState }: StateContext<AuthStateModel>,
+    { request }: ResendConfirmEmail
+  ) {
     return this.authService.resendConfirmEmail(request);
   }
 
   @Action(ForgetPassword)
-  forgetPassword({ patchState }: StateContext<AuthStateModel>, {request}: ForgetPassword) {
-    return this.authService.forgetPassword(request);
+  forgetPassword(
+    { patchState }: StateContext<AuthStateModel>,
+    { request }: ForgetPassword
+  ) {
+    this.toasterService.showrToast('loading');
+
+    return this.authService.forgetPassword(request).pipe(
+      tap({
+        next: () => {
+          // Request completed successfully, close the toaster
+          this.toasterService.closehToast();
+          
+        },
+        error: (error) => {
+          // Request completed with an error, close the toaster and handle the error as needed
+          this.toasterService.closehToast();
+          // You can also dispatch an action to handle the error in your state or show another toast
+        },
+      })
+    );
   }
 
   @Action(ResetPassword)
-  resetPassword({ patchState }: StateContext<AuthStateModel>, {request}: ResetPassword) {
-    return this.authService.resetPassword(request);
+  resetPassword(
+    { patchState }: StateContext<AuthStateModel>,
+    { request }: ResetPassword
+  ) {
+    this.toasterService.showrToast('loading');
+
+    return this.authService.resetPassword(request).pipe(
+      tap({
+        next: () => {
+          // Request completed successfully, close the toaster
+          this.toasterService.closehToast();
+        },
+        error: (error) => {
+          // Request completed with an error, close the toaster and handle the error as needed
+          this.toasterService.closehToast();
+          // You can also dispatch an action to handle the error in your state or show another toast
+        },
+      })
+    );
   }
 }
