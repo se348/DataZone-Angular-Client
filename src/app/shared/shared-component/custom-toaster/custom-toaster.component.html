@@ -1,9 +1,10 @@
-<div
+
+<div *ngIf="toastType === 'loading'"
   (click)="closeToast()"
   class="toast-container"
   [ngClass]="{ 'show-toast': showToast }"
 >
-  <custom-spinner *ngIf="toastType === 'loading'"></custom-spinner>
+  <custom-spinner></custom-spinner>
   <div class="text-container">
     <div class="loading-container" *ngIf="toastType === 'loading'">
       <span class="loading-text">{{ toast }}</span>

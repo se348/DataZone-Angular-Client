@@ -11,12 +11,13 @@ import { ProfilePictureComponent } from './profile-picture/profile-picture.compo
 import { MatIconModule } from '@angular/material/icon';
 import { SuccessIndicatorComponent } from "./success-indicator/success-indicator.component";
 import { ErrorIndicatorComponent } from "./error-indicator/error-indicator.component";
+import { SuccessPageComponent } from './success-page/success-page.component';
 
 
 
 @NgModule({
     declarations: [
-        CustomStepperComponent, DragDropComponent, ProfilePictureComponent, CustomSpinnerComponent, CustomToasterComponent
+        CustomStepperComponent, DragDropComponent, ProfilePictureComponent, CustomSpinnerComponent, CustomToasterComponent, SuccessPageComponent
     ],
     exports: [CustomStepperComponent, CustomToasterComponent, DragDropComponent, ProfilePictureComponent],
     imports: [
