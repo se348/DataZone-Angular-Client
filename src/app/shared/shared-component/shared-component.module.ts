@@ -9,17 +9,21 @@ import { SharedModule } from '../shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
 import { MatIconModule } from '@angular/material/icon';
+import { SuccessIndicatorComponent } from "./success-indicator/success-indicator.component";
+import { ErrorIndicatorComponent } from "./error-indicator/error-indicator.component";
 
 
 
 @NgModule({
-  declarations: [
-    CustomStepperComponent, DragDropComponent, ProfilePictureComponent,CustomSpinnerComponent, CustomToasterComponent
-  ],
-  imports: [
-    CommonModule, 
-    CdkStepperModule, ReactiveFormsModule, MatIconModule
-  ],
-  exports:[CustomStepperComponent, CustomToasterComponent, DragDropComponent, ProfilePictureComponent]
+    declarations: [
+        CustomStepperComponent, DragDropComponent, ProfilePictureComponent, CustomSpinnerComponent, CustomToasterComponent
+    ],
+    exports: [CustomStepperComponent, CustomToasterComponent, DragDropComponent, ProfilePictureComponent],
+    imports: [
+        CommonModule,
+        CdkStepperModule, ReactiveFormsModule, MatIconModule,
+        SuccessIndicatorComponent,
+        ErrorIndicatorComponent
+    ]
 })
 export class SharedComponentModule { }
