@@ -20,6 +20,7 @@ import {
   ResetPassword,
 } from './auth.actions';
 import { ToasterService } from 'src/app/core/service/toast.service';
+import { StateMessageService } from 'src/app/core/service/state-message.service';
 
 export interface AuthStateModel {
   accessToken: string | null;
@@ -49,7 +50,8 @@ export class AuthState {
     private readonly authService: AuthService,
     private store: Store,
     private readonly router: Router,
-    private toasterService: ToasterService
+    private toasterService: ToasterService,
+    private stateMessageService: StateMessageService
   ) {}
 
   @Action(Login)
@@ -120,12 +122,26 @@ export class AuthState {
       tap({
         next: () => {
           // Request completed successfully, close the toaster
-          this.toasterService.closehToast();
-          
+          this.toasterService.showSuccessToast(
+            'Reset password link sent to our email'
+          );
+          setTimeout(() => {
+            this.toasterService.closehToast();
+          }, 2000);
+
+          setTimeout(() => {
+            this.stateMessageService.setStateMessage(
+              'Reset Password Link Sent to your email'
+            );
+            this.router.navigate(['/success']);
+          }, 2000);
         },
         error: (error) => {
           // Request completed with an error, close the toaster and handle the error as needed
-          this.toasterService.closehToast();
+          this.toasterService.showErrorToast(error);
+          setTimeout(() => {
+            this.toasterService.closehToast();
+          }, 4000);
           // You can also dispatch an action to handle the error in your state or show another toast
         },
       })
@@ -142,12 +158,18 @@ export class AuthState {
     return this.authService.resetPassword(request).pipe(
       tap({
         next: () => {
-          // Request completed successfully, close the toaster
-          this.toasterService.closehToast();
+          this.toasterService.showSuccessToast('Password reseted successfully');
+          setTimeout(() => {
+            this.toasterService.closehToast();
+          }, 4000);
+          this.router.navigate(['/landing-page']);
         },
         error: (error) => {
           // Request completed with an error, close the toaster and handle the error as needed
-          this.toasterService.closehToast();
+          this.toasterService.showErrorToast(error);
+          setTimeout(() => {
+            this.toasterService.closehToast();
+          }, 2000);
           // You can also dispatch an action to handle the error in your state or show another toast
         },
       })
