@@ -123,7 +123,7 @@ export class AuthState {
         next: () => {
           // Request completed successfully, close the toaster
           this.toasterService.showSuccessToast(
-            'Reset password link sent to our email'
+            'Success'
           );
           setTimeout(() => {
             this.toasterService.closehToast();
@@ -169,7 +169,7 @@ export class AuthState {
           this.toasterService.showErrorToast(error);
           setTimeout(() => {
             this.toasterService.closehToast();
-          }, 2000);
+          }, 3000);
           // You can also dispatch an action to handle the error in your state or show another toast
         },
       })

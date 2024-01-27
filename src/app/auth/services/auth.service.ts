@@ -34,7 +34,11 @@ export class AuthService {
   }
 
   forgetPassword(request: ForgetPasswordRequest){
-    return this.http.post<any>(FORGET_PASSWORD, request)
+    return this.http.post<any>(FORGET_PASSWORD, request).pipe(
+      catchError((error, caught) => {
+        throw error.message || 'Server Error';
+      })
+    )
   }
 
   resetPassword(request: ResetPasswordRequest){
