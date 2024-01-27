@@ -4,8 +4,6 @@ import { StateMessageService } from 'src/app/core/service/state-message.service'
 
 @Component({
   selector: 'app-success-page',
-  standalone: true,
-  imports: [],
   templateUrl: './success-page.component.html',
   styleUrl: './success-page.component.scss',
 })
