@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import { DatasetModule } from './dataset/dataset.module';
+import { DataMarketplaceRoutingModule } from './data-marketplace-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    DataMarketplaceRoutingModule,
+    DatasetModule,
+    //TODO: Add State
   ]
 })
 export class DataMarketplaceModule { }

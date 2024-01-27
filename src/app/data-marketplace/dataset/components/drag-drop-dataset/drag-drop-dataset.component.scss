@@ -1,0 +1,48 @@
+/* Existing styles remain unchanged */
+
+.fileupload {
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    text-align: center;
+    height: 100%;
+    cursor: pointer;
+    margin-bottom: 20px;
+    position: relative;
+    background-color: #d9d9d9af;
+    padding: 10px 50px;
+  }
+  
+  .fileupload:hover {
+    border-color: #aaa;
+  }
+  
+  .ddinfo {
+    font-size: 16px;
+    color: #555;
+  }
+
+  .file-display{
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  mat-icon{
+    width: 5rem;
+    height: 5rem;
+    font-size: 80px;
+  }
+
+ .fileupload {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  .pad{
+    padding-bottom: 15px ;
+  }
+@media screen and (min-width: 800px) {
+  .fileupload{
+    padding: 40px 200px;
+  }
+}

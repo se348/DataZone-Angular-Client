@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
+    path: '',
+    loadChildren: () => import('./data-marketplace/data-marketplace.module').then((m) => m.DataMarketplaceModule),
+  },
+  {
     path: LANDING_PAGE_ROUTE,
     component: LandingPageComponent,
   },
