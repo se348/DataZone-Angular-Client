@@ -1,0 +1,50 @@
+.centered-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem;
+}
+.p-10{
+    padding: 2rem 4rem;
+}
+.action-btn{
+    display: flex;
+    justify-content:space-around;
+}
+.flexed{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+.width-responsive{
+    width: 100%;
+}
+
+.row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+
+    
+}
+.pad-top-20{
+    padding-top: 50px;
+}
+
+.bold{
+    font-weight: 800;
+}
+
+.align-right{
+    width: 400px;
+    text-align: end;
+}
+@media screen and (min-width: 800px) {
+    .width-responsive{
+        width: 650px;
+    }
+    .row{
+        width: 650px;
+    }
+}
