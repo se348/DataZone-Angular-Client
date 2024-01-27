@@ -14,3 +14,4 @@ export const ROLES_LIST_ROUTE = 'roles-list';
 export const EMAIL_SENT_ROUTE = 'email-sent';
 export const DATASET_ROUTE = 'dataset';
 export const DATASET_UPLOAD_FORM_ROUTE = 'upload';
+export const SUCCESS_ROUTE = 'success';
