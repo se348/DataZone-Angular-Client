@@ -3,9 +3,8 @@ import { AuthFacade } from '../../facades/auth.facades';
 import { RxState } from '@rx-angular/state';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LANDING_PAGE_ROUTE, REGISTER_ROUTE } from 'src/app/core/constants/routes';
+import { FORGET_PASSWORD_ROUTE, LANDING_PAGE_ROUTE, REGISTER_ROUTE } from 'src/app/core/constants/routes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FORGET_PASSWORD } from 'src/app/core/constants/api-endpoints';
 
 interface LoginComponentState {
   isAuthenticated: boolean;
@@ -83,6 +82,6 @@ export class LoginComponent implements OnInit {
   }
 
   navigateToForgetPassword() {
-    this.router.navigate([FORGET_PASSWORD]);
+    this.router.navigate([FORGET_PASSWORD_ROUTE]);
   }
 }

@@ -4,6 +4,10 @@ export const AUTH_URL = `${BASE_URL}/account`;
 
 export const LOGIN_URL = `${AUTH_URL}/login`;
 
+export const FORGET_PASSWORD = `${AUTH_URL}/forgotPassword`;
+
+export const RESET_PASSWORD = `${AUTH_URL}/resetPassword`;
+
 export const COMPLETE_COMPANY_PROFILE_URL = `${BASE_URL}/users/company-profile`;
 
 export const EDIT_COMPANY_PROFILE_URL = `${BASE_URL}/users/edit-company-profile`;
@@ -21,8 +25,3 @@ export const REGISTER_URL = `${AUTH_URL}/register`;
 export const ROLES_URL = `${BASE_URL}/roles`;
 
 export const RESEND_CONFIRM_EMAIL_URL = `${AUTH_URL}/resendConfirmationEmail`;
-
-export const FORGET_PASSWORD = `${AUTH_URL}/forgotPassword`;
-
-export const RESET_PASSWORD = `${AUTH_URL}/resetPassword`;
-
