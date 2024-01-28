@@ -1,9 +1,10 @@
 .home {
-  height: 100vh;
+  height: 65vh;
   width: 100%;
   color: #4d4d4d;
   display: flex;
   flex-direction: column;
+  text-align: center;
   margin: 0;
   padding: 0;
 }
@@ -36,7 +37,7 @@ button {
 .heading {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: flex-start;
 }
 
@@ -44,7 +45,7 @@ button {
   font-size: 4rem;
   margin: 0;
   padding: 0;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
 
 .heading p {
@@ -67,6 +68,10 @@ button {
   .hero {
     display: flex;
     flex-direction: column-reverse;
+  }
+  .heading {
+    align-items: center;
+    justify-content: center;
   }
 
   .heading p {
