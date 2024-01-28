@@ -1,13 +1,15 @@
-<div class="bg-img">
-  <div class="row pd-all">
-    <div class="first">
-      <app-marketplace-side-bar></app-marketplace-side-bar>
-    </div>
+<mat-sidenav-container class="container bg-img">
+  <mat-sidenav mode="side" opened class="first">
+    <app-marketplace-side-bar></app-marketplace-side-bar>
+  </mat-sidenav>
+  <mat-sidenav-content>
     <div class="second">
       <div class="row row-end vert-center">
         <app-top-nav-bar></app-top-nav-bar>
       </div>
-      <router-outlet></router-outlet>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
     </div>
-  </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
