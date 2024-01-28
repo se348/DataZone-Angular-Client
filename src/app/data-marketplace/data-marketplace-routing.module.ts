@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DATASET_ROUTE } from '../core/constants/routes';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 const routes: Routes = [
-    {
-        path: DATASET_ROUTE,
-        loadChildren: () =>
-          import('./dataset/dataset.module').then((m) => m.DatasetModule),
-      },
+  {
+    path: '',
+    component: HomePageComponent,
+    children: [],
+  },
 ];
 
 @NgModule({
