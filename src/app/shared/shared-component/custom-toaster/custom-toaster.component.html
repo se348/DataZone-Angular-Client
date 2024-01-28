@@ -1,14 +1,22 @@
-<div (click)="closeToast()" class="toast-container" [ngClass]="{'show-toast': showToast}">
-    <custom-spinner></custom-spinner>
-    <!-- <button class="close-button" (click)="closeToast()">Close</button> -->
-    <div class="text-container">
-            <div class="loading-container">
-                <span class="loading-text">{{toast}}</span>
-                <span class="ellipsis-animation"></span>
-              </div>
+
+<div *ngIf="toastType === 'loading'"
+  (click)="closeToast()"
+  class="toast-container"
+  [ngClass]="{ 'show-toast': showToast }"
+>
+  <custom-spinner></custom-spinner>
+  <div class="text-container">
+    <div class="loading-container" *ngIf="toastType === 'loading'">
+      <span class="loading-text">{{ toast }}</span>
+      <span class="ellipsis-animation"></span>
     </div>
   </div>
-  
-
-
-  
+</div>
+<app-success-indicator
+  *ngIf="toastType === 'success'"
+  [message]="toast"
+></app-success-indicator>
+<app-error-indicator
+  *ngIf="toastType === 'error'"
+  [message]="toast"
+></app-error-indicator>
