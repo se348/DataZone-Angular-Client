@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { LOGIN_URL, COMPLETE_COMPANY_PROFILE_URL, REGISTER_URL, RESEND_CONFIRM_EMAIL_URL } from "src/app/core/constants/api-endpoints";
-import { LoginRequest, LoginResponse, RegisterRequest, ResendConfirmationRequest } from "../models/auth.model";
+import { Observable, catchError } from "rxjs";
+import { LOGIN_URL, COMPLETE_COMPANY_PROFILE_URL, REGISTER_URL, RESEND_CONFIRM_EMAIL_URL, FORGET_PASSWORD, RESET_PASSWORD } from "src/app/core/constants/api-endpoints";
+import { ForgetPasswordRequest, LoginRequest, LoginResponse, RegisterRequest, ResendConfirmationRequest, ResetPasswordRequest } from "../models/auth.model";
 import { CompanyProfileResponse } from "../models/profile.model";
 
 
@@ -33,5 +33,21 @@ export class AuthService {
     return this.http.post<any>(RESEND_CONFIRM_EMAIL_URL, request)
   }
 
+  forgetPassword(request: ForgetPasswordRequest){
+    return this.http.post<any>(FORGET_PASSWORD, request).pipe(
+      catchError((error, caught) => {
+        throw error.message || 'Server Error';
+      })
+    )
+  }
+
+  resetPassword(request: ResetPasswordRequest){
+    console.log(request, 'request');
+    return this.http.post<any>(RESET_PASSWORD, request).pipe(
+      catchError((error, caught) => {
+        throw error.message || 'Server Error';
+      })
+    )
+  }
 
 }

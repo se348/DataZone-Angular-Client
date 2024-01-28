@@ -3,7 +3,7 @@ import { AuthFacade } from '../../facades/auth.facades';
 import { RxState } from '@rx-angular/state';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LANDING_PAGE_ROUTE, REGISTER_ROUTE } from 'src/app/core/constants/routes';
+import { FORGET_PASSWORD_ROUTE, LANDING_PAGE_ROUTE, REGISTER_ROUTE } from 'src/app/core/constants/routes';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface LoginComponentState {
@@ -79,5 +79,9 @@ export class LoginComponent implements OnInit {
 
   navigateToSignup() {
     this.router.navigate([REGISTER_ROUTE]);
+  }
+
+  navigateToForgetPassword() {
+    this.router.navigate([FORGET_PASSWORD_ROUTE]);
   }
 }

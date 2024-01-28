@@ -1,4 +1,4 @@
-import { LoginRequest, RegisterRequest, ResendConfirmationRequest } from "../models/auth.model";
+import { ForgetPasswordRequest, LoginRequest, RegisterRequest, ResendConfirmationRequest, ResetPasswordRequest } from "../models/auth.model";
 
 
 export class Login {
@@ -23,4 +23,14 @@ export class Register {
 export class ResendConfirmEmail {
   static readonly type = `[Auth] ${ResendConfirmEmail.name}`;
   constructor(public request: ResendConfirmationRequest) {}
+}
+
+export class ForgetPassword {
+  static readonly type = `[Auth] ${ForgetPassword.name}`;
+  constructor(public request: ForgetPasswordRequest) {}
+}
+
+export class ResetPassword {
+  static readonly type = `[Auth] ${ResetPassword.name}`;
+  constructor(public request: ResetPasswordRequest) {}
 }

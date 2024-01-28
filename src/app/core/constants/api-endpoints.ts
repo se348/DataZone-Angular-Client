@@ -4,6 +4,10 @@ export const AUTH_URL = `${BASE_URL}/account`;
 
 export const LOGIN_URL = `${AUTH_URL}/login`;
 
+export const FORGET_PASSWORD = `${AUTH_URL}/forgotPassword`;
+
+export const RESET_PASSWORD = `${AUTH_URL}/resetPassword`;
+
 export const COMPLETE_COMPANY_PROFILE_URL = `${BASE_URL}/users/company-profile`;
 
 export const EDIT_COMPANY_PROFILE_URL = `${BASE_URL}/users/edit-company-profile`;
