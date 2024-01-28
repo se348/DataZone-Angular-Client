@@ -3,7 +3,6 @@ import { DatasetModule } from './dataset/dataset.module';
 import { DataMarketplaceRoutingModule } from './data-marketplace-routing.module';
 
 import { CommonModule } from '@angular/common';
-import { MarketplaceRoutingModule } from './marketplace-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { SharedComponentModule } from '../shared/shared-component/shared-component.module';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -20,7 +19,6 @@ import { SideNavBarComponent } from '../shared/shared-component/side-nav-bar/sid
     DataMarketplaceRoutingModule,
     DatasetModule,
     //TODO: Add State,
-    MarketplaceRoutingModule,
     SharedModule,
     SharedComponentModule,
   ],
