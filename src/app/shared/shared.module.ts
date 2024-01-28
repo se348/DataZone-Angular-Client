@@ -90,7 +90,6 @@ const OTHER_MODULES: any[] = [
   CommonModule,
   RouterModule,
   ReactiveFormsModule,
-
 ];
 
 const SHARED_MODULES = [

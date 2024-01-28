@@ -1,0 +1,33 @@
+.row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.vert-center {
+  align-items: center;
+}
+
+.nav-text {
+  padding: 1rem;
+  border-radius: 5%;
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+.medium-icon {
+  font-size: 1.9rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.horz-gap {
+  width: 1rem;
+}
+
+.nav-text:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  opacity: 10;
+}
