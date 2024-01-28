@@ -1,0 +1,42 @@
+<mat-list cols="2" rowHeight="2:1">
+    <h3 matSubheader>My datasets</h3>
+    @for(dataset of datasets; track dataset.id){
+    @if(dataset.isPrivate){
+    <mat-list-item lines="4" class="item">
+        <h3 matListItemTitle class="dataset-title">{{dataset.name}}</h3>
+        <div matListItemLine class="sm">
+            <span class="pr-2">{{dataset.datetime}}</span>
+            <span>{{dataset.fileSize}}</span>
+        </div>
+        <span matListItemLine>{{dataset.fileType}}</span>
+        <div matListItemLine class="flex"><mat-icon>visibility_off</mat-icon>
+            <div>Private</div>
+        </div>
+    </mat-list-item>
+    }@else{
+    <mat-list-item lines="10" class="item">
+        <h3 matListItemTitle class="dataset-title">{{dataset.name}}</h3>
+        <div matListItemLine class="sm">
+            <span class="pr-2">{{dataset.datetime}}</span>
+            <span>{{dataset.fileSize}}</span>
+        </div>
+        <span matListItemLine>{{dataset.fileType}}</span>
+        <div matListItemLine class="flex"><mat-icon>public</mat-icon>
+            <div>Public</div>
+        </div>
+        <div matListItemLine *ngIf="dataset.license">
+            <span class="smaller">License:</span> {{dataset.license}}
+        </div>
+        <div matListItemLine class="flex-2">
+            <p-rating [(ngModel)]="dataset.rating" [readonly]="true" [cancel]="false"></p-rating>
+            <div
+                style="font-weight: 700; padding: 10px; background-color: #eeeeeedf; border-radius: 7px; margin-left: auto;">
+                <div>{{dataset.price}} ETB</div>
+            </div>
+        </div>
+    </mat-list-item>
+    }
+    <div class="div">
+    </div>
+    }
+</mat-list>
