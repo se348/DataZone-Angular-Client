@@ -9,6 +9,7 @@ import { SharedModule } from '../shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfilePictureComponent } from './profile-picture/profile-picture.component';
 import { MatIconModule } from '@angular/material/icon';
+import { CustomButtonComponent } from './custom-button/custom-button.component';
 import { SuccessIndicatorComponent } from './success-indicator/success-indicator.component';
 import { ErrorIndicatorComponent } from './error-indicator/error-indicator.component';
 import { SuccessPageComponent } from './success-page/success-page.component';
@@ -55,7 +56,7 @@ import { RouterModule } from '@angular/router';
     DragDropComponent,
     ProfilePictureComponent,
     CustomSpinnerComponent,
-    CustomToasterComponent,
+    CustomToasterComponent, CustomButtonComponent,
     CustomSearchBarComponent,
     TopNavBarComponent,
     SideNavBarComponent,
