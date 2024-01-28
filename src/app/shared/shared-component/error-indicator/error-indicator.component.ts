@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-error-indicator',
-  standalone: true,
-  imports: [],
   templateUrl: './error-indicator.component.html',
   styleUrl: './error-indicator.component.scss'
 })
