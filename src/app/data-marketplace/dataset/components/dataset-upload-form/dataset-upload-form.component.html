@@ -1,0 +1,203 @@
+<div class="p-10">
+    <mat-stepper linear class="stepper-container">
+        <div class="form-container">
+            <form [formGroup]="this.fileControl" autocomplete="off">
+                <mat-step [stepControl]="fileControl">
+                    <div class="step-container">
+                        <ng-template matStepLabel>Dataset Upload</ng-template>
+                        <div class="centered-flex">
+                            <div class="inner-center">
+                                <app-drag-drop-dataset class="drag-drop-container"
+                                    (uploadedFile)="getUploadedFile($event)"></app-drag-drop-dataset>
+                                <div class="action-btn">
+                                    <button mat-button matStepperPrevious type="button">Back</button>
+                                    <button mat-flat-button color="primary" matStepperNext type="button">Next</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-step>
+            </form>
+            <form [formGroup]="datasetControl">
+                <mat-step [stepControl]="datasetControl">
+                    <div class="step-container">
+                        <ng-template matStepLabel>Dataset Details</ng-template>
+                        <div class="width-responsive">
+                            <h1 class="left"> Fill in the details of the dataset</h1>
+                            <div class="flexed">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput formControlName="datasetName" />
+                                </mat-form-field>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Description</mat-label>
+                                    <textarea rows="5" matInput formControlName="description"
+                                        placeholder="Ex. Student Grades based on ....."></textarea>
+                                </mat-form-field>
+                                <!-- privacy-select.component.html -->
+
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Visibility</mat-label>
+                                    <mat-select formControlName="Visibility">
+                                        <mat-option value="true">
+                                            <mat-icon>public</mat-icon>
+                                            Public
+                                        </mat-option>
+                                        <mat-option value="false">
+                                            <mat-icon>visibility_off</mat-icon>
+                                            Private
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Tags</mat-label>
+                                    <mat-chip-grid #chipGrid aria-label="tags">
+                                        @for (tag of tags; track tag) {
+                                        <mat-chip-row (removed)="remove(tag)">
+                                            {{tag}}
+                                            <button matChipRemove [attr.aria-label]="'remove ' + tag">
+                                                <mat-icon>cancel</mat-icon>
+                                            </button>
+                                        </mat-chip-row>
+                                        }
+                                    </mat-chip-grid>
+                                    <input placeholder="Add tag" #fruitInput [formControl]="tagCtrl"
+                                        [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                        (matChipInputTokenEnd)="add($event)" />
+                                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                        @for (fruit of filteredTags | async; track fruit) {
+                                        <mat-option [value]="fruit">{{fruit}}</mat-option>
+                                        }
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                                <mat-form-field appearance="fill">
+                                    <mat-label>Downloadable</mat-label>
+                                    <mat-select formControlName="isDownloadable">
+                                        <mat-option value={{true}}>
+                                            <mat-icon>cloud_download</mat-icon>
+                                            Yes
+                                        </mat-option>
+                                        <mat-option value={{false}}>
+                                            <mat-icon>cloud_off</mat-icon>
+                                            No
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Price (in ETB)</mat-label>
+                                    <input type="number" formControlName="price" matInput formControlName="price" />
+                                </mat-form-field>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Terms and conditions</mat-label>
+                                    <textarea rows="5" formControlName="terms" matInput
+                                        placeholder="The Data has copyright issue"></textarea>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Liscence</mat-label>
+                                    <input matInput formControlName="liscence" />
+                                </mat-form-field>
+                            </div>
+                            <div class="action-btn">
+                                <button mat-button matStepperPrevious type="button">Back</button>
+                                <button mat-flat-button color="primary" matStepperNext type="button">Next</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </mat-step>
+            </form>
+            <mat-step>
+                <div class="step-container">
+
+                    <ng-template matStepLabel>Review and sumit</ng-template>
+                    <div class="width-responsive">
+                        <h2 class="left">Review and Submit</h2>
+                        <div class="flexed">
+                            <div class="row">
+                                <div class="bold">Name</div>
+                                <div class="align-right">{{datasetControl.get('datasetName')?.value}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="bold">Description</div>
+                                <div class="align-right">{{datasetControl.get('description')?.value}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="bold">Visibility</div>
+                                <div>
+                                    <div *ngIf="datasetControl.get('Visibility')?.value == 'true'; else elseBlock">
+                                        <span
+                                            style="display: flex; justify-content: end; align-items: center;"><mat-icon>public</mat-icon>
+                                            Public</span>
+
+                                    </div>
+
+                                    <ng-template #elseBlock>
+                                        <span style="display: flex; justify-content: end; align-items: center;">
+                                            <mat-icon>visibility_off</mat-icon>
+                                            Private
+                                        </span>
+
+                                    </ng-template>
+                                </div>
+                            </div>
+                            <div *ngIf="datasetControl.get('Visibility')?.value == 'true'">
+                                <div class="row">
+                                    <div class="bold">Downloadable</div>
+                                    <div class="align-right">
+                                        <div
+                                            *ngIf="datasetControl.get('isDownloadable')?.value == 'true'; else elseBlock">
+                                            Yes
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            No
+                                        </ng-template>
+                                    </div>
+
+                                </div>
+                                <div class="row" *ngIf="datasetControl.get('liscence')?.value">
+                                    <div class="bold">Liscence</div>
+                                    <div class="align-right">{{datasetControl.get('liscence')?.value}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="bold">Price</div>
+                                    <div class="align-right">
+                                        <div *ngIf="datasetControl.get('price')?.value; else elseBlock2">
+                                            {{datasetControl.get('price')?.value}} ETB
+                                        </div>
+                                        <ng-template #elseBlock2>
+                                            0 ETB
+                                        </ng-template>
+                                    </div>
+                                </div>
+                                <div class="row" *ngIf="datasetControl.get('terms')?.value">
+                                    <div class="bold">Terms and conditions</div>
+                                    <div class="align-right"> {{datasetControl.get('terms')?.value}}</div>
+                                </div>
+                            </div>
+                            <div style="color: red; padding-top: 10px;">
+                                <div *ngIf="noPrice == true && datasetControl.get('Visibility')?.value == 'true'">
+                                    *No price set
+                                </div>
+                                <div
+                                    *ngIf="noDownloadability == true && datasetControl.get('Visibility')?.value == 'true'">
+                                    *Downloadablity is not set
+                                </div>
+                            </div>
+                            <div class="action-btn pad-top-20">
+                                <button mat-button matStepperPrevious type="button">Back</button>
+                                <button mat-flat-button color="primary" type="button">Submit</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </mat-step>
+        </div>
+
+    </mat-stepper>
+
+</div>

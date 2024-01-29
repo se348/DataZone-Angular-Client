@@ -1,11 +1,24 @@
-import { Injectable } from "@angular/core";
-import { Select, Store } from "@ngxs/store";
-import { Observable } from "rxjs";
-import { LoginRequest, RegisterRequest } from "../models/auth.model";
-import { CompanyProfileResponse, CompanyProfileRequest } from "../models/profile.model";
-import { Login, CompleteCompanyProfile, ConfirmEmail, Register } from "../store/auth.actions";
-import { AuthSelector } from "../store/auth.selector";
-
+import { Injectable } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import {
+  ForgetPasswordRequest,
+  LoginRequest,
+  RegisterRequest,
+  ResendConfirmationRequest,
+  ResetPasswordRequest,
+} from '../models/auth.model';
+import { CompanyProfileResponse } from '../models/profile.model';
+import {
+  Login,
+  CompleteCompanyProfile,
+  ConfirmEmail,
+  Register,
+  ResendConfirmEmail,
+  ForgetPassword,
+  ResetPassword,
+} from '../store/auth.actions';
+import { AuthSelector } from '../store/auth.selector';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +31,6 @@ export class AuthFacade {
   @Select(AuthSelector.accessToken)
   accessToken$!: Observable<string>;
 
-  
   @Select(AuthSelector.companyProfile)
   companyProfile$!: Observable<CompanyProfileResponse | null>;
 
@@ -28,14 +40,26 @@ export class AuthFacade {
     this.store.dispatch(new Login(request));
   }
 
-  dispatchCompleteCompanyProfile(request: CompanyProfileRequest) {
+  dispatchCompleteCompanyProfile(request: FormData) {
     this.store.dispatch(new CompleteCompanyProfile(request));
   }
 
-  dispatchConfirmEmail(userId: string, token: string) {
-    this.store.dispatch(new ConfirmEmail(userId, token));
+  dispatchConfirmEmail(userId: string, code : string) {
+    this.store.dispatch(new ConfirmEmail(userId, code));
   }
   dispatchRegister(request: RegisterRequest) {
     this.store.dispatch(new Register(request));
+  }
+
+  dispatchResendConfirmationEmail(request: ResendConfirmationRequest) {
+    this.store.dispatch(new ResendConfirmEmail(request));
+  }
+
+  dispatchForgetPassword(request: ForgetPasswordRequest) {
+    this.store.dispatch(new ForgetPassword(request));
+  }
+
+  dispatchResetPassword(request: ResetPasswordRequest) {
+    this.store.dispatch(new ResetPassword(request));
   }
 }

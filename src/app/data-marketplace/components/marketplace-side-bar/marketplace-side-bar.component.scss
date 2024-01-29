@@ -1,0 +1,80 @@
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.column-st {
+  display: flex;
+  flex-direction: column;
+}
+
+.zero-vt-mar {
+  margin: 0.4rem 0;
+}
+
+.logo-wrap {
+  display: flex;
+}
+
+.headline {
+  justify-self: center;
+  font-size: 1.8rem;
+  padding-left: 0.5rem;
+}
+
+.bold {
+  border-top-width: 0.15rem;
+  color: black;
+}
+
+.vert-space {
+  height: 1.5rem;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sb-comp:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  opacity: 10;
+}
+
+.sb-comp {
+  border-radius: 5%;
+  padding: 0.1rem 0.5rem;
+}
+
+.sp-bet {
+  gap: 4rem;
+  align-items: space-between;
+  justify-content: space-between;
+}
+
+.sp-bet-row {
+  justify-content: space-between;
+}
+
+.icon-med {
+  font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.mar-all {
+  margin: 0.5rem;
+}
+
+.notification-badge {
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: bold;
+}

@@ -1,13 +1,5 @@
 import { User } from "./auth.model";
 
-export interface CompanyProfileRequest{
-
-     CompanyName: string,
-     ContactEmail: string,
-     CompanyWebsite?: string,
-     Address?: string,
-     IndustryType?: string
-}
 
 export interface CompanyProfileResponse{
     companyEmail : string;

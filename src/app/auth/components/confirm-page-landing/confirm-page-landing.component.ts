@@ -14,14 +14,17 @@ export class ConfirmPageLandingComponent {
   userId : string| undefined  = undefined;
   token: string | undefined = undefined;
   constructor(private activeRoute: ActivatedRoute, private router: Router, private authFacade: AuthFacade){
-    this.activeRoute.params.subscribe((p)=>{
-      this.userId = p['UserId'];
-      this.token = p['token'];
+    this.activeRoute.queryParams.subscribe((p)=>{
+      this.userId = p['userId'];
+      this.token = p['code'];
     })
+    console.log(this.userId, this.token)
     if(this.userId && this.token){
-     this.authFacade.dispatchConfirmEmail(this.userId, this.token);}
+     this.authFacade.dispatchConfirmEmail(this.userId, this.token);
+     this.router.navigate([LANDING_PAGE_ROUTE]);
+
+    }
     else this.router.navigate([LOGIN_ROUTE]);
-    this.router.navigate([LANDING_PAGE_ROUTE]);
   }
 
 }

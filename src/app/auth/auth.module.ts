@@ -11,16 +11,29 @@ import { SharedComponentModule } from '../shared/shared-component/shared-compone
 import { CompleteCompanyProfileComponent } from './components/complete-company-profile/complete-company-profile.component';
 import { ConfirmPageLandingComponent } from './components/confirm-page-landing/confirm-page-landing.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { RolesListComponent } from './components/roles-list/roles-list.component';
+import { RoleState } from './store/roles/role.state';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
-  declarations: [LoginComponent, CompleteCompanyProfileComponent, ConfirmPageLandingComponent, SignUpComponent],
+  declarations: [
+    LoginComponent,
+    CompleteCompanyProfileComponent,
+    ConfirmPageLandingComponent,
+    SignUpComponent,
+    RolesListComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,
     AuthRoutingModule,
     NgxsModule.forFeature([AuthState]),
+    NgxsModule.forFeature([RoleState]),
     SharedComponentModule,
-    CdkStepperModule
+    CdkStepperModule,
   ],
   providers: [RxState],
 })
