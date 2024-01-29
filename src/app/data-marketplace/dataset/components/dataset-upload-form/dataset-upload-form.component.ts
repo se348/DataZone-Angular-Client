@@ -116,7 +116,6 @@ export class DatasetUploadFormComponent {
       else{
         this.noPrice = false
       }
-      console.log(this.noPrice)
     })
     this.datasetControl.get('isDownloadable')?.valueChanges.subscribe((value: string) => {
       if (value== ''){
@@ -128,14 +127,12 @@ export class DatasetUploadFormComponent {
       console.log(this.noDownloadability)
     })
     this.datasetControl.get('Visibility')?.valueChanges.subscribe((value: string) => {
-      // Enable/disable and make controls optional/required based on the 'Visibility' value
       const priceControl = this.datasetControl.get('price');
       const termsControl = this.datasetControl.get('terms');
       const isDownloadableControl =  this.datasetControl.get("isDownloadable")
       const liscenceControl = this.datasetControl.get("liscence")
       
       if (value == 'true') {
-        // If visibility is true, enable and make controls required
         priceControl?.enable();
         termsControl?.enable();
         liscenceControl?.enable();
@@ -169,45 +166,37 @@ export class DatasetUploadFormComponent {
       if ((this.noDownloadability || this.noPrice) && (this.datasetControl.get('Visibility')?.value == 'true')){
         return
       }
-//     const { valid, touched, dirty } = this.fileControl!;
-//     if (valid && (touched || dirty)) {
-//       // const {
-//       //   companyName,
-//       //   companyEmail,
-//       //   companyWebSite,
-//       //   companyAddress,
-//       //   industryType,
-//       // } = this.fileControl!.value;
+      const {
+        datasetName, 
+        description, 
+        isDownloadable, 
+        price, 
+        terms, 
+        visibility,
+        liscence
+      } = this.datasetControl!.value;
       
-//       const formData = this.organizeFormData(companyName,
-//         companyEmail,
-//         companyWebSite,
-//         companyAddress,
-// )
-//       this.router.navigate([LANDING_PAGE_ROUTE]);
-//     }
-  }
+    const formData = new FormData();
 
-  // organizeFormData(
-  // //   companyName: string,
-  // //   companyEmail: string,
-  // //   companyWebSite?: string,
-  // //   companyAddress?: string): FormData {
-  // //   const formData = new FormData();
-  // //   formData.append('CompanyName', companyName);
-  // //   formData.append('CompanyEmail', companyEmail);
-  // //   if(companyWebSite) 
-  // //   formData.append('CompanyWebSite', companyWebSite);
-  // // if(companyAddress)
-  // // formData.append('CompanyAddress', companyAddress);
+    formData.append('name', datasetName);
+    formData.append("description", description);
     
-  //   return formData;
-  // }
+    if(visibility =='false')
+      formData.append('isPrivate', "false");
+    else
+      formData.append('isPrivate', "true");
+    
+    formData.append('isDownloadable', isDownloadable);
+
+    formData.append('price', price.toString());
+
+    formData.append('terms', terms);
+    formData.append('license', liscence);
+
+    
+    }
 
   getUploadedFile(file?:File){
     this.fileControl.setValue({file})
     }
-  // handleSelectionChange(index: number) {
-  //   this.currentStepIndexControl.setValue(index);
-  // }
 }
