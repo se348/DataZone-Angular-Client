@@ -1,5 +1,5 @@
 // toaster.component.ts
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ToastState, ToastStateModel } from 'src/app/core/store/toast.state';
@@ -9,7 +9,10 @@ import { ToastState, ToastStateModel } from 'src/app/core/store/toast.state';
   templateUrl: './custom-toaster.component.html',
   styleUrls: ['./custom-toaster.component.scss'],
 })
-export class CustomToasterComponent implements OnInit {
+export class CustomToasterComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    this.closeToast();
+  }
   @Select(ToastState) toastState$!: Observable<ToastStateModel>;
 
   toast: string = '';
@@ -30,4 +33,5 @@ export class CustomToasterComponent implements OnInit {
   closeToast() {
     this.showToast = false;
   }
+
 }

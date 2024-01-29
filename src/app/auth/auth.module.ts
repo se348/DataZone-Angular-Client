@@ -8,14 +8,19 @@ import { AuthState } from './store/auth.state';
 import { NgxsModule } from '@ngxs/store';
 import { CdkStepperModule } from '@angular/cdk/stepper';
 import { SharedComponentModule } from '../shared/shared-component/shared-component.module';
-import { CompleteCompanyProfileComponent } from './components/complete-company-profile/complete-company-profile.component';
+import { CompleteCompanyProfileComponent } from '../company-profile/components/complete-company-profile/complete-company-profile.component';
 import { ConfirmPageLandingComponent } from './components/confirm-page-landing/confirm-page-landing.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { RolesListComponent } from './components/roles-list/roles-list.component';
 import { RoleState } from './store/roles/role.state';
 
 @NgModule({
-  declarations: [LoginComponent, CompleteCompanyProfileComponent, ConfirmPageLandingComponent, SignUpComponent, RolesListComponent],
+  declarations: [
+    LoginComponent,
+    ConfirmPageLandingComponent,
+    SignUpComponent,
+    RolesListComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -23,7 +28,7 @@ import { RoleState } from './store/roles/role.state';
     NgxsModule.forFeature([AuthState]),
     NgxsModule.forFeature([RoleState]),
     SharedComponentModule,
-    CdkStepperModule
+    CdkStepperModule,
   ],
   providers: [RxState],
 })

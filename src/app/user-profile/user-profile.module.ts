@@ -5,10 +5,11 @@ import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { NgxsModule } from '@ngxs/store';
 import { UserProfileState } from './store/user-profile.state';
 import { RxState } from '@rx-angular/state';
-import { EditUserProfileComponent } from './components/complete-user-profile/complete-user-profile.component';
+import { EditUserProfileComponent } from './components/edit-user-profile/edit-user-profile.component';
+import {CompleteUserProfileComponent} from "./components/complete-user-profile/complete-user-profile.component";
 
 @NgModule({
-  declarations: [EditUserProfileComponent],
+  declarations: [EditUserProfileComponent, CompleteUserProfileComponent],
   imports: [
     CommonModule,
     SharedModule,

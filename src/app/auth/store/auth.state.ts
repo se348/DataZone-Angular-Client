@@ -6,7 +6,6 @@ import { LoginResponse } from '../models/auth.model';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { EMAIL_SENT_ROUTE, LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
-import { CompanyProfileResponse } from '../models/profile.model';
 import { Login, CompleteCompanyProfile, ConfirmEmail, Register, ResendConfirmEmail } from './auth.actions';
 
 export interface AuthStateModel {
@@ -14,7 +13,7 @@ export interface AuthStateModel {
   refreshToken: string | null;
   email: string | null;
   username: string | null;
-  companyProfile: CompanyProfileResponse | null
+
 }
 
 const AUTH_STATE_TOKEN = new StateToken<AuthStateModel>('authState');
@@ -24,7 +23,6 @@ const defaultState: AuthStateModel = {
   refreshToken: null,
   username: null,
   email: null,
-  companyProfile: null
 };
 
 @State<AuthStateModel>({
@@ -47,17 +45,6 @@ export class AuthState {
                 accessToken: response.accessToken,
                 refreshToken: response.refreshToken,
                 email: request.email,
-            });
-        }
-    ))
-  }
-
-  @Action(CompleteCompanyProfile)
-  completeCompanyProfile({ patchState }: StateContext<AuthStateModel>, { request }: CompleteCompanyProfile) {
-    return this.authService.completeCompanyProfile(request).pipe(tap(
-        (response: CompanyProfileResponse) => {
-            patchState({
-                companyProfile: response
             });
         }
     ))

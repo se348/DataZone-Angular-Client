@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Select, Store } from "@ngxs/store";
 import { Observable } from "rxjs";
 import { LoginRequest, RegisterRequest, ResendConfirmationRequest } from "../models/auth.model";
-import { CompanyProfileResponse } from "../models/profile.model";
+
 import { Login, CompleteCompanyProfile, ConfirmEmail, Register, ResendConfirmEmail } from "../store/auth.actions";
 import { AuthSelector } from "../store/auth.selector";
 
@@ -16,10 +16,6 @@ export class AuthFacade {
 
   @Select(AuthSelector.accessToken)
   accessToken$!: Observable<string>;
-
-  
-  @Select(AuthSelector.companyProfile)
-  companyProfile$!: Observable<CompanyProfileResponse | null>;
 
   constructor(private store: Store) {}
 

@@ -5,13 +5,18 @@ import { NgxsModule } from '@ngxs/store';
 import { CompanyProfileState } from './store/company-profile.state';
 import { RxState } from '@rx-angular/state';
 import { EditCompanyProfileComponent } from './components/edit-company-profile/edit-company-profile.component';
+import {CompanyProfileRoutingModule} from "./company-profile-routing.module";
+import {
+  CompleteCompanyProfileComponent
+} from "./components/complete-company-profile/complete-company-profile.component";
 
 @NgModule({
   declarations: [
-    EditCompanyProfileComponent
+    EditCompanyProfileComponent, CompleteCompanyProfileComponent
   ],
   imports: [
     CommonModule,
+    CompanyProfileRoutingModule,
     SharedModule,
     NgxsModule.forFeature([CompanyProfileState]),
   ],

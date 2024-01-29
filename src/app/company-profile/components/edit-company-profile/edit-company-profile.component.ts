@@ -1,5 +1,5 @@
 import { EditCompanyProfile } from './../../store/company-profile.actions';
-import { CompanyProfileFacade } from './../../facades/company-profile-facades';
+import { CompanyProfileFacade } from '../../facades/company-profile.facades';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CompanyProfile } from './../../models/company-profile.model';
 import { Component } from '@angular/core';

@@ -1,6 +1,6 @@
 import { Selector, createPropertySelectors } from '@ngxs/store';
 import { AuthState, AuthStateModel } from './auth.state';
-import { CompanyProfileResponse } from '../models/profile.model';
+import {CompanyProfileResponse} from "../../company-profile/models/company-profile.model";
 
 export class AuthSelector {
   static slices = createPropertySelectors<AuthStateModel>(AuthState);
@@ -13,10 +13,5 @@ export class AuthSelector {
   @Selector([AuthState])
   static accessToken(state: AuthStateModel): string | null {
     return state.accessToken;
-  }
-  
-  @Selector([AuthState])
-  static companyProfile(state: AuthStateModel): CompanyProfileResponse | null {
-    return state.companyProfile;
   }
 }
