@@ -116,7 +116,6 @@ export class DatasetUploadFormComponent {
       else{
         this.noPrice = false
       }
-      console.log(this.noPrice)
     })
     this.datasetControl.get('isDownloadable')?.valueChanges.subscribe((value: string) => {
       if (value== ''){
@@ -128,14 +127,12 @@ export class DatasetUploadFormComponent {
       console.log(this.noDownloadability)
     })
     this.datasetControl.get('Visibility')?.valueChanges.subscribe((value: string) => {
-      // Enable/disable and make controls optional/required based on the 'Visibility' value
       const priceControl = this.datasetControl.get('price');
       const termsControl = this.datasetControl.get('terms');
       const isDownloadableControl =  this.datasetControl.get("isDownloadable")
       const liscenceControl = this.datasetControl.get("liscence")
       
       if (value == 'true') {
-        // If visibility is true, enable and make controls required
         priceControl?.enable();
         termsControl?.enable();
         liscenceControl?.enable();
@@ -202,7 +199,4 @@ export class DatasetUploadFormComponent {
   getUploadedFile(file?:File){
     this.fileControl.setValue({file})
     }
-  // handleSelectionChange(index: number) {
-  //   this.currentStepIndexControl.setValue(index);
-  // }
 }
