@@ -18,6 +18,7 @@ import { ToastState } from './core/store/toast.state';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { CompanyProfileModule } from './company-profile/company-profile.module';
 import { DataMarketplaceModule } from './data-marketplace/data-marketplace.module';
+import { MainLandingPageModule } from './main-landing-page/main-landing-page.module';
 @NgModule({
   declarations: [AppComponent, LandingPageComponent],
   providers: [
@@ -47,6 +48,7 @@ import { DataMarketplaceModule } from './data-marketplace/data-marketplace.modul
     AppRoutingModule,
     UserProfileModule,
     CompanyProfileModule,
+    MainLandingPageModule
   ],
 })
 export class AppModule {}

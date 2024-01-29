@@ -15,3 +15,4 @@ export const EMAIL_SENT_ROUTE = 'email-sent';
 export const DATASET_ROUTE = 'dataset';
 export const DATASET_UPLOAD_FORM_ROUTE = 'upload';
 export const SUCCESS_ROUTE = 'success';
+export const MAIN_LANDING_PAGE_ROUTE = 'main-landing-page';
