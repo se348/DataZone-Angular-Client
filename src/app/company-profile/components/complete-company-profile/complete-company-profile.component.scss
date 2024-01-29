@@ -1,0 +1,160 @@
+.body{
+  background-image: url("../../../../assets/images/background_net.svg") !important;
+  background-position: 110% -185%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.divider {
+  display: grid;
+  grid-template-columns: 1fr 1% 1fr;
+  padding: 1rem;
+}
+
+.vertical-line{
+    grid-column-start: 2;
+}
+.company-profile-form {
+  grid-column-start: 3;
+  align-self: center;
+}
+
+h3{
+  padding:5px 0;
+  margin: 0;
+}
+
+.container{
+  width: 75vw;
+  height: 80vh;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgb(241, 242, 237, 0.6);
+  border-radius: 6px;
+  border-style: solid;
+  border-width: 1.2px;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.color{
+    border-radius: 1.5px;
+    width: 100%;
+}
+.progress-tracker{
+  align-self: center;
+  margin: 0 auto;
+}
+
+.stepper-container{
+  background-color: inherit;
+}
+
+mat-form-field {
+  width: 60%;
+  margin: 0 auto;
+}
+.profile-container{
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.action-btn{
+  display: flex;
+  gap: 20px;
+}
+
+.step-container{
+  padding-top: 20px;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pd-l {
+  padding-left: 2rem;
+}
+
+.submit-btn {
+  padding: 1.3rem 0;
+  width: 100%;
+  margin-top: 2rem;
+  background-color: black;
+  color: white !important;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.circular-radius {
+  border-radius: 0.55rem !important;
+}
+
+.margin-top {
+  margin-top: 2rem;
+}
+
+.lt-300 {
+  color: grey;
+  font-weight: 300;
+}
+
+.lt-400 {
+  font-weight: 350;
+}
+
+
+.full-width {
+  width: 100%;
+}
+
+.half-width {
+  width: 45%;
+}
+
+.row-sp-betwn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.8rem;
+}
+
+.row-items {
+  width: 50%;
+  justify-self: start;
+  align-self: center;
+}
+
+.x-gap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4rem;
+}
+
+.row {
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+  align-items: center;
+  min-height: fit-content;
+}
+
+.icon-image {
+  width: 2.6rem;
+  height: 2.6rem;
+}
+
+:host ::ng-deep .mdc-text-field--outlined {
+  --mdc-outlined-text-field-container-shape: 0.55rem;
+}
+
+
