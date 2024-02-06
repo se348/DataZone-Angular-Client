@@ -18,6 +18,9 @@ import { UserProfileModule } from './user-profile/user-profile.module';
 import { CompanyProfileModule } from './company-profile/company-profile.module';
 import { DataMarketplaceModule } from './data-marketplace/data-marketplace.module';
 import { MainLandingPageModule } from './main-landing-page/main-landing-page.module';
+import {ErrorInterceptor} from "./core/interceptors/error.inteceptor";
+import {CoreModule} from "./core/core.module";
+import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
 @NgModule({
   declarations: [AppComponent, LandingPageComponent],
   providers: [
@@ -26,17 +29,27 @@ import { MainLandingPageModule } from './main-landing-page/main-landing-page.mod
       useClass: JwtInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
   imports: [
     NgxsModule.forRoot([ToastState]),
     NgxsStoragePluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
+    LoggerModule.forRoot({
+      // serverLoggingUrl: '/api/v1/logs',
+      level: NgxLoggerLevel.DEBUG,
+      // serverLogLevel: NgxLoggerLevel.ERROR,
+    }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    HttpClientModule,
+    CoreModule,
     AuthModule,
     DataMarketplaceModule,
     AppRoutingModule,

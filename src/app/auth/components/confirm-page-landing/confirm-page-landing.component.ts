@@ -18,11 +18,9 @@ export class ConfirmPageLandingComponent {
       this.userId = p['userId'];
       this.token = p['code'];
     })
-    console.log(this.userId, this.token)
     if(this.userId && this.token){
      this.authFacade.dispatchConfirmEmail(this.userId, this.token);
      this.router.navigate([LANDING_PAGE_ROUTE]);
-
     }
     else this.router.navigate([LOGIN_ROUTE]);
   }

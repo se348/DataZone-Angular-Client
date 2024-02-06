@@ -20,6 +20,10 @@ export class Register {
   constructor(public request: RegisterRequest) {}
 }
 
+export class Logout {
+  static readonly type = '[Auth] Logout';
+}
+
 export class ResendConfirmEmail {
   static readonly type = `[Auth] ${ResendConfirmEmail.name}`;
   constructor(public request: ResendConfirmationRequest) {}
