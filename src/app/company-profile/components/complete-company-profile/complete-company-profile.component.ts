@@ -22,6 +22,7 @@ import { LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
 import { AuthFacade } from '../../../auth/facades/auth.facades';
 import {CompanyProfileFacade} from "../../facades/company-profile.facades";
 import {CompanyProfile, CompanyProfileResponse, IndustryTypes} from "../../models/company-profile.model";
+import {MatSelectChange} from "@angular/material/select";
 
 interface LoginComponentState {
   isAuthenticated: boolean;
@@ -102,27 +103,36 @@ export class CompleteCompanyProfileComponent {
 
   stepperTitle = 'Complete Company Profile';
 
-  handleSubmitEvent(event: any) {
-    if (event) this.saveForm();
+  handleIndustryType(event:MatSelectChange){
+    this.documentControl.get('industryType')?.setValue(event.value);
   }
 
+  validFormControls(){
+    const validProfile = this.profileControl.valid;
+    const touchedProfile = this.profileControl.touched;
+    const dirtyProfile = this.profileControl.dirty;
+    const validDocument = this.documentControl.valid;
+    const touchedDocument = this.documentControl.touched;
+    const dirtyDocument = this.documentControl.dirty;
+    return (validProfile&&(touchedProfile || dirtyProfile)&&(validDocument && (touchedDocument || dirtyDocument)));
+  }
   saveForm() {
-    const { valid, touched, dirty } = this.profileControl!;
-    if (valid && (touched || dirty)) {
+    if (this.validFormControls()) {
       const {
         companyName,
         companyEmail,
         companyWebSite,
-        companyAddress,
-        industryType,
-      } = this.profileControl!.value;
+      } = this.profileControl.value;
+      const{ companyAddress,
+        industryType,} = this.documentControl.value;
 
       const formData = this.organizeFormData(
         companyName,
         companyEmail,
+        industryType,
         companyWebSite,
         companyAddress,
-        industryType
+
       );
       this.authFacade.dispatchCompleteCompanyProfile(formData);
       this.router.navigate([LANDING_PAGE_ROUTE]);
@@ -138,11 +148,12 @@ export class CompleteCompanyProfileComponent {
   ): FormData {
     const formData = new FormData();
     formData.append('CompanyName', companyName);
-    formData.append('CompanyEmail', companyEmail);
+    formData.append('ContactEmail', companyEmail);
     if (companyWebSite) formData.append('CompanyWebSite', companyWebSite);
-    if (companyAddress) formData.append('CompanyAddress', companyAddress);
+    if (companyAddress) formData.append('Address', companyAddress);
     formData.append('IndustryType', industryType);
     if (this.profilePic) formData.append('ProfilePic', this.profilePic);
+    if (this.businessLicense) formData.append('BusinessLicense', this.businessLicense);
 
     return formData;
   }
@@ -171,9 +182,5 @@ export class CompleteCompanyProfileComponent {
       }
     }
     return initials.toUpperCase();
-  }
-
-  handleSelectionChange(index: number) {
-    this.currentStepIndexControl.setValue(index);
   }
 }

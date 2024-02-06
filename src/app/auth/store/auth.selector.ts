@@ -10,6 +10,7 @@ export class AuthSelector {
     return !!state.accessToken;
   }
 
+
   @Selector([AuthState])
   static accessToken(state: AuthStateModel): string | null {
     return state.accessToken;
