@@ -1,0 +1,73 @@
+@layer reset, primeng;
+
+
+.p-2{
+    padding: 1rem 0;
+}
+
+.dataset-title{
+    color: gray;
+    font-size: x-large;
+}
+.item{
+    padding: 10px;
+    display: block;
+    border-radius: 15px;
+}
+.item:hover{
+    background-color: #EEEEEE;
+    cursor: pointer;
+}
+
+.pr-2{
+    padding-right: 20px;
+}
+
+.sm{
+    font-size: small;
+}
+.bottom-line{
+    border-bottom: 0.4px solid;
+    margin: 10px;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: end;
+    margin: 10px 0;
+}
+.flex-2{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+h3{
+    font-size: xx-large;
+}
+.smaller{
+    font-weight: 700;
+}
+
+.div{
+    border-bottom: 0.5px solid #eee;
+    margin: 10px 5px;
+}
+@layer reset{
+    :host ::ng-deep 
+	.p-rating-icon:not(.p-rating-cancel) { 
+	color: rgb(138, 138, 14) !important; 
+}
+
+}
+
+@media screen and (min-width: 1000px) {
+    .item{
+        width: 800px;
+    }
+    .div{
+        width: 800px;
+    }
+}
+

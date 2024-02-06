@@ -17,6 +17,8 @@ import { AuthModule } from './auth/auth.module';
 import { ToastState } from './core/store/toast.state';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { CompanyProfileModule } from './company-profile/company-profile.module';
+import { DataMarketplaceModule } from './data-marketplace/data-marketplace.module';
+import { MainLandingPageModule } from './main-landing-page/main-landing-page.module';
 @NgModule({
   declarations: [AppComponent, LandingPageComponent],
   providers: [
@@ -42,9 +44,11 @@ import { CompanyProfileModule } from './company-profile/company-profile.module';
     SharedModule,
     HttpClientModule,
     AuthModule,
+    DataMarketplaceModule,
     AppRoutingModule,
     UserProfileModule,
-    CompanyProfileModule
+    CompanyProfileModule,
+    MainLandingPageModule
   ],
 })
 export class AppModule {}

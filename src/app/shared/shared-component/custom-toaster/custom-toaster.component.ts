@@ -1,7 +1,9 @@
 // toaster.component.ts
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NavigationStart, Router } from '@angular/router';
 import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, filter } from 'rxjs';
 import { ToastState, ToastStateModel } from 'src/app/core/store/toast.state';
 
 @Component({
@@ -15,16 +17,21 @@ export class CustomToasterComponent implements OnInit, OnDestroy {
   }
   @Select(ToastState) toastState$!: Observable<ToastStateModel>;
 
-  toast: string = '';
+  toast: string | undefined = '';
+  toastType: string | undefined = '';
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
     this.toastState$.subscribe((state) => {
       if (state.toast) {
-        this.toast = state.toast;
+        this.toast = state.toast.message;
+        this.toastType = state.toast.type;
         this.showToastMessage();
       } else this.closeToast();
     });
   }
+
   showToast = false;
 
   showToastMessage() {
@@ -33,5 +40,4 @@ export class CustomToasterComponent implements OnInit, OnDestroy {
   closeToast() {
     this.showToast = false;
   }
-
 }

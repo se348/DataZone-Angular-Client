@@ -5,7 +5,7 @@ import {
   COMPLETE_USER_PROFILE_PAGE_ROUTE,
   CONFIRM_EMAIL_ROUTE,
   ROLES_LIST_ROUTE,
-  EMAIL_SENT_ROUTE,
+  EMAIL_SENT_ROUTE, FORGET_PASSWORD_ROUTE, RESET_PASSWORD_ROUTE,
 } from '../core/constants/routes';
 import { CompleteCompanyProfileComponent } from '../company-profile/components/complete-company-profile/complete-company-profile.component';
 import { CONFIRM_EMAIL_URL } from '../core/constants/api-endpoints';
@@ -14,6 +14,8 @@ import { LOGIN_ROUTE, REGISTER_ROUTE } from '../core/constants/routes';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { RolesListComponent } from './components/roles-list/roles-list.component';
 import { EmailSentComponent } from './components/email-sent/email-sent.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,14 @@ const routes: Routes = [
   {
     path: EMAIL_SENT_ROUTE,
     component: EmailSentComponent,
+  },
+  {
+    path: FORGET_PASSWORD_ROUTE,
+    component: ForgetPasswordComponent,
+  },
+  {
+    path: RESET_PASSWORD_ROUTE,
+    component: ResetPasswordComponent,
   },
 ];
 

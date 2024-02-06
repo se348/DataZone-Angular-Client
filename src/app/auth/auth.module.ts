@@ -13,6 +13,8 @@ import { ConfirmPageLandingComponent } from './components/confirm-page-landing/c
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { RolesListComponent } from './components/roles-list/roles-list.component';
 import { RoleState } from './store/roles/role.state';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +22,8 @@ import { RoleState } from './store/roles/role.state';
     ConfirmPageLandingComponent,
     SignUpComponent,
     RolesListComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     CommonModule,

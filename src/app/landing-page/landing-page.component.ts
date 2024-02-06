@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {COMPLETE_COMPANY_PROFILE_PAGE_ROUTE, COMPLETE_USER_PROFILE_PAGE_ROUTE} from '../core/constants/routes';
 
+
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',

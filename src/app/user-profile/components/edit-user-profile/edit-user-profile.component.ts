@@ -41,7 +41,7 @@ export class EditUserProfileComponent implements OnInit {
     private readonly formBuilder: FormBuilder
   ) {
     this.state.set(initCompleteUserProfileComponentState);
-    this.state.connect('userProfile', this.userProfileFacade.userProfile$);
+    this.state.connect('userProfile', this.userProfileFacade.userProfile);
   }
 
   ngOnInit(): void {
@@ -53,7 +53,6 @@ export class EditUserProfileComponent implements OnInit {
       fullName: [this.userProfile?.fullName || ''],
       email: [this.userProfile?.email || ''],
       phoneNumber: [this.userProfile?.phoneNumber || ''],
-      address: [this.userProfile?.address || ''],
       bio: [this.userProfile?.bio],
     });
   }
@@ -69,7 +68,6 @@ export class EditUserProfileComponent implements OnInit {
     if (valid && (touched || dirty)) {
       this.userProfileFacade.dispatchEditUserProfile({
         fullName: this.userProfileForm.value.fullName,
-        address: this.userProfileForm.value.address,
         email: this.userProfileForm.value.email,
         phoneNumber: this.userProfileForm.value.phoneNumber,
         bio: this.userProfileForm.value.bio,

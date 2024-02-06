@@ -10,9 +10,6 @@ import {CompleteUserProfile, EditUserProfile, GetUserProfile} from '../store/use
   providedIn: 'root',
 })
 export class UserProfileFacade {
-  userProfile$: Observable<UserProfile> = this.store.select(
-    UserProfileSelector.userProfile
-  );
 
   @Select(UserProfileSelector.userProfile)
   userProfile!: Observable<UserProfile>;

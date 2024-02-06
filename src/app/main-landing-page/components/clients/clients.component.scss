@@ -1,0 +1,41 @@
+.about {
+  color: #4d4d4d;
+  margin: 0 10vw;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.info-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 2.3rem;
+}
+
+.info img {
+  width: 48px;
+  height: 48px;
+}
+
+.about p {
+  font-size: 1rem;
+  margin: 2px;
+  padding: 0;
+}
+
+.divider {
+  margin: 2rem 4rem;
+  border: 1px solid #4d4d4d;
+}
