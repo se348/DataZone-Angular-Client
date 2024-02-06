@@ -1,7 +1,15 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import {Observable, catchError, of} from "rxjs";
-import { LOGIN_URL, COMPLETE_COMPANY_PROFILE_URL, REGISTER_URL, RESEND_CONFIRM_EMAIL_URL, FORGET_PASSWORD, RESET_PASSWORD } from "src/app/core/constants/api-endpoints";
+import {
+  LOGIN_URL,
+  COMPLETE_COMPANY_PROFILE_URL,
+  REGISTER_URL,
+  RESEND_CONFIRM_EMAIL_URL,
+  FORGET_PASSWORD,
+  RESET_PASSWORD,
+  CONFIRM_EMAIL_URL
+} from "src/app/core/constants/api-endpoints";
 import { ForgetPasswordRequest, LoginRequest, LoginResponse, RegisterRequest, ResendConfirmationRequest, ResetPasswordRequest } from "../models/auth.model";
 import { CompanyProfileResponse } from "../models/profile.model";
 
@@ -22,7 +30,7 @@ export class AuthService {
   }
 
   confirmEmail(userId:string, token: string) {
-    return this.http.get(`CONFIRM_EMAIL_URL?userId=${userId}&code=${token}`, {});
+    return this.http.get(`${CONFIRM_EMAIL_URL}?userId=${userId}&code=${token}`, {});
   }
 
   logout(): Observable<boolean> {
