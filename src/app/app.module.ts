@@ -9,7 +9,6 @@ import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { JwtInterceptor } from './auth/services/jwt.interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ErrorInterceptor } from './core/interceptors/error.inteceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SharedModule } from './shared/shared.module';
@@ -19,6 +18,9 @@ import { UserProfileModule } from './user-profile/user-profile.module';
 import { CompanyProfileModule } from './company-profile/company-profile.module';
 import { DataMarketplaceModule } from './data-marketplace/data-marketplace.module';
 import { MainLandingPageModule } from './main-landing-page/main-landing-page.module';
+import {ErrorInterceptor} from "./core/interceptors/error.inteceptor";
+import {CoreModule} from "./core/core.module";
+import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
 @NgModule({
   declarations: [AppComponent, LandingPageComponent],
   providers: [
@@ -38,11 +40,16 @@ import { MainLandingPageModule } from './main-landing-page/main-landing-page.mod
     NgxsModule.forRoot([ToastState]),
     NgxsStoragePluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
+    LoggerModule.forRoot({
+      // serverLoggingUrl: '/api/v1/logs',
+      level: NgxLoggerLevel.DEBUG,
+      // serverLogLevel: NgxLoggerLevel.ERROR,
+    }),
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    HttpClientModule,
+    CoreModule,
     AuthModule,
     DataMarketplaceModule,
     AppRoutingModule,

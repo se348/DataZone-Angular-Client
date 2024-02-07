@@ -44,8 +44,8 @@ export class AuthFacade {
     this.store.dispatch(new CompleteCompanyProfile(request));
   }
 
-  dispatchConfirmEmail(userId: string, token: string) {
-    this.store.dispatch(new ConfirmEmail(userId, token));
+  dispatchConfirmEmail(userId: string, code : string) {
+    this.store.dispatch(new ConfirmEmail(userId, code));
   }
   dispatchRegister(request: RegisterRequest) {
     this.store.dispatch(new Register(request));

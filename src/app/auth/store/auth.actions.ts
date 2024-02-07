@@ -12,12 +12,16 @@ export class CompleteCompanyProfile {
 }
 export class ConfirmEmail {
     static readonly type = `[Auth] ${ConfirmEmail.name}`;
-    constructor(public userId: string , public token: string) {}
+    constructor(public userId: string, public code: string) {}
 }
 
 export class Register {
   static readonly type = `[Auth] ${Register.name}`;
   constructor(public request: RegisterRequest) {}
+}
+
+export class Logout {
+  static readonly type = '[Auth] Logout';
 }
 
 export class ResendConfirmEmail {

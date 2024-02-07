@@ -2,6 +2,8 @@ export const BASE_URL = 'http://localhost:8888/api/v1';
 
 export const AUTH_URL = `${BASE_URL}/account`;
 
+export const REFRESH_TOKEN_URL = `${BASE_URL}/refresh`;
+
 export const LOGIN_URL = `${AUTH_URL}/login`;
 
 export const FORGET_PASSWORD = `${AUTH_URL}/forgotPassword`;

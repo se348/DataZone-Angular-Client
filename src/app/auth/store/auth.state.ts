@@ -17,7 +17,7 @@ import {
   Register,
   ResendConfirmEmail,
   ForgetPassword,
-  ResetPassword,
+  ResetPassword, Logout,
 } from './auth.actions';
 import { ToasterService } from 'src/app/core/service/toast.service';
 import { StateMessageService } from 'src/app/core/service/state-message.service';
@@ -84,9 +84,9 @@ export class AuthState {
   @Action(ConfirmEmail)
   confirmEmail(
     { patchState }: StateContext<AuthStateModel>,
-    { userId, token }: ConfirmEmail
+    { userId, code }: ConfirmEmail
   ) {
-    return this.authService.confirmEmail(userId, token);
+    return this.authService.confirmEmail(userId, code);
   }
 
   @Action(Register)
@@ -100,6 +100,22 @@ export class AuthState {
         const queryParams = { email: userEmail };
         this.router.navigate([EMAIL_SENT_ROUTE], { queryParams });
       })
+    );
+  }
+
+  @Action(Logout)
+  logout({ setState }: StateContext<AuthStateModel>) {
+    return this.authService.logout().pipe(
+      tap(() => {
+        setState({
+          accessToken: null,
+          refreshToken: null,
+          username: null,
+          email: null,
+          companyProfile:null
+        });
+        // this.store.dispatch(new StateResetAll()); this needs package
+      }),
     );
   }
 
