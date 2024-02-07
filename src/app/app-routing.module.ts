@@ -8,7 +8,7 @@ import {
   MAIN_LANDING_PAGE_ROUTE,
 } from './core/constants/routes';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { EditUserProfileComponent } from './user-profile/components/complete-user-profile/complete-user-profile.component';
+import { EditUserProfileComponent } from './user-profile/components/edit-user-profile/edit-user-profile.component';
 import { EditCompanyProfileComponent } from './company-profile/components/edit-company-profile/edit-company-profile.component';
 import { SuccessIndicatorComponent } from './shared/shared-component/success-indicator/success-indicator.component';
 import { SuccessPageComponent } from './shared/shared-component/success-page/success-page.component';

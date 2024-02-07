@@ -8,3 +8,8 @@ export class GetUserProfile {
   static readonly type = `[UserProfile] ${GetUserProfile.name}`;
   constructor(public request: String) {}
 }
+
+export class CompleteUserProfile {
+  static readonly type = `[UserProfile] ${CompleteUserProfile.name}`;
+  constructor(public request: FormData) {}
+}

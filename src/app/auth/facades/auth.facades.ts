@@ -8,7 +8,6 @@ import {
   ResendConfirmationRequest,
   ResetPasswordRequest,
 } from '../models/auth.model';
-import { CompanyProfileResponse } from '../models/profile.model';
 import {
   Login,
   CompleteCompanyProfile,
@@ -31,8 +30,6 @@ export class AuthFacade {
   @Select(AuthSelector.accessToken)
   accessToken$!: Observable<string>;
 
-  @Select(AuthSelector.companyProfile)
-  companyProfile$!: Observable<CompanyProfileResponse | null>;
 
   constructor(private store: Store) {}
 

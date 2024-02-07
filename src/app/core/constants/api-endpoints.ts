@@ -12,13 +12,15 @@ export const RESET_PASSWORD = `${AUTH_URL}/resetPassword`;
 
 export const COMPLETE_COMPANY_PROFILE_URL = `${BASE_URL}/users/company-profile`;
 
+export const COMPLETE_USER_PROFILE_URL = `${BASE_URL}/users/user-profile`;
+
 export const EDIT_COMPANY_PROFILE_URL = `${BASE_URL}/users/edit-company-profile`;
 
 export const GET_COMPANY_PROFILE_URL = `${BASE_URL}/users/get-company-profile`;
 
-export const EDIT_USER_PROFILE_URL = `${BASE_URL}/users/edit-company-profile`;
+export const GET_USER_PROFILE_URL = `${BASE_URL}/users/get-user-profile`;
 
-export const GET_USER_PROFILE_URL = `${BASE_URL}/users/get-company-profile`;
+export const EDIT_USER_PROFILE_URL = `${BASE_URL}/users/edit-company-profile`;
 
 export const CONFIRM_EMAIL_URL = `${AUTH_URL}/confirmEmail`;
 

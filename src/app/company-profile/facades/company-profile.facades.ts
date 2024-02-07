@@ -1,6 +1,6 @@
-import { CompanyProfileSelector } from './../store/company-profile.selector';
+import { CompanyProfileSelector } from '../store/company-profile.selector';
 import { Observable } from 'rxjs';
-import { CompanyProfile } from './../models/company-profile.model';
+import {CompanyProfile, CompanyProfileResponse} from '../models/company-profile.model';
 import { Injectable } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import {
@@ -12,7 +12,6 @@ import {
   providedIn: 'root',
 })
 export class CompanyProfileFacade {
-
   @Select(CompanyProfileSelector.companyProfile)
   companyProfile$!: Observable<CompanyProfile>;
   constructor(private store: Store) {}

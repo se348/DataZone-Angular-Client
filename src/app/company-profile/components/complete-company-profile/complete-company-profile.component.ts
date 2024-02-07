@@ -19,18 +19,14 @@ import {
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
-import { AuthFacade } from '../../facades/auth.facades';
-import { SelectionChange } from '@angular/cdk/collections';
-import {
-  CompanyProfileResponse,
-  IndustryTypes,
-} from '../../models/profile.model';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { MatSelectChange } from '@angular/material/select';
+import { AuthFacade } from '../../../auth/facades/auth.facades';
+import {CompanyProfileFacade} from "../../facades/company-profile.facades";
+import {CompanyProfile, CompanyProfileResponse, IndustryTypes} from "../../models/company-profile.model";
+import {MatSelectChange} from "@angular/material/select";
 
 interface LoginComponentState {
   isAuthenticated: boolean;
-  companyProfile: CompanyProfileResponse | null;
+  companyProfile: CompanyProfile | null;
 }
 
 const initLoginComponentState: LoginComponentState = {
@@ -50,10 +46,9 @@ export class CompleteCompanyProfileComponent {
   documentControl!: FormGroup;
   paymentControl!: FormGroup;
   profilePic?: File;
-  businessLicense?:File;
+  businessLicense?: File;
 
-
-  companyProfile: CompanyProfileResponse | null = null;
+  companyProfile: CompanyProfile | null = null;
 
   companyProfile$ = this.state.select('companyProfile');
 
@@ -69,26 +64,27 @@ export class CompleteCompanyProfileComponent {
 
   constructor(
     private readonly authFacade: AuthFacade,
+    private readonly companyProfileFacade: CompanyProfileFacade,
     private readonly state: RxState<LoginComponentState>,
     private readonly router: Router,
     private readonly formBuilder: FormBuilder
   ) {
     this.state.set(initLoginComponentState);
     this.state.connect('isAuthenticated', this.authFacade.isAuthenticated$);
-    this.state.connect('companyProfile', this.authFacade.companyProfile$);
+    this.state.connect('companyProfile', this.companyProfileFacade.companyProfile$);
 
     this.profileControl = this.formBuilder.group({
-          companyName: ['', [Validators.required]],
-          companyEmail: ['', [Validators.required, Validators.email]],
-          companyWebSite: [''],
-        });
-    this.documentControl =  this.formBuilder.group({
+      companyName: ['', [Validators.required]],
+      companyEmail: ['', [Validators.required, Validators.email]],
+      companyWebSite: [''],
+    });
+    this.documentControl = this.formBuilder.group({
       companyAddress: [''],
       industryType: ['', [Validators.required]],
       businessLicense: ['', [Validators.required]],
-      profilePicture:['']
+      profilePicture: [''],
     });
-    this.paymentControl = this.formBuilder.group({}); 
+    this.paymentControl = this.formBuilder.group({});
   }
 
   ngOnInit(): void {
@@ -107,27 +103,37 @@ export class CompleteCompanyProfileComponent {
 
   stepperTitle = 'Complete Company Profile';
 
-
-  handleSubmitEvent(event: any) {
-    if (event) this.saveForm();
+  handleIndustryType(event:MatSelectChange){
+    this.documentControl.get('industryType')?.setValue(event.value);
   }
 
+  validFormControls(){
+    const validProfile = this.profileControl.valid;
+    const touchedProfile = this.profileControl.touched;
+    const dirtyProfile = this.profileControl.dirty;
+    const validDocument = this.documentControl.valid;
+    const touchedDocument = this.documentControl.touched;
+    const dirtyDocument = this.documentControl.dirty;
+    return (validProfile&&(touchedProfile || dirtyProfile)&&(validDocument && (touchedDocument || dirtyDocument)));
+  }
   saveForm() {
-    const { valid, touched, dirty } = this.profileControl!;
-    if (valid && (touched || dirty)) {
+    if (this.validFormControls()) {
       const {
         companyName,
         companyEmail,
         companyWebSite,
-        companyAddress,
-        industryType,
-      } = this.profileControl!.value;
-      
-      const formData = this.organizeFormData(companyName,
+      } = this.profileControl.value;
+      const{ companyAddress,
+        industryType,} = this.documentControl.value;
+
+      const formData = this.organizeFormData(
+        companyName,
         companyEmail,
+        industryType,
         companyWebSite,
         companyAddress,
-        industryType,)
+
+      );
       this.authFacade.dispatchCompleteCompanyProfile(formData);
       this.router.navigate([LANDING_PAGE_ROUTE]);
     }
@@ -138,48 +144,42 @@ export class CompleteCompanyProfileComponent {
     companyEmail: string,
     industryType: IndustryTypes,
     companyWebSite?: string,
-    companyAddress?: string): FormData {
+    companyAddress?: string
+  ): FormData {
     const formData = new FormData();
     formData.append('CompanyName', companyName);
-    formData.append('CompanyEmail', companyEmail);
-    if(companyWebSite) 
-    formData.append('CompanyWebSite', companyWebSite);
-  if(companyAddress)
-  formData.append('CompanyAddress', companyAddress);
-  formData.append('IndustryType', industryType);
-  if(this.profilePic)
-  formData.append('ProfilePic', this.profilePic);
-    
+    formData.append('ContactEmail', companyEmail);
+    if (companyWebSite) formData.append('CompanyWebSite', companyWebSite);
+    if (companyAddress) formData.append('Address', companyAddress);
+    formData.append('IndustryType', industryType);
+    if (this.profilePic) formData.append('ProfilePic', this.profilePic);
+    if (this.businessLicense) formData.append('BusinessLicense', this.businessLicense)
     return formData;
   }
 
-  getProfilePic(file:File){
+  getProfilePic(file: File) {
     this.profilePic = file;
   }
-  
-  getUploadedLicense(file?:File){
+
+  getUploadedLicense(file?: File) {
     this.documentControl.controls['businessLicense'].setValue(file);
-    if(file) 
-    this.businessLicense = file;
-  else return 
+    if (file) this.businessLicense = file;
+    else return;
   }
 
-  getInitials(){
-
-    const names = this.profileControl.controls['companyName'].value.trim().split(' ');
+  getInitials() {
+    const names = this.profileControl.controls['companyName'].value
+      .trim()
+      .split(' ');
     let initials = '';
     for (let i = 0; i < names.length; i++) {
       if (names[i] !== '') {
-        initials += names[i][0]; 
+        initials += names[i][0];
         if (initials.length === 2) {
           break;
         }
       }
     }
-    return initials.toUpperCase();    
-  }
-
-  handleSelectionChange(index: number) {
-    this.currentStepIndexControl.setValue(index);
+    return initials.toUpperCase();
   }
 }

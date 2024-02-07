@@ -3,7 +3,8 @@ import {
   CompanyProfileState,
   CompanyProfileStateModel,
 } from './company-profile.state';
-import { CompanyProfile } from '../models/company-profile.model';
+import {CompanyProfile, CompanyProfileResponse} from '../models/company-profile.model';
+import {AuthState, AuthStateModel} from "../../auth/store/auth.state";
 
 export class CompanyProfileSelector {
   static slices =

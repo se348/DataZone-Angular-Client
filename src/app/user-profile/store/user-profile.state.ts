@@ -3,8 +3,11 @@ import { UserProfileService } from './../service/user-profile.service';
 import { UserProfile } from './../models/user-profile.model';
 import { Action, State, StateContext, StateToken, Store } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import { EditUserProfile, GetUserProfile } from './user-profile.actions';
+import {CompleteUserProfile, EditUserProfile, GetUserProfile} from './user-profile.actions';
 import { tap } from 'rxjs';
+import {CompleteCompanyProfile} from "../../auth/store/auth.actions";
+import {CompanyProfile} from "../../company-profile/models/company-profile.model";
+import {CompanyProfileStateModel} from "../../company-profile/store/company-profile.state";
 
 export interface UserProfileStateModel {
   userProfile: UserProfile | null;
@@ -41,6 +44,17 @@ export class UserProfileState {
         });
       })
     );
+  }
+
+  @Action(CompleteUserProfile)
+  completeCompanyProfile({ patchState }: StateContext<UserProfileStateModel>, { request }: CompleteUserProfile) {
+    return this.userProfileService.completeUserProfile(request).pipe(tap(
+      (response: UserProfile) => {
+        patchState({
+          userProfile: response
+        });
+      }
+    ))
   }
 
   @Action(GetUserProfile)

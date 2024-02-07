@@ -17,12 +17,12 @@ export class JwtInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
-    const tokens = this.store.selectSnapshot(AuthSelector.tokens);
-    if (tokens.accessToken) {
+    const tokens = this.store.selectSnapshot(AuthSelector.accessToken);
+    if (tokens) {
       return next.handle(
         request.clone({
           setHeaders: {
-            Authorization: `Bearer ${tokens.accessToken}`,
+            Authorization: `Bearer ${tokens}`,
           },
         }),
       );

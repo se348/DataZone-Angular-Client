@@ -43,7 +43,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="workflow-selector">
                   <mat-label>Choose Industry type</mat-label>
-                  <mat-select formControlName="industryType">
+                  <mat-select (selectionChange)="handleIndustryType($event)" formControlName="industryType">
                     <mat-option *ngFor="let type of getIndustryTypes" [value]="type">{{
                       type
                       }}</mat-option>
@@ -78,7 +78,7 @@
 
               <div class="action-btn">
                 <button mat-button matStepperPrevious  type="button">Back</button>
-                <button mat-flat-button color="primary" matStepperNext  type="button" >save</button>
+                <button mat-flat-button color="primary" matStepperNext (click)="saveForm()" type="button" >save</button>
               </div>
             </mat-step>
         </div>

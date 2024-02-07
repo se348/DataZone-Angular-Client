@@ -11,7 +11,6 @@ import {
   CONFIRM_EMAIL_URL
 } from "src/app/core/constants/api-endpoints";
 import { ForgetPasswordRequest, LoginRequest, LoginResponse, RegisterRequest, ResendConfirmationRequest, ResetPasswordRequest } from "../models/auth.model";
-import { CompanyProfileResponse } from "../models/profile.model";
 
 
 @Injectable({
@@ -24,9 +23,6 @@ export class AuthService {
 
   login(request: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(LOGIN_URL, request);
-  }
-  completeCompanyProfile(request: FormData): Observable<CompanyProfileResponse> {
-    return this.http.post<CompanyProfileResponse>(COMPLETE_COMPANY_PROFILE_URL, request);
   }
 
   confirmEmail(userId:string, token: string) {

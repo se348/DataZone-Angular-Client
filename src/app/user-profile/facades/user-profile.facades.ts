@@ -1,17 +1,15 @@
-import { UserProfileSelector } from './../store/user-profile.selector';
+import { UserProfileSelector } from '../store/user-profile.selector';
 import { Observable } from 'rxjs';
-import { UserProfile } from './../models/user-profile.model';
+import { UserProfile } from '../models/user-profile.model';
 import { Injectable } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { EditUserProfile, GetUserProfile } from '../store/user-profile.actions';
+import {CompleteUserProfile, EditUserProfile, GetUserProfile} from '../store/user-profile.actions';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserProfileFacade {
-  userProfile$: Observable<UserProfile> = this.store.select(
-    UserProfileSelector.userProfile
-  );
 
   @Select(UserProfileSelector.userProfile)
   userProfile!: Observable<UserProfile>;
@@ -23,5 +21,11 @@ export class UserProfileFacade {
 
   dispatchEditUserProfile(request: Partial<UserProfile>) {
     this.store.dispatch(new EditUserProfile(request));
+  }
+
+
+
+  dispatchCompleteUserProfile(request: FormData) {
+    this.store.dispatch(new CompleteUserProfile(request));
   }
 }

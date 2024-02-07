@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { CompanyProfileService } from './../service/company-profile.service';
-import { CompanyProfile } from './../models/company-profile.model';
+import {CompanyProfile, CompanyProfileResponse} from './../models/company-profile.model';
 import { Action, State, StateContext, StateToken, Store } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import {
@@ -8,6 +8,8 @@ import {
   GetCompanyProfile,
 } from './company-profile.actions';
 import { tap } from 'rxjs';
+import {CompleteCompanyProfile} from "../../auth/store/auth.actions";
+import {AuthStateModel} from "../../auth/store/auth.state";
 
 export interface CompanyProfileStateModel {
   companyProfile: CompanyProfile | null;
@@ -45,6 +47,18 @@ export class CompanyProfileState {
       })
     );
   }
+
+  @Action(CompleteCompanyProfile)
+  completeCompanyProfile({ patchState }: StateContext<CompanyProfileStateModel>, { request }: CompleteCompanyProfile) {
+    return this.CompanyProfileService.completeCompanyProfile(request).pipe(tap(
+      (response: CompanyProfile) => {
+        patchState({
+          companyProfile: response
+        });
+      }
+    ))
+  }
+
 
   @Action(GetCompanyProfile)
   getCompanyProfile(

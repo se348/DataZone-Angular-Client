@@ -6,7 +6,7 @@ export class UserProfileSelector {
   static slices = createPropertySelectors<UserProfileStateModel>(UserProfileState);
 
   @Selector([UserProfileState])
-  static userProfile(state: UserProfileStateModel): UserProfile {
-    return state.userProfile!;
+  static userProfile(state: UserProfileStateModel): UserProfile | null {
+    return state.userProfile;
   }
 }
