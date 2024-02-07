@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { formatDistanceToNow } from 'date-fns';
 import { DatasetListModel } from '../../models/dataset.model';
+import {formatDistanceToNow} from "date-fns";
 @Component({
   selector: 'app-dataset-list',
   templateUrl: './dataset-list.component.html',

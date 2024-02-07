@@ -153,8 +153,7 @@ export class CompleteCompanyProfileComponent {
     if (companyAddress) formData.append('Address', companyAddress);
     formData.append('IndustryType', industryType);
     if (this.profilePic) formData.append('ProfilePic', this.profilePic);
-    if (this.businessLicense) formData.append('BusinessLicense', this.businessLicense);
-
+    if (this.businessLicense) formData.append('BusinessLicense', this.businessLicense)
     return formData;
   }
 

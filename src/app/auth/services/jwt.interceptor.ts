@@ -7,8 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Store } from '@ngxs/store';
-import {AuthSelector} from "../store/auth.selector";
-// import { AuthSelector } from '../store/auth.selector';
+import { AuthSelector } from '../store/auth.selector';
 
 @Injectable({ providedIn: 'root' })
 export class JwtInterceptor implements HttpInterceptor {
