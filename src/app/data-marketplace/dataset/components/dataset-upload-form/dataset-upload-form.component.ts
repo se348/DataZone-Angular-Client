@@ -16,6 +16,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { DatasetFacade } from 'src/app/data-marketplace/facades/dataset.facades';
 
 @Component({
   selector: 'app-dataset-upload-form',
@@ -30,7 +31,6 @@ export class DatasetUploadFormComponent {
   businessLicense?:File;
   noPrice: boolean = false;
   noDownloadability: boolean= false;
-
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl('');
   filteredTags: Observable<string[]>;
@@ -85,7 +85,8 @@ export class DatasetUploadFormComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly datasetFacade: DatasetFacade
   ) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
@@ -158,13 +159,13 @@ export class DatasetUploadFormComponent {
 
   stepperTitle = 'Complete Company Profile';
   
-  handleSubmitEvent(event: any) {
-    if (event) this.saveForm();
+  handleSubmitEvent() {
+    this.saveForm();
   }
 
   saveForm() {
       if ((this.noDownloadability || this.noPrice) && (this.datasetControl.get('Visibility')?.value == 'true')){
-        return
+        return;
       }
       const {
         datasetName, 
@@ -176,26 +177,17 @@ export class DatasetUploadFormComponent {
         liscence
       } = this.datasetControl!.value;
       
-    const formData = new FormData();
-
-    formData.append('name', datasetName);
-    formData.append("description", description);
-    
-    if(visibility =='false')
-      formData.append('isPrivate', "false");
-    else
-      formData.append('isPrivate', "true");
-    
-    formData.append('isDownloadable', isDownloadable);
-
-    formData.append('price', price.toString());
-
-    formData.append('terms', terms);
-    formData.append('license', liscence);
-
+      this.datasetFacade.dispatchUploadDataset({
+        name: datasetName,
+        description,
+        isDownloadable,
+        price,
+        terms,
+        isPrivate: visibility == 'false',
+        license: liscence
+      })
     
     }
-
   getUploadedFile(file?:File){
     this.fileControl.setValue({file})
     }

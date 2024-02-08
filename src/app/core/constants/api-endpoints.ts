@@ -31,3 +31,6 @@ export const ROLES_URL = `${BASE_URL}/roles`;
 export const RESEND_CONFIRM_EMAIL_URL = `${AUTH_URL}/resendConfirmationEmail`;
 
 export const UPLOAD_DATASET_URL = `${BASE_URL}/datasets`
+
+
+export const DATSET_LIST_URL = `${BASE_URL}/datasets/list`

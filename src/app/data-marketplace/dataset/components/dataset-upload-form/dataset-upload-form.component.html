@@ -188,7 +188,8 @@
                             </div>
                             <div class="action-btn pad-top-20">
                                 <button mat-button matStepperPrevious type="button">Back</button>
-                                <button mat-flat-button color="primary" type="button">Submit</button>
+                                <button mat-flat-button color="primary" type="button" (click)="handleSubmitEvent()"
+                                    [disabled]="(noPrice || noDownloadability) && datasetControl.get('Visibility')?.value == 'true'">Submit</button>
                             </div>
 
                         </div>
