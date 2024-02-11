@@ -37,8 +37,8 @@ export class DatasetUploadFormComponent {
   tags: string[] = ['Educational'];
   allTags: string[] = ['Educational', 'Agriculture', 'Technology'];
 
-  @ViewChild('fruitInput')
-  fruitInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('tagInput')
+  tagInput!: ElementRef<HTMLInputElement>;
   
   announcer = inject(LiveAnnouncer);
 
@@ -56,19 +56,19 @@ export class DatasetUploadFormComponent {
     this.tagCtrl.setValue(null);
   }
 
-  remove(fruit: string): void {
-    const index = this.tags.indexOf(fruit);
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
       this.tags.splice(index, 1);
 
-      this.announcer.announce(`Removed ${fruit}`);
+      this.announcer.announce(`Removed ${tag}`);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.tags.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
+    this.tagInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
   }
 
@@ -156,8 +156,6 @@ export class DatasetUploadFormComponent {
 
  
   currentStepIndexControl = new FormControl();
-
-  stepperTitle = 'Complete Company Profile';
   
   handleSubmitEvent() {
     this.saveForm();
@@ -183,8 +181,10 @@ export class DatasetUploadFormComponent {
         isDownloadable,
         price,
         terms,
+        file: this.fileControl.value.file,
         isPrivate: visibility == 'false',
-        license: liscence
+        license: liscence,
+        tags: this.tags ?? [],
       })
     
     }

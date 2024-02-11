@@ -45,7 +45,7 @@ export class DatasetState {
   }
 
   @Action(GetDatasetList)
-  getCompanyProfile(
+  getDatasetList(
     { patchState }: StateContext<any>,
   ) {
     return this.datasetService.getDatasetList().pipe(
