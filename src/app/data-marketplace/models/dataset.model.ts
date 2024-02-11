@@ -15,3 +15,17 @@ export interface DatasetListModel{
     datetime: string;
 
 }
+
+
+export interface DatasetUploadRequest{
+    name: string;
+    description: string;
+    tags: string[];
+    file: File;
+    isPrivate: boolean;
+    isDownloadable?: boolean;
+    price?: number;
+    terms?: string;
+    license?: string;
+
+}

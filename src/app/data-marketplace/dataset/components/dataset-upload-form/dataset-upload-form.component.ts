@@ -16,6 +16,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { DatasetFacade } from 'src/app/data-marketplace/facades/dataset.facades';
 
 @Component({
   selector: 'app-dataset-upload-form',
@@ -30,15 +31,14 @@ export class DatasetUploadFormComponent {
   businessLicense?:File;
   noPrice: boolean = false;
   noDownloadability: boolean= false;
-
   separatorKeysCodes: number[] = [ENTER, COMMA];
   tagCtrl = new FormControl('');
   filteredTags: Observable<string[]>;
   tags: string[] = ['Educational'];
   allTags: string[] = ['Educational', 'Agriculture', 'Technology'];
 
-  @ViewChild('fruitInput')
-  fruitInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('tagInput')
+  tagInput!: ElementRef<HTMLInputElement>;
   
   announcer = inject(LiveAnnouncer);
 
@@ -56,19 +56,19 @@ export class DatasetUploadFormComponent {
     this.tagCtrl.setValue(null);
   }
 
-  remove(fruit: string): void {
-    const index = this.tags.indexOf(fruit);
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
 
     if (index >= 0) {
       this.tags.splice(index, 1);
 
-      this.announcer.announce(`Removed ${fruit}`);
+      this.announcer.announce(`Removed ${tag}`);
     }
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.tags.push(event.option.viewValue);
-    this.fruitInput.nativeElement.value = '';
+    this.tagInput.nativeElement.value = '';
     this.tagCtrl.setValue(null);
   }
 
@@ -85,7 +85,8 @@ export class DatasetUploadFormComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly formBuilder: FormBuilder
+    private readonly formBuilder: FormBuilder,
+    private readonly datasetFacade: DatasetFacade
   ) {
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
@@ -155,16 +156,14 @@ export class DatasetUploadFormComponent {
 
  
   currentStepIndexControl = new FormControl();
-
-  stepperTitle = 'Complete Company Profile';
   
-  handleSubmitEvent(event: any) {
-    if (event) this.saveForm();
+  handleSubmitEvent() {
+    this.saveForm();
   }
 
   saveForm() {
       if ((this.noDownloadability || this.noPrice) && (this.datasetControl.get('Visibility')?.value == 'true')){
-        return
+        return;
       }
       const {
         datasetName, 
@@ -176,26 +175,19 @@ export class DatasetUploadFormComponent {
         liscence
       } = this.datasetControl!.value;
       
-    const formData = new FormData();
-
-    formData.append('name', datasetName);
-    formData.append("description", description);
-    
-    if(visibility =='false')
-      formData.append('isPrivate', "false");
-    else
-      formData.append('isPrivate', "true");
-    
-    formData.append('isDownloadable', isDownloadable);
-
-    formData.append('price', price.toString());
-
-    formData.append('terms', terms);
-    formData.append('license', liscence);
-
+      this.datasetFacade.dispatchUploadDataset({
+        name: datasetName,
+        description,
+        isDownloadable,
+        price,
+        terms,
+        file: this.fileControl.value.file,
+        isPrivate: visibility == 'false',
+        license: liscence,
+        tags: this.tags ?? [],
+      })
     
     }
-
   getUploadedFile(file?:File){
     this.fileControl.setValue({file})
     }
