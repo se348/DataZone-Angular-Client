@@ -18,9 +18,10 @@ import { UserProfileModule } from './user-profile/user-profile.module';
 import { CompanyProfileModule } from './company-profile/company-profile.module';
 import { DataMarketplaceModule } from './data-marketplace/data-marketplace.module';
 import { MainLandingPageModule } from './main-landing-page/main-landing-page.module';
-import {ErrorInterceptor} from "./core/interceptors/error.inteceptor";
-import {CoreModule} from "./core/core.module";
-import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
+import { ErrorInterceptor } from './core/interceptors/error.inteceptor';
+import { CoreModule } from './core/core.module';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import { ButtonModule } from 'primeng/button';
 @NgModule({
   declarations: [AppComponent, LandingPageComponent],
   providers: [
@@ -55,7 +56,8 @@ import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
     AppRoutingModule,
     UserProfileModule,
     CompanyProfileModule,
-    MainLandingPageModule
+    MainLandingPageModule,
+    ButtonModule,
   ],
 })
 export class AppModule {}
