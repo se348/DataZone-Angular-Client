@@ -20,3 +20,4 @@ export const DATASET_UPLOAD_FORM_ROUTE = 'upload';
 export const DATASET_LIST_ROUTE = 'list';
 export const SUCCESS_ROUTE = 'success';
 export const MAIN_LANDING_PAGE_ROUTE = 'main-landing-page';
+export const DATASET_PREVIEW_ROUTE = 'dataset-preview';

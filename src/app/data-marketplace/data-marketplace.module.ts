@@ -13,12 +13,14 @@ import { DataViewModule } from 'primeng/dataview';
 import { NgxsModule } from '@ngxs/store';
 import { DatasetState } from './store/dataset.state';
 import { DatasetReportsModule } from './dataset-reports/dataset-reports.module';
+import { DatasetPreviewComponent } from './components/dataset-preview/dataset-preview.component';
 @NgModule({
   declarations: [
     HomePageComponent,
     MarketplaceSideBarComponent,
     MarketplaceSideBarComponent,
-    DatasetListComponent
+    DatasetListComponent, 
+    DatasetPreviewComponent
   ],
   imports: [
     DataMarketplaceRoutingModule,
