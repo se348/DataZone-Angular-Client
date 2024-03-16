@@ -10,6 +10,7 @@ import { DatasetListComponent } from './components/dataset-list/dataset-list.com
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { DataViewModule } from 'primeng/dataview';
+import { DatasetReportsModule } from './dataset-reports/dataset-reports.module';
 @NgModule({
   declarations: [
     HomePageComponent,
@@ -20,6 +21,7 @@ import { DataViewModule } from 'primeng/dataview';
   imports: [
     DataMarketplaceRoutingModule,
     DatasetModule,
+    DatasetReportsModule,
     //TODO: Add State,
     RatingModule,
     SharedModule,
