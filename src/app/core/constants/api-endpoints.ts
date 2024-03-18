@@ -33,4 +33,7 @@ export const RESEND_CONFIRM_EMAIL_URL = `${AUTH_URL}/resendConfirmationEmail`;
 export const UPLOAD_DATASET_URL = `${BASE_URL}/datasets`
 
 
-export const DATSET_LIST_URL = `${BASE_URL}/datasets/my-datasets`
+export const DATSET_LIST_URL = `${BASE_URL}/datasets/list`
+
+// Dataset Report urls
+export const DATASET_REPORT_URL = `${BASE_URL}/dataset-reports`;
