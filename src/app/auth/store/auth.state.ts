@@ -16,7 +16,8 @@ import {
   Register,
   ResendConfirmEmail,
   ForgetPassword,
-  ResetPassword, Logout,
+  ResetPassword,
+  Logout,
 } from './auth.actions';
 import { ToasterService } from 'src/app/core/service/toast.service';
 import { StateMessageService } from 'src/app/core/service/state-message.service';
@@ -26,7 +27,6 @@ export interface AuthStateModel {
   refreshToken: string | null;
   email: string | null;
   username: string | null;
-
 }
 
 const AUTH_STATE_TOKEN = new StateToken<AuthStateModel>('authState');
@@ -65,7 +65,6 @@ export class AuthState {
     );
   }
 
-
   @Action(ConfirmEmail)
   confirmEmail(
     { patchState }: StateContext<AuthStateModel>,
@@ -97,10 +96,9 @@ export class AuthState {
           refreshToken: null,
           username: null,
           email: null,
-          companyProfile:null
         });
         // this.store.dispatch(new StateResetAll()); this needs package
-      }),
+      })
     );
   }
 
@@ -123,9 +121,7 @@ export class AuthState {
       tap({
         next: () => {
           // Request completed successfully, close the toaster
-          this.toasterService.showSuccessToast(
-            'Success'
-          );
+          this.toasterService.showSuccessToast('Success');
           setTimeout(() => {
             this.toasterService.closehToast();
           }, 2000);

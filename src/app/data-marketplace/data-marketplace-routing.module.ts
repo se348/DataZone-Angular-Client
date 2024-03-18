@@ -10,9 +10,16 @@ const routes: Routes = [
     children: [
       {
         path: 'list',
-        component: DatasetListComponent
-      }
+        component: DatasetListComponent,
+      },
     ],
+  },
+  {
+    path: 'reports',
+    loadChildren: () =>
+      import('./dataset-reports/dataset-reports.module').then(
+        (m) => m.DatasetReportsModule
+      ),
   },
 ];
 
