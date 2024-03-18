@@ -15,26 +15,28 @@ export class DatasetService {
   uploadDataset(request: Partial<DatasetUploadRequest>): Observable<any> {
     const formData = new FormData();
 
-    formData.append('name', request.name!);
-    formData.append('description', request.description!);
-    formData.append('tags', JSON.stringify(request.tags));
-    formData.append('file', request.file!);
-    formData.append('isPrivate', request.isPrivate!.toString());
-  
+    formData.append('Name', request.name!);
+    formData.append('Description', request.description!);
+    formData.append('Tags', JSON.stringify(request.tags));
+    formData.append('DatasetFile', request.file!);
+    formData.append('IsPrivate', request.isPrivate!.toString());
+    
+    console.log(formData);
+
     if (request.isPrivate) {
       // If isPrivate is true, append empty values for optional fields
-      formData.append('isDownloadable', '');
-      formData.append('price', '');
-      formData.append('terms', '');
-      formData.append('license', '');
+      formData.append('IsDownloadable', '');
+      formData.append('Price', '');
+      formData.append('TermsAndConditions', '');
+      formData.append('License', '');
     } else {
       // If isPrivate is false, append values for optional fields
-      formData.append('isDownloadable', request.isDownloadable ? 'true' : 'false');
-      formData.append('price', request.price ? request.price.toString() : '');
-      formData.append('terms', request.terms || '');
-      formData.append('license', request.license || '');
+      formData.append('IsDownloadable', request.isDownloadable ? 'true' : 'false');
+      formData.append('Price', request.price ? request.price.toString() : '');
+      formData.append('TermsAndConditions', request.terms || '');
+      formData.append('License', request.license || '');
     }
-    console.log(request);
+    
     return this.http.post<any>(UPLOAD_DATASET_URL, formData);
   }
 

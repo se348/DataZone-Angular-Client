@@ -17,6 +17,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { DatasetFacade } from 'src/app/data-marketplace/facades/dataset.facades';
+import { DATASET_LIST_ROUTE } from 'src/app/core/constants/routes';
 
 @Component({
   selector: 'app-dataset-upload-form',
@@ -171,10 +172,9 @@ export class DatasetUploadFormComponent {
         isDownloadable, 
         price, 
         terms, 
-        visibility,
         liscence
       } = this.datasetControl!.value;
-      
+      console.log(this.datasetControl!.value, "dataset");
       this.datasetFacade.dispatchUploadDataset({
         name: datasetName,
         description,
@@ -182,11 +182,11 @@ export class DatasetUploadFormComponent {
         price,
         terms,
         file: this.fileControl.value.file,
-        isPrivate: visibility == 'false',
+        isPrivate: this.datasetControl.get('Visibility')?.value  == 'false',
         license: liscence,
         tags: this.tags ?? [],
       })
-    
+      this.router.navigate([ "marketplace" , DATASET_LIST_ROUTE]);
     }
   getUploadedFile(file?:File){
     this.fileControl.setValue({file})
