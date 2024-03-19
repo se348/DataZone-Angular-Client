@@ -10,6 +10,8 @@ import { DatasetListComponent } from './components/dataset-list/dataset-list.com
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { DataViewModule } from 'primeng/dataview';
+import { NgxsModule } from '@ngxs/store';
+import { DatasetState } from './store/dataset.state';
 import { DatasetReportsModule } from './dataset-reports/dataset-reports.module';
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { DatasetReportsModule } from './dataset-reports/dataset-reports.module';
   imports: [
     DataMarketplaceRoutingModule,
     DatasetModule,
+    NgxsModule.forFeature([DatasetState]),
     DatasetReportsModule,
     //TODO: Add State,
     RatingModule,

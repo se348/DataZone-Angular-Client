@@ -12,7 +12,7 @@ export interface DatasetListModel{
     termsAndCondition?: string;
     license?: string;
     rating?: number;
-    datetime: string;
+    createdAt: string;
 
 }
 

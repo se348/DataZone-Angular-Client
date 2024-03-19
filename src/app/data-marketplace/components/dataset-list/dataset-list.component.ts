@@ -1,155 +1,25 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { DatasetListModel } from '../../models/dataset.model';
 import {formatDistanceToNow} from "date-fns";
+import { DatasetSelector } from '../../store/dataset.selector';
+import { Observable } from 'rxjs';
+import { PaginatedList } from 'src/app/core/models/paginated_list';
+import { Select, Store } from '@ngxs/store';
 @Component({
   selector: 'app-dataset-list',
   templateUrl: './dataset-list.component.html',
   styleUrl: './dataset-list.component.scss',
 })
 export class DatasetListComponent {
-  datasets: DatasetListModel[] = [
-    {
-      id: "1",
-      name: "Crop Yield Data 2023",
-      filename: "crop_yield_2023.csv",
-      fileType: "CSV",
-      fileSize: "2.5 MB",
-      description: "Dataset containing crop yield data for the year 2023.",
-      isPrivate: false,
-      tags: ["agriculture", "crop yield", "2023"],
-      isDownloadable: true,
-      rating: 3.5,
-      price: 100000,
-      termsAndCondition: "Free for personal and research use.",
-      license: "Creative Commons Attribution 4.0 International License",
-      datetime:  formatDistanceToNow(new Date("2023-01-01T00:00:00Z"), { addSuffix: true }),
-    },
-    {
-      id: "2",
-      name: "Weather Patterns in Farming Regions",
-      filename: "weather_patterns_farming_regions.json",
-      fileType: "JSON",
-      fileSize: "1.8 MB",
-      description: "Dataset providing information on weather patterns in various farming regions.",
-      isPrivate: false,
-      tags: ["agriculture", "weather patterns", "farming regions"],
-      isDownloadable: true,
-      price: 1.49,
-      rating: 4,
-      termsAndCondition: "Commercial use requires a license.",
-      license: "Custom License - Contact for details",
-      datetime: formatDistanceToNow(new Date("2023-02-15T12:30:00Z"), { addSuffix: true }),
-    },
-    {
-      id: "3",
-      name: "Soil Composition Analysis",
-      filename: "soil_composition_analysis.xlsx",
-      fileType: "Excel",
-      fileSize: "3.2 MB",
-      description: "Detailed analysis of soil composition in agricultural areas.",
-      isPrivate: true,
-      tags: ["agriculture", "soil composition", "analysis"],
-      datetime: formatDistanceToNow(new Date("2023-03-10T08:45:00Z"), { addSuffix: true })
-    },
-    {
-      id: "4",
-      name: "Farm Equipment Usage Statistics",
-      filename: "farm_equipment_stats.csv",
-      fileType: "CSV",
-      fileSize: "1.5 MB",
-      description: "Statistics on the usage of farm equipment in different regions.",
-      isPrivate: false,
-      tags: ["agriculture", "farm equipment", "statistics"],
-      isDownloadable: true,
-      price: 1.25,
-      rating: 4,
-      termsAndCondition: "Free for non-commercial use.",
-      license: "Open Database License (ODbL)",
-      datetime: formatDistanceToNow(new Date("2023-04-20T15:20:00Z"), { addSuffix: true }),
-    },
-    {
-      id: "5",
-      name: "Pesticide Application Data",
-      filename: "pesticide_application_data.xlsx",
-      fileType: "Excel",
-      fileSize: "2.8 MB",
-      description: "Data on the application of pesticides in agricultural practices.",
-      isPrivate: false,
-      tags: ["agriculture", "pesticides", "application"],
-      isDownloadable: true,
-      price: 1.99,
-      rating: 4,
-      termsAndCondition: "Available for research purposes.",
-      license: "MIT License",
-      datetime:  formatDistanceToNow("2023-05-05T10:10:00Z", { addSuffix: true }),
-    },
-    {
-      id: "6",
-      name: "Livestock Inventory 2024",
-      filename: "livestock_inventory_2024.csv",
-      fileType: "CSV",
-      fileSize: "2.0 MB",
-      description: "Inventory of livestock in various farms for the year 2024.",
-      isPrivate: true,
-      tags: ["agriculture", "livestock", "inventory"],
-      datetime: formatDistanceToNow(new Date("2023-06-15T14:00:00Z"), { addSuffix: true }),
-    },
-    {
-      id: "7",
-      name: "Drought Risk Assessment",
-      filename: "drought_risk_assessment.json",
-      fileType: "JSON",
-      fileSize: "1.3 MB",
-      description: "Assessment of drought risk in different agricultural regions.",
-      isPrivate: false,
-      rating: 2.5,
-      tags: ["agriculture", "drought", "risk assessment"],
-      isDownloadable: true,
-      price: 1.75,
-      termsAndCondition: "Commercial use requires a license.",
-      license: "GNU General Public License (GPL)",
-      datetime: formatDistanceToNow(new Date("2023-07-02T18:30:00Z"), { addSuffix: true }),
-    },
-    // {
-    //   id: "8",
-    //   name: "Organic Farming Practices",
-    //   filename: "organic_farming_practices.xlsx",
-    //   fileType: "Excel",
-    //   fileSize: "2.2 MB",
-    //   description: "Data on organic farming practices and techniques.",
-    //   isPrivate: false,
-    //   tags: ["agriculture", "organic farming", "practices"],
-    //   isDownloadable: true,
-    //   price: 1.99,
-    //   termsAndCondition: "Free for educational purposes.",
-    //   license: "Creative Commons Attribution-NonCommercial 4.0 International License",
-    //   datetime: formatDistanceToNow(new Date("2023-08-10T09:45:00Z"), { addSuffix: true }),
-    // },
-    // {
-    //   id: "9",
-    //   name: "Crop Disease Incidence",
-    //   filename: "crop_disease_incidence.csv",
-    //   fileType: "CSV",
-    //   fileSize: "1.7 MB",
-    //   description: "Incidence data of diseases affecting crops.",
-    //   isPrivate: true,
-    //   tags: ["agriculture", "crop disease", "incidence"],
-    //   datetime: formatDistanceToNow(new Date("2023-09-25T11:20:00Z"), { addSuffix: true }),
-    // },
-    // {
-    //   id: "10",
-    //   name: "Agricultural Market Prices",
-    //   filename: "agricultural_market_prices.json",
-    //   fileType: "JSON",
-    //   fileSize: "1.9 MB",
-    //   description: "Market prices of agricultural products in different regions.",
-    //   isPrivate: false,
-    //   tags: ["agriculture", "market prices", "agricultural products"],
-    //   isDownloadable: true,
-    //   price: 1.49,
-    //   termsAndCondition: "Free for personal and research use.",
-    //   license: "MIT License",
-    //   datetime: formatDistanceToNow(new Date("2023-10-12T16:10:00Z"), { addSuffix: true }),
-    // },
-  ];
+  datasets: DatasetListModel[] = [];
+  @Select(DatasetSelector.datasetList) datasets$!: Observable<PaginatedList<DatasetListModel>>;
+  constructor(public store: Store) {
+    this.datasets$.subscribe((data) => {
+      this.datasets = data.items;
+      this.datasets.forEach((dataset) => {
+        console.log(dataset.createdAt, "in component");
+        dataset.createdAt = formatDistanceToNow(new Date(dataset.createdAt), { addSuffix: true });
+      });
+    });
+  }
 }
