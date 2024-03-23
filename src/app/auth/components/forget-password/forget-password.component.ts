@@ -26,7 +26,6 @@ export class ForgetPasswordComponent {
   onSubmit(): void {
     const { valid, touched, dirty } = this.emailForm;
     if (valid && (touched || dirty)) {
-      console.log(this.emailForm.value.email, 'email');
       this.authFacade.dispatchForgetPassword({
         email: this.emailForm.value.email,
       });

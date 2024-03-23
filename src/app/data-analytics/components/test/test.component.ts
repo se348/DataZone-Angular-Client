@@ -35,14 +35,12 @@ this.state.connect("isExploratoryConnected", this.dataAnalyticsFacade.IsExplorat
       this.exploratoryAnalysisResult = result;
     });
     this.isExploratoryConnected$.subscribe((connected) => {
-      console.log("inside subs connected", connected );
       this.isExploratoryConnected = connected;
     });
     this.dataAnalyticsFacade.dispatchStartExploratoryConnection();
   }
 
   computeMean(){
-    console.log("connection status before send", this.isExploratoryConnected)
     this.dataAnalyticsFacade.dispatchDoExploratoryAnalysis(COMPUTE_MEAN, {
       "DatasetInfoVersionId":"1234dfg23",
       "ColumnName":"Age",

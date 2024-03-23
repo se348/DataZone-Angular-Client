@@ -42,7 +42,6 @@
       if (this.exploratoryHubConnection.state === SignalR.HubConnectionState.Connected) {
         // Invoke server method with payload
          this.exploratoryHubConnection.invoke(methodName, payload).then(() => {
-          console.log('Payload sent to server.');
         }
 )
       } else {
