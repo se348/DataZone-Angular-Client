@@ -45,4 +45,7 @@ export class DatasetService {
     return this.http.get<PaginatedList<DatasetListModel>>(DATSET_LIST_URL);
   }
   
+  getDataset(id: string): Observable<DatasetListModel>{
+    return this.http.get<DatasetListModel>(`${DATSET_LIST_URL}/${id}`);
+  }
 }
