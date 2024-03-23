@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { DatasetListModel, DatasetUploadRequest } from '../models/dataset.model';
+import {
+  DatasetListModel,
+  DatasetUploadRequest,
+} from '../models/dataset.model';
 import { PaginatedList } from 'src/app/core/models/paginated_list';
-import { DATSET_LIST_URL, UPLOAD_DATASET_URL } from 'src/app/core/constants/api-endpoints';
+import {
+  DATSET_LIST_URL,
+  UPLOAD_DATASET_URL,
+} from 'src/app/core/constants/api-endpoints';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DatasetService {
-
   constructor(private http: HttpClient) {}
 
   uploadDataset(request: Partial<DatasetUploadRequest>): Observable<any> {
@@ -31,21 +36,23 @@ export class DatasetService {
       formData.append('License', '');
     } else {
       // If isPrivate is false, append values for optional fields
-      formData.append('IsDownloadable', request.isDownloadable ? 'true' : 'false');
-      formData.append('Price', request.price ? request.price.toString() : '');
-      formData.append('TermsAndConditions', request.terms || '');
-      formData.append('License', request.license || '');
+      formData.append(
+        'isDownloadable',
+        request.isDownloadable ? 'true' : 'false'
+      );
+      formData.append('price', request.price ? request.price.toString() : '');
+      formData.append('terms', request.terms || '');
+      formData.append('license', request.license || '');
     }
     
     return this.http.post<any>(UPLOAD_DATASET_URL, formData);
   }
 
-
-  getDatasetList(): Observable<PaginatedList<DatasetListModel>>{
+  getDatasetList(): Observable<PaginatedList<DatasetListModel>> {
     return this.http.get<PaginatedList<DatasetListModel>>(DATSET_LIST_URL);
   }
-  
-  getDataset(id: string): Observable<DatasetListModel>{
+
+  getDataset(id: string): Observable<DatasetListModel> {
     return this.http.get<DatasetListModel>(`${DATSET_LIST_URL}/${id}`);
   }
 }
