@@ -1,0 +1,207 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700");
+
+$base-spacing-unit: 24px;
+$half-spacing-unit: $base-spacing-unit / 2;
+
+$color-alpha: #1772ff;
+$color-form-highlight: #d8d8ec;
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+// Container
+.container {
+  padding: 0.8rem 7rem 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+// Header
+.dataset-title {
+  font-weight: bold;
+  font-size: 28px;
+}
+
+// Row
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+}
+
+// Dataset props
+.dataset-props {
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  flex: 2.5;
+  margin-right: 8rem;
+}
+
+// Chips
+.chip {
+  padding: 0.6rem 1rem;
+  border-radius: 30px;
+  display: inline;
+  font-style: italic;
+  display: flex;
+  font-weight: 100;
+  color: rgba(0, 0, 0, 0.548);
+  margin-right: 2rem;
+  margin-bottom: 20px;
+}
+
+.chip .icon {
+  width: 25px;
+  height: 25px;
+  padding-right: 5px;
+  color: #00000057;
+}
+
+.downloadable {
+  border: 1px #54aeff solid;
+  background-color: #ddf4ff;
+}
+
+.size {
+  background-color: #fff1e5;
+}
+
+.file-type {
+  background-color: #d772c66e;
+}
+
+.person {
+  background-color: #b2db9863;
+}
+
+.date-uploaded {
+  background-color: #d771715b;
+}
+
+.rating {
+  background-color: #fff1e5;
+}
+
+.rating .icon {
+  color: #fae275;
+}
+
+.price {
+  background-color: #9dde745e;
+}
+// Button
+
+.button {
+  flex: 1;
+}
+
+.button button {
+  padding: 0.6rem 5rem;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #3c3c43;
+  border: none;
+  color: white;
+}
+
+// Description
+.description {
+  margin-bottom: 2rem;
+}
+
+.description-title {
+  font-weight: bold;
+  font-size: 24px;
+  padding: 1rem 0;
+}
+
+.description-content {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.preview {
+  margin-bottom: 2rem;
+}
+
+.preview-title {
+  font-weight: bold;
+  font-size: 24px;
+  padding: 1rem 0;
+}
+
+
+// Table
+.table {
+  width: 100%;
+  border: 1px solid $color-form-highlight;
+}
+
+.table-header {
+  display: flex;
+  width: 100%;
+  background: #d7d7e4;
+  padding: ($half-spacing-unit * 1.5) 0;
+  border-bottom: rgba(54, 53, 53, 0.603) solid 2px;
+  font-size: 16;
+  font-weight: bold;
+}
+
+.table-row {
+  display: flex;
+  width: 100%;
+  padding: ($half-spacing-unit * 1.5) 0;
+  background-color: #c1c1d1;
+
+  &:nth-of-type(odd) {
+    background: $color-form-highlight;
+  }
+}
+
+.table-data,
+.header__item {
+  flex: 1 1 20%;
+  text-align: center;
+}
+
+.header__item {
+  text-transform: uppercase;
+}
+
+.filter__link {
+  color: black;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-left: $base-spacing-unit;
+  padding-right: $base-spacing-unit;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: -($half-spacing-unit * 1.5);
+    color: white;
+    font-size: $half-spacing-unit;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &.desc::after {
+    content: "(desc)";
+  }
+
+  &.asc::after {
+    content: "(asc)";
+  }
+}
