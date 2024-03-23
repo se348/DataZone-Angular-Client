@@ -10,7 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class DragDropDatasetComponent implements OnInit {
   fileObj: File | undefined;
   @Output() uploadedFile = new EventEmitter<File | undefined>();
-  
+
   fileMeta: { name: string; url: string } = { name: '', url: '' };
   isDragOver: boolean = false;
 
@@ -48,15 +48,14 @@ export class DragDropDatasetComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.isDragOver = true;
-    
-    console.log("OVER")
+
   }
 
   onDragLeave(event: DragEvent) {
     event.preventDefault();
     event.stopPropagation();
     this.isDragOver = false;
-    
+
     console.log("LEAVE")
   }
 

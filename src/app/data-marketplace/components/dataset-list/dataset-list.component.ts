@@ -17,7 +17,6 @@ export class DatasetListComponent {
     this.datasets$.subscribe((data) => {
       this.datasets = data.items;
       this.datasets.forEach((dataset) => {
-        console.log(dataset.createdAt, "in component");
         dataset.createdAt = formatDistanceToNow(new Date(dataset.createdAt), { addSuffix: true });
       });
     });

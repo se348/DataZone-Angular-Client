@@ -50,7 +50,6 @@ export class AuthService {
   }
 
   resetPassword(request: ResetPasswordRequest){
-    console.log(request, 'request');
     return this.http.post<any>(RESET_PASSWORD, request).pipe(
       catchError((error, caught) => {
         throw error.message || 'Server Error';
