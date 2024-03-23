@@ -14,4 +14,9 @@ export class DatasetSelector {
     static datasetList(state: DatasetStateModel): PaginatedList<DatasetListModel> {
       return state.datasetList!;
     }
+
+    @Selector([DatasetState])
+    static dataset(state: DatasetStateModel): DatasetListModel {
+      return state.dataset!;
+    }
   }

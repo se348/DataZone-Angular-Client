@@ -1,23 +1,24 @@
 import { Router } from '@angular/router';
 import { Action, State, StateContext, StateToken, Store } from '@ngxs/store';
 import { Injectable } from '@angular/core';
-import {
-  DatasetUpload, GetDatasetList,
-} from './dataset.action';
+import { DatasetUpload, GetDataset, GetDatasetList } from './dataset.action';
 import { tap } from 'rxjs';
 import { DatasetService } from '../services/dataset.service';
-import { DatasetListModel, DatasetUploadRequest } from '../models/dataset.model';
+import {
+  DatasetListModel,
+  DatasetUploadRequest,
+} from '../models/dataset.model';
 import { PaginatedList } from 'src/app/core/models/paginated_list';
 
 export interface DatasetStateModel {
   datasetList: PaginatedList<DatasetListModel> | null;
+  dataset: DatasetListModel | null;
 }
 
-const DATASET_STATE_TOKEN = new StateToken<DatasetStateModel>(
-  'DatasetState'
-);
+const DATASET_STATE_TOKEN = new StateToken<DatasetStateModel>('DatasetState');
 const defaultState: DatasetStateModel = {
   datasetList: null,
+  dataset: null,
 };
 
 @State<DatasetStateModel>({
@@ -37,21 +38,28 @@ export class DatasetState {
     { patchState }: StateContext<DatasetUploadRequest>,
     { request }: DatasetUpload
   ) {
-    return this.datasetService.uploadDataset(request).pipe(
-      tap((response: any) => {
-        
-      })
-    );
+    return this.datasetService
+      .uploadDataset(request)
+      .pipe(tap((response: any) => {}));
   }
 
   @Action(GetDatasetList)
-  getDatasetList(
-    { patchState }: StateContext<any>,
-  ) {
+  getDatasetList({ patchState }: StateContext<any>) {
     return this.datasetService.getDatasetList().pipe(
       tap((response) => {
         patchState({
           datasetList: response,
+        });
+      })
+    );
+  }
+
+  @Action(GetDataset)
+  getDataset({ patchState }: StateContext<any>, { id }: GetDataset) {
+    return this.datasetService.getDataset(id).pipe(
+      tap((response) => {
+        patchState({
+          dataset: response,
         });
       })
     );
