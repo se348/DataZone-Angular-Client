@@ -14,13 +14,14 @@ import { NgxsModule } from '@ngxs/store';
 import { DatasetState } from './store/dataset.state';
 import { DatasetReportsModule } from './dataset-reports/dataset-reports.module';
 import { DatasetPreviewComponent } from './components/dataset-preview/dataset-preview.component';
+import { ChipModule } from 'primeng/chip';
 @NgModule({
   declarations: [
     HomePageComponent,
     MarketplaceSideBarComponent,
     MarketplaceSideBarComponent,
-    DatasetListComponent, 
-    DatasetPreviewComponent
+    DatasetListComponent,
+    DatasetPreviewComponent,
   ],
   imports: [
     DataMarketplaceRoutingModule,
@@ -32,7 +33,8 @@ import { DatasetPreviewComponent } from './components/dataset-preview/dataset-pr
     SharedModule,
     SharedComponentModule,
     FormsModule,
-    DataViewModule
+    DataViewModule,
+    ChipModule,
   ],
 })
 export class DataMarketplaceModule {}
