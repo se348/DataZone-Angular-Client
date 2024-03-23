@@ -1,0 +1,31 @@
+/* dataset-report-list.component.scss */
+.report-card {
+  margin-bottom: 1em;
+}
+
+.chip {
+  margin: 0 12px;
+  border: 1px solid;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transparent {
+  background-color: transparent !important;
+}
+
+.bold-big-text {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.width-70 {
+  width: 80%;
+}
