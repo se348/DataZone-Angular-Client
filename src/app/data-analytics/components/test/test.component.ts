@@ -43,7 +43,10 @@ this.state.connect("isExploratoryConnected", this.dataAnalyticsFacade.IsExplorat
 
   computeMean(){
     console.log("connection status before send", this.isExploratoryConnected)
-    this.dataAnalyticsFacade.dispatchDoExploratoryAnalysis(COMPUTE_MEAN, {"data": [1,2,3,4,5]})
+    this.dataAnalyticsFacade.dispatchDoExploratoryAnalysis(COMPUTE_MEAN, {
+      "DatasetInfoVersionId":"1234dfg23",
+      "ColumnName":"Age",
+    })
   }
 
 

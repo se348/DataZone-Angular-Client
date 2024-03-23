@@ -34,30 +34,29 @@
     registerRegressionEvent(eventName: string, callback: (...args: any[]) => void) {
       if (this.regressionHubConnection.state === SignalR.HubConnectionState.Connected) {
         this.regressionHubConnection.on(eventName, callback)      } else {
-        console.warn('SignalR connection is not established. Payload not sent.');
+        console.warn('register regression event SignalR connection is not established. Payload not sent.');
       }
     }
-    sendExploratoryRequest(methodName: string, payload: any, callback: (...args: any[]) => void ): void {
+    sendExploratoryRequest(methodName: string, payload: any): void {
       // Check if connection is in a connected state
       if (this.exploratoryHubConnection.state === SignalR.HubConnectionState.Connected) {
         // Invoke server method with payload
-         this.exploratoryHubConnection.invoke(methodName, payload, callback).then(() => {
+         this.exploratoryHubConnection.invoke(methodName, payload).then(() => {
           console.log('Payload sent to server.');
         }
 )
       } else {
-        console.warn('SignalR connection is not established. Payload not sent.');
+        console.warn('send exploratory request SignalR connection is not established. Payload not sent.' + this.exploratoryHubConnection.state);
       }
     }
-    sendRegressionRequest(methodName: string, payload: any, callback: (...args: any[]) => void ): void {
+    sendRegressionRequest(methodName: string, payload: any ): void {
       // Check if connection is in a connected state
       if (this.regressionHubConnection.state === SignalR.HubConnectionState.Connected) {
         // Invoke server method with payload
-        this.regressionHubConnection.invoke(methodName, payload, callback).then(() => {
-          console.log('Payload sent to server.');
+        this.regressionHubConnection.invoke(methodName, payload).then(() => {
         })
       }else {
-        console.warn('SignalR connection is not established. Payload not sent.');
+        console.warn('send regression request SignalR connection is not established. Payload not sent.');
         }
       }
 

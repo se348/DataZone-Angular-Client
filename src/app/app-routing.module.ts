@@ -27,6 +27,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'analytics',
+    loadChildren: () =>
+      import('./data-analytics/data-analytics.module').then(
+        (m) => m.DataAnalyticsModule
+      ),
+  },
+  {
     path: LANDING_PAGE_ROUTE,
     component: LandingPageComponent,
   },

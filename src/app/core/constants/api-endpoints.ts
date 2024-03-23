@@ -2,6 +2,9 @@ export const BASE_URL = 'http://localhost:8888/api/v1';
 
 export const AUTH_URL = `${BASE_URL}/account`;
 
+export const EXPLORATORY_ANALYSIS_HUB_URL = `http://localhost:8888/Analytics`;
+export const REGRESSION_ANALYSIS_HUB_URL = `http://localhost:8888/RegressionAnalysis`;
+
 export const REFRESH_TOKEN_URL = `${BASE_URL}/refresh`;
 
 export const LOGIN_URL = `${AUTH_URL}/login`;
@@ -37,3 +40,4 @@ export const DATSET_LIST_URL = `${BASE_URL}/datasets/list`
 
 // Dataset Report urls
 export const DATASET_REPORT_URL = `${BASE_URL}/dataset-reports`;
+
