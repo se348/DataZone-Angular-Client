@@ -13,6 +13,9 @@ import { DatasetReport } from "../models/dataset-report.model";
 export class DatasetReportFacade {
     @Select(DatasetReportSelector.datasetReports)
     datasetReports$!: Observable<PaginatedList<DatasetReport>>;
+    
+    @Select(DatasetReportSelector.selectedDatasetReport)
+    selectedDatasetReport$!: Observable<DatasetReport>;
 
 
     constructor(

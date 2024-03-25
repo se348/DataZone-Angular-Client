@@ -1,1 +1,17 @@
-<p>dataset-report-detail works!</p>
+<!-- dataset-report-detail.component.html -->
+<mat-card class="report-detail-card">
+  <mat-card-header>
+    <mat-card-title>{{
+      selectedDatasetReport?.infringementType
+    }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ selectedDatasetReport?.message }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" class="approve-button">
+      Approve
+    </button>
+    <button mat-raised-button color="warn" class="reject-button">Reject</button>
+  </mat-card-actions>
+</mat-card>

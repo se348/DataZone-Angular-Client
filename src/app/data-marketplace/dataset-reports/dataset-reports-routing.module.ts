@@ -1,4 +1,3 @@
-import { DatasetReport } from './models/dataset-report.model';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DatasetReportListComponent } from './components/dataset-report-list/dataset-report-list.component';
