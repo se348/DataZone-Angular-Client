@@ -1,1 +1,24 @@
-<p>dataset-report-list works!</p>
+<mat-paginator
+  class="transparent"
+  [length]="length"
+  [pageSize]="pageSize"
+  [pageIndex]="pageIndex"
+  [pageSizeOptions]="[5, 10, 20, 50]"
+  (page)="loadPaginatedReports($event)"
+>
+</mat-paginator>
+<br />
+<mat-card *ngFor="let report of datasetReports" class="report-card width-70">
+  <mat-card-header>
+    <div class="flex bold-big-text">
+      <mat-card-title>{{ report.infringementType }}</mat-card-title>
+      <div class="chip text-bold">
+        {{ report.status }}
+      </div>
+    </div>
+  </mat-card-header>
+  <br />
+  <mat-card-content>
+    <p>{{ report.message | slice : 0 : 300 }}...</p>
+  </mat-card-content>
+</mat-card>

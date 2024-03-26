@@ -12,14 +12,14 @@ const routes: Routes = [
         path: 'list',
         component: DatasetListComponent,
       },
+      {
+        path: 'reports',
+        loadChildren: () =>
+          import('./dataset-reports/dataset-reports.module').then(
+            (m) => m.DatasetReportsModule
+          ),
+      },
     ],
-  },
-  {
-    path: 'reports',
-    loadChildren: () =>
-      import('./dataset-reports/dataset-reports.module').then(
-        (m) => m.DatasetReportsModule
-      ),
   },
 ];
 

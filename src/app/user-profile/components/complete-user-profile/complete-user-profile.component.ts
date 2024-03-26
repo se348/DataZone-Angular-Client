@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input } from '@angular/core';
-import {
-  CdkStepper,
-} from '@angular/cdk/stepper';
+import { CdkStepper } from '@angular/cdk/stepper';
 import { RxState } from '@rx-angular/state';
 import {
   FormGroup,
@@ -12,19 +10,20 @@ import {
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LANDING_PAGE_ROUTE } from 'src/app/core/constants/routes';
-import {AuthFacade} from "../../../auth/facades/auth.facades";
-import {UserProfileFacade} from "../../facades/user-profile.facades";
-import {UserProfile} from "../../models/user-profile.model";
+import { AuthFacade } from '../../../auth/facades/auth.facades';
+import { UserProfileFacade } from '../../facades/user-profile.facades';
+import { UserProfile } from '../../models/user-profile.model';
 
 interface CompleteUserProfileComponentState {
   isAuthenticated: boolean;
   userProfile: UserProfile | null;
 }
 
-const initCompleteUserProfileComponentState: CompleteUserProfileComponentState = {
-  isAuthenticated: false,
-  userProfile: null,
-};
+const initCompleteUserProfileComponentState: CompleteUserProfileComponentState =
+  {
+    isAuthenticated: false,
+    userProfile: null,
+  };
 
 @Component({
   selector: 'app-complete-user-profile',
@@ -61,6 +60,7 @@ export class CompleteUserProfileComponent {
       userName: ['', [Validators.required]],
       userEmail: ['', [Validators.required, Validators.email]],
       userPhoneNumber: [''],
+      bio: [''],
     });
     this.paymentControl = this.formBuilder.group({});
   }
@@ -88,12 +88,8 @@ export class CompleteUserProfileComponent {
   saveForm() {
     const { valid, touched, dirty } = this.profileControl!;
     if (valid && (touched || dirty)) {
-      const {
-        userName,
-        userEmail,
-        userWebSite,
-        industryType,
-      } = this.profileControl!.value;
+      const { userName, userEmail, userWebSite, industryType } =
+        this.profileControl!.value;
 
       const formData = this.organizeFormData(
         userName,
@@ -110,7 +106,7 @@ export class CompleteUserProfileComponent {
     userName: string,
     userEmail: string,
     userWebSite?: string,
-    userAddress?: string,
+    userAddress?: string
   ): FormData {
     const formData = new FormData();
     formData.append('UserName', userName);

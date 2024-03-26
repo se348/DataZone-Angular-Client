@@ -1,12 +1,20 @@
 import { Injectable } from "@angular/core";
-import { Store } from "@ngxs/store";
+import { Select, Store } from "@ngxs/store";
 import { ChangeDatasetReportStatus, GetDatasetReport, GetDatasetReports } from "../store/dataset-report.actions";
+import { DatasetReportSelector } from "../store/dataset-report.selector";
+import { Observable } from "rxjs";
+import { PaginatedList } from "src/app/core/models/paginated_list";
+import { DatasetReport } from "../models/dataset-report.model";
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class DatasetReportFacade {
+    @Select(DatasetReportSelector.datasetReports)
+    datasetReports$!: Observable<PaginatedList<DatasetReport>>;
+
+
     constructor(
         private readonly store: Store
     ) {}
